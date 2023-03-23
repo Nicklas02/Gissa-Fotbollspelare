@@ -2,8 +2,6 @@ package controller;
 
 /**
  * Main class in our project.
- * test9
- * test 2
  * @author Group 29
  */
 public class MainProgram {

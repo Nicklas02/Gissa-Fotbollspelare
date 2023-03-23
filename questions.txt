@@ -1,153 +1,153 @@
-Vem är den mest målskyttande spelaren i La Liga historia?
+Vilken spelare har gjort flest mål i La Ligas historia?
 Lionel Messi
-option2
-option3
-option4
+Cristiano Ronaldo
+Luis Suarez
+Raul
 Vilken klubb vann Champions League säsongen 2020/21?
 Chelsea
-option2
-option3
-option4
+Bayern München
+Real Madrid
+Liverpool
 Vem är den nuvarande tränaren för Paris Saint-Germain?
+Christophe Galtier
 Mauricio Pochettino
-option2
-option3
-option4
+Thomas Tuchel
+Zinedine Zidane
 Vem är den nuvarande kaptenen för Real Madrid?
+Karim Benzema
 Sergio Ramos
-option2
-option3
-option4
+Luka Modric
+Toni Kroos
 Vilken spelare vann Ballon d'Or priset 2020?
 Lionel Messi
-option2
-option3
-option4
+Cristiano Ronaldo
+Robert Lewandowski
+Jorginho
 Vilken spelare har vunnit flest ligamästerskap i England?
 Ryan Giggs (13 med Manchester United)
-option2
-option3
-option4
-Vem är den mest målskyttande spelaren i Premier League historia?
+Paul Scholes
+Frank Lampard
+Wayne Rooney
+Vilken spelare har gjort flest mål i Premier Leagues historia?
 Alan Shearer
-option2
-option3
-option4
+Wayne Rooney
+Harry Kane
+Sergio Agüero
 Vilken klubb vann Serie A säsongen 2020/21?
 Inter Milan
-option2
-option3
-option4
+Juventus
+Roma
+AC Milan
 Vem är den nuvarande tränaren för Bayern Munich?
+Julian Nagelsmann
 Hansi Flick
-option2
-option3
-option4
+Carlo Ancelotti
+Joachim Löw
 Vem är den nuvarande kaptenen för Barcelona?
 Sergio Busquets
-option2
-option3
-option4
+Marc-Andre Ter Stegen
+Jordi Alba
+Sergio Roberto
 Vilken spelare har vunnit flest ligamästerskap i Spanien?
 Xavi Hernandez (25 med Barcelona)
-option2
-option3
-option4
-Vem är den mest målskyttande spelaren i Bundesliga historia?
+Raul
+Sergio Ramos
+Carles Puyol
+Vilken spelare har gjort flest mål i Bundesligas historia?
 Gerd Muller
-option2
-option3
-option4
+Robert Lewandowski
+Miroslav Klose
+Thomas Müller
 Vilken klubb vann Ligue 1 säsongen 2020/21?
 Paris Saint-Germain
-option2
-option3
-option4
+As Monaco
+Lyon
+Marseille
 Vem är den nuvarande tränaren för Liverpool?
 Jürgen Klopp
-option2
-option3
-option4
+Kenny Daglish
+Carlo Ancelotti
+Pep Guardiola
 Vem är den nuvarande kaptenen för Atletico Madrid?
 Koke
-option2
-option3
-option4
+Saul Niguez
+Jose Gimenez
+Jan Oblak
 Vilken spelare vann Ballon d'Or priset 2021?
 Lionel Messi
-option2
-option3
-option4
+Cristiano Ronaldo
+Karim Benzema
+Robert Lewandowski
 Vilken spelare har vunnit flest ligamästerskap i Italien?
 Paolo Maldini (7 med AC Milan)
-option2
-option3
-option4
-Vem är den mest målskyttande spelaren i Serie A historia?
+Leonardo Bonucci
+Andrea Pirlo
+Gianluigi Buffon
+Vilken spelare har gjort flest mål i Serie A:s historia?
 Silvio Piola
-option2
-option3
-option4
+Francesco Totti
+Alessandro Del Piero
+Antonio Di Natale
 Vilken klubb vann Premier League säsongen 2020/21?
 Manchester City
-option2
-option3
-option4
+Liverpool
+Manchester United
+Chelsea
 Vem är den nuvarande tränaren för Manchester United?
+Erik Ten Hag
 Ole Gunnar Solskjær
-option2
-option3
-option4
- Vem är den nuvarande kaptenen för Arsenal?
+Thomas Tuchel
+Michael Carrick
+Vem är den nuvarande kaptenen för Arsenal?
+Martin Ødegaard
 Pierre-Emerick Aubameyang
-option2
-option3
-option4
+Granit Xhaka
+Thomas Partey
 Vilken spelare har vunnit flest ligamästerskap i Tyskland?
 Philipp Lahm (8 med Bayern Munich)
-option2
-option3
-option4
-Vem är den mest målskyttande spelaren i Bundesliga historia för en enskild klubb?
+Manuel Neuer
+Thomas Müller
+Jerome Boateng
+Vilken spelare har gjort flest mål i Bundesligas historia för en enskild klubb?
 Gerd Muller (Bayern Munich)
-option2
-option3
-option4
+Miroslav Klose
+Robert Lewandowski
+Thomas Müller
 Vilken klubb vann La Liga säsongen 2020/21?
 Atletico Madrid
-option2
-option3
-option4
+Barcelona
+Sevilla
+Real Madrid
 Vem är den nuvarande tränaren för Juventus?
 Massimiliano Allegri
-option2
-option3
-option4
+Jose Mourinho
+Simone Inzaghi
+Andrea Pirlo
 Vem är den nuvarande kaptenen för AC Milan?
+Davide Calabria
 Alessio Romagnoli
-option2
-option3
-option4
+Zlatan Ibrahimovic
+Theo Hernandez
 Vilken spelare har vunnit flest ligamästerskap i Frankrike?
 Thiago Silva (8 med Paris Saint-Germain)
-option2
-option3
-option4
-Vem är den mest målskyttande spelaren i Ligue 1 historia?
+Zlatan Ibrahimovic
+Presnel Kimpembe
+Kylian Mbappe
+Vilken spelare har gjort flest mål i Ligue 1:s historia?
 Delio Onnis
-option2
-option3
-option4
+Zlatan Ibrahimovic
+Edinson Cavani
+Kylian Mbappe
 Vilken klubb vann Serie A säsongen 2019/20?
 Juventus
-option2
-option3
-option4
+Inter milan
+Napoli
+AC Milan
 Vem är den nuvarande tränaren för Chelsea?
+Graham Potter
 Thomas Tuchel
-option2
-option3
-option4
+Mauricio Pochettino
+Jose Mourinho
 Vem är bäst ?
 Omar
 option2

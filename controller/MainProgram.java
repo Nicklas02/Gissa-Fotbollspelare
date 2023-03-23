@@ -3,7 +3,7 @@ package controller;
 /**
  * Main class in our project.
  * @author Group 29
- * Martins redigering
+ * Martins redigering i main 
  */
 public class MainProgram {
 

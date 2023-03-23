@@ -18,8 +18,7 @@ public class Controller {
 
 
     /**
-     * parameter constrictor that used to create object of Controller.
-     *
+     * Parameter constrictor that used to create object of Controller.
      * @param fileName file name that contains questions.
      */
     public Controller(String fileName) {

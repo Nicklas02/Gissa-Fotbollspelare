@@ -7,7 +7,7 @@ package controller;
 public class MainProgram {
 
     /**
-     * main function where the program start.
+     * Main function where the program start.
      * @param args main parameter.
      */
     public static void main(String[] args) {

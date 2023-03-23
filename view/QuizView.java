@@ -42,17 +42,17 @@ public class QuizView {
         background.setBounds(0,0,800,600);
         frame.add(background);
         questionNumber = new JLabel();
-        questionNumber.setBounds(500, 100, 100, 40);
+        questionNumber.setBounds(500, 50, 100, 40);
         questionNumber.setFont(font);
         //colour for fonts
-        questionNumber.setForeground(Color.red);
+        questionNumber.setForeground(Color.blue);
         background.add(questionNumber);
 
         questionLabel = new JLabel();
         questionLabel.setBounds(50, 50, 600, 30);
         questionLabel.setFont(font);
         //colour fonts
-        questionLabel.setForeground(Color.blue);
+        questionLabel.setForeground(Color.black);
         background.add(questionLabel);
 
         optionButtons = new JRadioButton[4];

@@ -19,6 +19,8 @@ public class QuizView {
     private JFrame frame;
     private JLabel questionLabel;
     private JLabel questionNumber;
+    JLabel rightOrWrong;
+
     private JRadioButton[] optionButtons;
     private ButtonGroup optionGroup;
     private JButton nextButton;
@@ -32,13 +34,13 @@ public class QuizView {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 600);//700*300
         frame.setLayout(null);
-        imageIcon =new ImageIcon("soccer.jpg");
+        imageIcon =new ImageIcon("files/soccer.jpg");
         Image image = imageIcon.getImage();
 
 
         Image scaled = image.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
         imageIcon= new ImageIcon(scaled );
-        background = new JLabel(imageIcon);
+        background = new JLabel();
         background.setBounds(0,0,800,600);
         frame.add(background);
         questionNumber = new JLabel();
@@ -47,6 +49,11 @@ public class QuizView {
         //colour for fonts
         questionNumber.setForeground(Color.blue);
         background.add(questionNumber);
+
+        rightOrWrong = new JLabel();
+        rightOrWrong.setBounds(50, 250, 300, 300);
+        rightOrWrong.setForeground(Color.black);
+        background.add(rightOrWrong);
 
         questionLabel = new JLabel();
         questionLabel.setBounds(50, 50, 600, 30);
@@ -116,6 +123,10 @@ public class QuizView {
             return userChoice.getText();
         }
         return "";
+    }
+
+    public void showRightOrWrong(String s){
+        rightOrWrong.setText(s);
     }
 
     public void display() {

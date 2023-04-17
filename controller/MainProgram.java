@@ -12,6 +12,6 @@ public class MainProgram {
      */
     public static void main(String[] args) {
         // create object of controller
-        Controller controller = new Controller("questions.txt");
+        Controller controller = new Controller("files/questions.txt");
     }
 }

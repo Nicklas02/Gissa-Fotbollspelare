@@ -52,9 +52,11 @@ public class Controller {
         }
         if (this.quiz.getCurrentQuestion().isCorrect(this.quizView.getUserAnswer())) {
             lastScore = 1;////presentag
+            this.quizView.showRightOrWrong("You answered correct!");
         }
         else{
             lastScore = 0;
+            this.quizView.showRightOrWrong("You answered wrong!");
         }
         this.score += lastScore;
         if (!(this.quiz.hasNextQuestion())) {

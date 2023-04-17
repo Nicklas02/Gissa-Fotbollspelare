@@ -1,10 +1,12 @@
 package view;
 
 //package com.example.footballquiz;
+
 import controller.Controller;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+
 import model.Question;
 import model.Quiz;
 
@@ -34,14 +36,13 @@ public class QuizView {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 600);//700*300
         frame.setLayout(null);
-        imageIcon =new ImageIcon("files/soccer.jpg");
+        imageIcon = new ImageIcon("files/soccer.jpg");
         Image image = imageIcon.getImage();
 
-
         Image scaled = image.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
-        imageIcon= new ImageIcon(scaled );
+        imageIcon = new ImageIcon(scaled);
         background = new JLabel();
-        background.setBounds(0,0,800,600);
+        background.setBounds(0, 0, 800, 600);
         frame.add(background);
         questionNumber = new JLabel();
         questionNumber.setBounds(500, 50, 100, 40);
@@ -125,9 +126,7 @@ public class QuizView {
         return "";
     }
 
-    public void showRightOrWrong(String s){
-        rightOrWrong.setText(s);
-    }
+    public void showRightOrWrong(String s) {rightOrWrong.setText(s);}
 
     public void display() {
         frame.setVisible(true);
@@ -169,6 +168,7 @@ public class QuizView {
     public void setNextButtonTextToNext() {
         this.nextButton.setText("Next");
     }
+
     //presentag
     public void showGameOverMessage(String message, int scorePresentage) {
         disablePrevButton();

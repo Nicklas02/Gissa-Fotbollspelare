@@ -6,14 +6,13 @@ import java.util.Scanner;
 
 /**
  * Class that reads the text file HighScore and changes it if there is a new one.
- *
- * @author Adam Leijman, Mattias Malm
+ * @author Adam Leijman
  */
 public class HighScore {
 
     private String[] name = new String[10];
     private int[] score = new int[10];
-    private String[] list = new String[10];
+    private String[] highScoreList = new String[10];
     private int place = 1;
 
     /**
@@ -47,7 +46,7 @@ public class HighScore {
                 name[i] = myReader.nextLine();
                 score[i] = Integer.parseInt(myReader.nextLine());
                 if (name[i] != null) {
-                    list[i] = String.format(place + " " + name[i] + " " + score[i]);
+                    highScoreList[i] = String.format(place + " " + name[i] + " " + score[i]);
                     i++;
                     place++;
                 }
@@ -56,7 +55,7 @@ public class HighScore {
             System.out.println("An error occurred");
             e.printStackTrace();
         }
-        return list;
+        return highScoreList;
     }
 
     /**

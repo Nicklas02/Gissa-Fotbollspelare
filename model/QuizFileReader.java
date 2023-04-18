@@ -30,42 +30,26 @@ public class QuizFileReader {
      * this function read all questions from input file.
      */
     public void readQuestions() {
-
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
-            String line;
-            // read questions from file one by one
-            // each question consists of 5 lines one for question itself and other 4 lines
-            // for 4 answer options
-            String question;
-            String[] options;
-            String correctAnswer;
-            while ((line = br.readLine()) != null) {
-                // read question
-                question = line.trim();
-                options = new String[4];
-                // read option 1 (correct option)
-                line = br.readLine();
-                correctAnswer = line.trim();
-                options[0] = line.trim();
-                // read option 2
-                line = br.readLine();
-                options[1] = line.trim();
-                // read option 3
-                line = br.readLine();
-                options[2] = line.trim();
-                // read option 4
-                line = br.readLine();
-                options[3] = line.trim();
-                questions.add(new Question(question, options, correctAnswer));
-
+            try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+                String line;
+                while ((line = br.readLine()) != null) {
+                    String question = line.trim();
+                    String[] options = new String[4];
+                    String correctAnswer = "";
+                    for (int i = 0; i < 4; i++) {
+                        line = br.readLine();
+                        options[i] = line.trim();
+                        if (i == 0) {
+                            correctAnswer = options[i];
+                        }
+                    }
+                    questions.add(new Question(question, options, correctAnswer));
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading questions from file: " + e.getMessage());
+                System.exit(1);
             }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
         }
-    }
 
     public List<Question> getQuestions() {
         return questions;

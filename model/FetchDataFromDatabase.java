@@ -1,17 +1,19 @@
 package model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import controller.DatabaseController;
+
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
-import java.util.Scanner;
 
 public class FetchDataFromDatabase {
     Connection conn;
+    private ArrayList<Player> currPlayersList =new ArrayList<>();
+    private DatabaseController databaseController;
 
-    public FetchDataFromDatabase() {
+    public FetchDataFromDatabase(DatabaseController databaseController) {
         conn = getDatabaseConnection();
+        this.databaseController = databaseController;
     }
 
     /**
@@ -28,26 +30,85 @@ public class FetchDataFromDatabase {
         try {
             Connection conn = DriverManager.getConnection(url, props);
             System.out.println("Connection Established");
-
-            String QUERY = "SELECT * FROM \"fotbollsspelare\"";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(QUERY);
-            int count =0;
-            while (rs.next()) {
-                if (count>100){
-                    break;
-                }
-                System.out.print("ID: " + rs.getString("id"));
-                System.out.print(", Name: " + rs.getString("name"));
-                System.out.println("----------------------------------------------------------");
-                count++;
-            }
-            stmt.close();
-            conn.close();
             return conn;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+        public void questionsAboutAge() {
+            try {
+                String QUERY = "SELECT * FROM \"spelare\"";
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(QUERY);
+                Player currPlayer = null;
+                int count = 0;
+                while (rs.next()) {
+                    if (count > 3) {
+                        break;
+                    }
+                    System.out.print("ID: " + rs.getString("id"));
+                    System.out.print(" Name: " + rs.getString("namn"));
+                    System.out.print(" Ålder: " + rs.getString("ålder"));
+                    System.out.println();
+
+                    currPlayer = new Player(rs.getString("id"), rs.getString("namn"));
+                    currPlayer.setAge(rs.getString("ålder"));
+                    currPlayersList.add(currPlayer);
+
+                    count++;
+                }
+                stmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    public ArrayList<Player> getCurrPlayersList() {
+        return currPlayersList;
+    }
+
+    public String verifyAnswer(int answer) {
+        //if questionVariabel == age / highestAge
+
+        Player answerPlayer = currPlayersList.get(answer - 1);
+        int answerPlayerAge = Integer.parseInt(answerPlayer.getAge());
+        System.out.println("YOU ANSWERED " + answerPlayer.getName());
+        boolean correct = true;
+
+        for (Player p : currPlayersList){
+            int comparingPlayerAge = Integer.parseInt(p.getAge());
+            if (comparingPlayerAge > answerPlayerAge){
+                correct = false;
+            }
+        }
+
+        String userOutput;
+        if (correct){
+            userOutput = "Correct! ";
+        } else{ userOutput = "False! ";}
+
+        userOutput += "\n" + "--------------------" + "\n" + "The answers are: ";
+        for (Player p : currPlayersList){
+            userOutput += p.getName() + " " + p.getAge() + " --- ";
+        }
+
+        return userOutput;
+    }
+
+
+    public String getAlternatives() {
+        String str = "";
+        int alternative = 1;
+        for (Player p : currPlayersList){
+            str += alternative;
+            str+= ": " + p.getName();
+            str += "\n";
+            alternative++;
+        }
+        System.out.println(str);
+        return str;
     }
 }

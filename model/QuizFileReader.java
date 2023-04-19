@@ -36,7 +36,8 @@ public class QuizFileReader {
                     String question = line.trim();
                     String[] options = new String[4];
                     String correctAnswer = "";
-                    for (int i = 0; i < 4; i++) {
+                    int alternatives = 4;
+                    for (int i = 0; i < alternatives; i++) {
                         line = br.readLine();
                         options[i] = line.trim();
                         if (i == 0) {

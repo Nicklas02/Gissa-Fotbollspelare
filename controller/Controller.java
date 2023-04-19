@@ -53,7 +53,9 @@ public class Controller {
             this.quizView.showError("Must select one option first");
             return;
         }
-        if (this.quiz.getCurrentQuestionNum() == this.quiz.getTotalNumberQuestions() - 1) {
+        int currQuestion= this.quiz.getCurrentQuestionNum();
+
+        if (currQuestion == this.quiz.getTotalNumberQuestions() - 1) {
             this.quizView.setNextButtonTextToFinish();
         }
         if (this.quiz.getCurrentQuestion().isCorrect(this.quizView.getUserAnswer())) {
@@ -65,8 +67,9 @@ public class Controller {
         }
         this.score += lastScore;
         if (!(this.quiz.hasNextQuestion())) {
+            int percent = 100;
 //presentag
-            this.quizView.showGameOverMessage("game over", this.score * 100 / this.quiz.getTotalNumberQuestions());
+            this.quizView.showGameOverMessage("game over", this.score * percent / this.quiz.getTotalNumberQuestions());
             onLeaderboard();
             return;
         }

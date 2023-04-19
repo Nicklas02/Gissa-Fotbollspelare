@@ -5,6 +5,7 @@ import controller.DatabaseController;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Random;
 
 public class FetchDataFromDatabase {
     Connection conn;
@@ -43,24 +44,31 @@ public class FetchDataFromDatabase {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(QUERY);
                 Player currPlayer = null;
-                int count = 0;
-                while (rs.next()) {
-                    if (count > 3) {
-                        break;
-                    }
-                    System.out.print("ID: " + rs.getString("id"));
-                    System.out.print(" Name: " + rs.getString("namn"));
-                    System.out.print(" Ålder: " + rs.getString("ålder"));
-                    System.out.println();
+                Random rand = new Random();
+                int limit = 400;
+                int strata = rand.nextInt(390);
+                int count =0;
 
-                    currPlayer = new Player(rs.getString("id"), rs.getString("namn"));
-                    currPlayer.setAge(rs.getString("ålder"));
-                    currPlayersList.add(currPlayer);
+                strata = 3;
+
+                while (rs.next() && count<limit) {
+                    //if (count > 3) {
+                      //  break;
+                    //}
+                    //System.out.print("ID: " + rs.getString("id"));
+                    //System.out.print(" Name: " + rs.getString("namn"));
+                    //System.out.print(" Ålder: " + rs.getString("ålder"));
+                    //System.out.println();
+                    if(count > strata && count < strata +3) {
+                            currPlayer = new Player(rs.getString("id"), rs.getString("namn"));
+                            currPlayer.setAge(rs.getString("ålder"));
+                            currPlayersList.add(currPlayer);
+                    }
 
                     count++;
                 }
                 stmt.close();
-                conn.close();
+                //conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

@@ -15,13 +15,13 @@ public class DatabaseController {
     }
 
     private void startGenerating() {
-        fetchDataFromDatabase.questionsAboutAge();
-        System.out.println("Success halfway");
-        String question = "Vem äldst?";
-        String alternatives = fetchDataFromDatabase.getAlternatives();
-        automaticQuestionsGUI.gui(question,alternatives);
-        fetchDataFromDatabase.questionsAboutAge();
-
+        while(true) {
+            fetchDataFromDatabase.questionsAboutAge();
+            String question = "Vem är äldst?";
+            String alternatives = fetchDataFromDatabase.getAlternatives();
+            automaticQuestionsGUI.gui(question, alternatives);
+            fetchDataFromDatabase.questionsAboutAge();
+        }
     }
 
     public void answer(int nextInt) {

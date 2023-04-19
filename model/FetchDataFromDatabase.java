@@ -14,18 +14,20 @@ public class FetchDataFromDatabase {
         conn = getDatabaseConnection();
     }
 
+    /**
+     * Upprättar en förbindelse med jdbc till databasen gissa fotbollsspelare. Därefter upprättas en query som skrivs
+     * till psql för att sedan returnera och skriva ut data.
+     * @return metoden returnerar en uppkoppling.
+     */
     public Connection getDatabaseConnection() {
-
         String url = "jdbc:postgresql://pgserver.mau.se/gissa_fotbollsspelare";
         Properties props = new Properties();
         props.setProperty("user", "an5411");
         props.setProperty("password", "7sbqoxrh");
-        //String user = "am7496"; "xlousk70"
-
+        //String backup user = "am7496"; "xlousk70"
         try {
             Connection conn = DriverManager.getConnection(url, props);
             System.out.println("Connection Established");
-
 
             String QUERY = "SELECT * FROM \"fotbollsspelare\"";
             Statement stmt = conn.createStatement();
@@ -40,15 +42,10 @@ public class FetchDataFromDatabase {
                 System.out.println("----------------------------------------------------------");
                 count++;
             }
-
             stmt.close();
             conn.close();
-
-
             return conn;
-
         } catch (Exception e) {
-            System.out.println(e);
             e.printStackTrace();
             return null;
         }

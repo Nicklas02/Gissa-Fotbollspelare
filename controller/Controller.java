@@ -27,11 +27,14 @@ public class Controller {
      * @param fileName file name that contains questions.
      */
     public Controller(String fileName) {
-        quiz = new Quiz(fileName);
-        this.quizView = new QuizView(this);
         list = new HighScore();
-        this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
+        quiz = new Quiz(fileName);
         this.score = 0;
+    }
+
+    public void play(){
+        this.quizView = new QuizView(this);
+        this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
         this.quizView.display();
     }
 

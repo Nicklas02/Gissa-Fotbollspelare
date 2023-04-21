@@ -33,11 +33,11 @@ public class StartScreen {
         imageIcon = new ImageIcon(scaled);
 
         label = new JLabel(imageIcon);
-        label.setBounds(0,0, 600,600);
+        label.setBounds(0, 0, 600, 600);
         frame.add(label);
 
         JLabel scoreLbl = new JLabel("Top 10 High scores");
-        scoreLbl.setBounds(50,0,300,100);
+        scoreLbl.setBounds(50, 0, 300, 100);
         highScoreList = new JList<>();
         createHighScoreList(controller.getList());
         highScoreList.setBounds(50, 60, 135, 200);
@@ -47,7 +47,7 @@ public class StartScreen {
         label.add(highScoreList);
 
         play = new JButton("Start game");
-        play.setBounds(200,300,200,30);
+        play.setBounds(200, 300, 200, 30);
         play.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +60,8 @@ public class StartScreen {
         frame.setVisible(true);
     }
 
-    public void createHighScoreList(String[] scores){highScoreList.setListData(scores);}
+    public void createHighScoreList(String[] scores) {
+        highScoreList.setListData(scores);
+    }
 
 }

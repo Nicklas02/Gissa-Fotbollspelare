@@ -32,7 +32,7 @@ public class Controller {
         this.score = 0;
     }
 
-    public void play(){
+    public void play() {
         this.quizView = new QuizView(this);
         this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
         this.quizView.display();
@@ -56,7 +56,7 @@ public class Controller {
             this.quizView.showError("Must select one option first");
             return;
         }
-        int currQuestion= this.quiz.getCurrentQuestionNum();
+        int currQuestion = this.quiz.getCurrentQuestionNum();
 
         if (currQuestion == this.quiz.getTotalNumberQuestions() - 1) {
             this.quizView.setNextButtonTextToFinish();

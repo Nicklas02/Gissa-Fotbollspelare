@@ -2,7 +2,6 @@ package controller;
 
 import model.HighScore;
 import view.QuizView;
-import model.Question;
 import model.Quiz;
 
 import javax.swing.*;
@@ -18,7 +17,7 @@ public class Controller {
     private QuizView quizView;
     private int score;
     private int lastScore;
-    private HighScore list;
+    private HighScore highScoreList;
 
 
     /**
@@ -29,7 +28,7 @@ public class Controller {
     public Controller(String fileName) {
         quiz = new Quiz(fileName);
         this.quizView = new QuizView(this);
-        list = new HighScore();
+        highScoreList = new HighScore();
         this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
         this.score = 0;
         this.quizView.display();
@@ -85,9 +84,9 @@ public class Controller {
      * and if it is it asks for your name and puts it in the leaderboard and the sorts it.
      */
     public void onLeaderboard() {
-        getList();
-        int[] listScore = list.getScore();
-        String[] listName = list.getName();
+        getHighScoreList();
+        int[] listScore = highScoreList.getScore();
+        String[] listName = highScoreList.getName();
 
         if (score > listScore[9]) {
             String name = JOptionPane.showInputDialog(null, "You are in the Top10! \n" + "Enter name");
@@ -108,13 +107,13 @@ public class Controller {
                 }
             }
         }
-        list.writeToList(listName, listScore);
+        highScoreList.writeToList(listName, listScore);
     }
 
     /**
      * @return the highscorelist to the mainframe.
      */
-    public String[] getList() {
-        return list.readList();
+    public String[] getHighScoreList() {
+        return highScoreList.readList();
     }
 }

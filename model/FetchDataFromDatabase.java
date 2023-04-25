@@ -9,8 +9,14 @@ import java.util.Random;
 
 public class FetchDataFromDatabase {
     Connection conn;
-    private ArrayList<Player> currPlayersList =new ArrayList<>();
+    private ArrayList<Player> currPlayersList = new ArrayList<>();
     private DatabaseController databaseController;
+    Random rand = new Random();
+    private int alt1 = 0;
+    private int alt2 = 0;
+    private int alt3 = 0;
+    private int alt4 = 0;
+
 
     public FetchDataFromDatabase(DatabaseController databaseController) {
         conn = getDatabaseConnection();
@@ -20,6 +26,7 @@ public class FetchDataFromDatabase {
     /**
      * Upprättar en förbindelse med jdbc till databasen gissa fotbollsspelare. Därefter upprättas en query som skrivs
      * till psql för att sedan returnera och skriva ut data.
+     *
      * @return metoden returnerar en uppkoppling.
      */
     public Connection getDatabaseConnection() {
@@ -38,41 +45,30 @@ public class FetchDataFromDatabase {
         }
     }
 
-        public void questionsAboutAge() {
-            try {
-                String QUERY = "SELECT * FROM \"spelare\"";
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(QUERY);
-                Player currPlayer = null;
-                Random rand = new Random();
-                int limit = 400;
-                int strata = rand.nextInt(390);
-                int count =0;
+    public void addPlayersToArray() {
+        try {
+            String QUERY = "select * from \"spelare\" " +
+                    "join fifastats on spelare.id = fifastats.id " +
+                    "order by fifastats.overall desc;";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(QUERY);
+            Player player = null;
+            int limit = 100;
+            int count = 0;
 
-                strata = 3;
-
-                while (rs.next() && count<limit) {
-                    //if (count > 3) {
-                      //  break;
-                    //}
-                    //System.out.print("ID: " + rs.getString("id"));
-                    //System.out.print(" Name: " + rs.getString("namn"));
-                    //System.out.print(" Ålder: " + rs.getString("ålder"));
-                    //System.out.println();
-                    if(count > strata && count < strata +3) {
-                            currPlayer = new Player(rs.getString("id"), rs.getString("namn"));
-                            currPlayer.setAge(rs.getString("ålder"));
-                            currPlayersList.add(currPlayer);
-                    }
-
-                    count++;
-                }
-                stmt.close();
-                //conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            while (rs.next() && count < limit) {
+                player = new Player(count, rs.getString("namn"));
+                player.setAge(rs.getInt("ålder"));
+                currPlayersList.add(player);
+                count++;
+                //System.out.println(player.getName());
             }
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
 
     public ArrayList<Player> getCurrPlayersList() {
         return currPlayersList;
@@ -81,27 +77,29 @@ public class FetchDataFromDatabase {
     public String verifyAnswer(int answer) {
         //if questionVariabel == age / highestAge
 
-        Player answerPlayer = currPlayersList.get(answer - 1);
-        int answerPlayerAge = Integer.parseInt(answerPlayer.getAge());
+        Player answerPlayer = currPlayersList.get(answer);
+        int answerPlayerAge = answerPlayer.getAge();
         System.out.println("YOU ANSWERED " + answerPlayer.getName());
         boolean correct = true;
 
-        for (Player p : currPlayersList){
-            int comparingPlayerAge = Integer.parseInt(p.getAge());
-            if (comparingPlayerAge > answerPlayerAge){
-                correct = false;
-            }
+        if (currPlayersList.get(answer).getAge() < currPlayersList.get(alt1).getAge() || currPlayersList.get(answer).getAge() < currPlayersList.get(alt2).getAge() ||
+                currPlayersList.get(answer).getAge() < currPlayersList.get(alt3).getAge() || currPlayersList.get(answer).getAge() < currPlayersList.get(alt4).getAge()) {
+            correct = false;
         }
 
         String userOutput;
-        if (correct){
+        if (correct) {
             userOutput = "Correct! ";
-        } else{ userOutput = "False! ";}
+        } else {
+            userOutput = "False! ";
+        }
 
         userOutput += "\n" + "--------------------" + "\n" + "The answers are: ";
-        for (Player p : currPlayersList){
-            userOutput += p.getName() + " " + p.getAge() + " --- ";
-        }
+
+        userOutput += currPlayersList.get(alt1).getName() + " " + currPlayersList.get(alt1).getAge() + " --- ";
+        userOutput += currPlayersList.get(alt2).getName() + " " + currPlayersList.get(alt2).getAge() + " --- ";
+        userOutput += currPlayersList.get(alt3).getName() + " " + currPlayersList.get(alt3).getAge() + " --- ";
+        userOutput += currPlayersList.get(alt4).getName() + " " + currPlayersList.get(alt4).getAge() + " --- ";
 
         return userOutput;
     }
@@ -109,14 +107,27 @@ public class FetchDataFromDatabase {
 
     public String getAlternatives() {
         String str = "";
-        int alternative = 1;
-        for (Player p : currPlayersList){
-            str += alternative;
-            str+= ": " + p.getName();
+        alt1 = 0;
+        alt2 = 0;
+        alt3 = 0;
+        alt4 = 0;
+
+        for (int i = 0; i < 4; i++) {
+            Player p = currPlayersList.get(rand.nextInt(100));
+            str += p.getId();
+            str += ": " + p.getName();
             str += "\n";
-            alternative++;
+            if (alt1 == 0) {
+                alt1 = p.getId();
+            } else if (alt2 == 0) {
+                alt2 = p.getId();
+            } else if (alt3 == 0) {
+                alt3 = p.getId();
+            } else if (alt4 == 0) {
+                alt4 = p.getId();
+            }
         }
-        System.out.println(str);
+
         return str;
     }
 }

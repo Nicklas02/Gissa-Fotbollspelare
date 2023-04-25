@@ -1,20 +1,21 @@
 package model;
 
 public class Player {
-    private String id;
+    private int id;
     private String name;
-    private String age;
+    private int age;
 
-    public Player(String id, String name) {
+
+    public Player(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -26,11 +27,11 @@ public class Player {
         this.name = name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }

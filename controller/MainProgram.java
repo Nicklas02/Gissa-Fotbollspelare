@@ -4,6 +4,7 @@ package controller;
  * Main class in our project.
  * @author Group 29
  * Testttttt
+ *
  */
 public class MainProgram {
 
@@ -14,5 +15,10 @@ public class MainProgram {
     public static void main(String[] args) {
         // create object of controller
         Controller controller = new Controller("files/questions.txt");
+        int i = 0;
+    }
+
+    public  void GUImetod{
+        //kod
     }
 }

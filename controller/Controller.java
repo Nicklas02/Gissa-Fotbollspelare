@@ -18,7 +18,7 @@ public class Controller {
     private int score;
     private int lastScore;
     private HighScore highScoreList;
-
+    //Test
 
     /**
      * Parameter constrictor that used to create object of Controller.

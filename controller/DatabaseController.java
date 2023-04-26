@@ -1,10 +1,11 @@
 package controller;
 
-import model.FetchDataFromDatabase;
-import view.AutomaticQuestionsGUI;
+//import model.FetchDataFromDatabase;
+//import view.AutomaticQuestionsGUI;
 
-import java.sql.SQLException;
+//import java.sql.SQLException;
 
+/*
 public class DatabaseController {
     private FetchDataFromDatabase fetchDataFromDatabase;
     private AutomaticQuestionsGUI automaticQuestionsGUI;
@@ -34,4 +35,4 @@ public class DatabaseController {
         DatabaseController databaseController = new DatabaseController();
     }
 
-}
+}*/

@@ -1,5 +1,6 @@
 package model;
 
+/*
 import controller.DatabaseController;
 
 import java.sql.*;
@@ -23,12 +24,14 @@ public class FetchDataFromDatabase {
         this.databaseController = databaseController;
     }
 
+
     /**
      * Upprättar en förbindelse med jdbc till databasen gissa fotbollsspelare. Därefter upprättas en query som skrivs
      * till psql för att sedan returnera och skriva ut data.
      *
      * @return metoden returnerar en uppkoppling.
      */
+/*
     public Connection getDatabaseConnection() {
         String url = "jdbc:postgresql://pgserver.mau.se/gissa_fotbollsspelare";
         Properties props = new Properties();
@@ -45,6 +48,7 @@ public class FetchDataFromDatabase {
         }
     }
 
+    /*
     public void addPlayersToArray() {
         try {
             String QUERY = "select * from \"spelare\" " +
@@ -70,9 +74,11 @@ public class FetchDataFromDatabase {
         }
     }
 
-    public ArrayList<Player> getCurrPlayersList() {
-        return currPlayersList;
-    }
+*/
+
+
+
+    /*
 
     public String verifyAnswer(int answer) {
         //if questionVariabel == age / highestAge
@@ -130,4 +136,4 @@ public class FetchDataFromDatabase {
 
         return str;
     }
-}
+}*/

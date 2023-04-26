@@ -1,5 +1,5 @@
 package view;
-
+/*
 import controller.DatabaseController;
 
 import java.util.Scanner;
@@ -18,3 +18,4 @@ public class AutomaticQuestionsGUI {
         databaseController.answer(scanner.nextInt());
     }
 }
+*/

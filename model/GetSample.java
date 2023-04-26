@@ -12,7 +12,7 @@ public class GetSample {
 
     public GetSample() {
         conn = getDatabaseConnection();
-        Player[] playersSample GetSample(GameType);
+        Player[] playersSample =GetSample(GameType);
         //skicka vidare playersSample till en annan klass som ansvarar för att generera frågor.
     }
 

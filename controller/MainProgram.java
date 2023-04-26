@@ -19,6 +19,7 @@ public class MainProgram {
     }*/
 
     public static void main(String[] args) {
-        GetSample getSample = new GetSample();
+            GetSample getSample = new GetSample();
+
     }
 }

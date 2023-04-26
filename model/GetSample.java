@@ -16,6 +16,7 @@ public class GetSample {
         Player[] playersSample = getSample(gameType, listSize);
         //skicka vidare playersSample till en annan klass som ansvarar för att generera frågor.
         //printPlayerSample(playersSample);
+
         GenerateQuestionSet generateQuestionSet = new GenerateQuestionSet(playersSample);
     }
 
@@ -81,4 +82,6 @@ public class GetSample {
             }
         }
     }
+
+
 }

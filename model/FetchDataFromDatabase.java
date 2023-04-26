@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
+import java.util.concurrent.CyclicBarrier;
 
 public class FetchDataFromDatabase {
     Connection conn;
@@ -38,6 +39,14 @@ public class FetchDataFromDatabase {
         }
     }
 
+    public void gatherUrvalAvSpelare(){
+        //get 100 object
+
+        //Anropa 5 slupmässiga metoder
+    }
+
+
+
         public void questionsAboutAge() {
             try {
                 String QUERY = "SELECT * FROM \"spelare\"";
@@ -50,6 +59,7 @@ public class FetchDataFromDatabase {
                 int count =0;
 
                 strata = 3;
+                CyclicBarrier turnstil = new CyclicBarrier(5);
 
                 while (rs.next() && count<limit) {
                     //if (count > 3) {

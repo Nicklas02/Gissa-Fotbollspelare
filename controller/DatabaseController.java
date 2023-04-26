@@ -17,6 +17,7 @@ public class DatabaseController {
     private void startGenerating() {
         while(true) {
             fetchDataFromDatabase.questionsAboutAge();
+            //Get manuella frågor
             String question = "Vem är äldst?";
             String alternatives = fetchDataFromDatabase.getAlternatives();
             automaticQuestionsGUI.gui(question, alternatives);

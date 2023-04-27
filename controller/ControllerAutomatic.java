@@ -16,7 +16,7 @@ public class ControllerAutomatic {
         startQuiz(); //Konsolbaserat lokalt gui
     }
 
-    //maximum number of questions is 50-4 = 46; 
+    //maximum number of questions is 50-4 = 46;
     private void getQuestions() {
         GenerateQuestionSet generateQuestionSet = new GenerateQuestionSet(10, GameType.PremierLeague);
         listQuestions = generateQuestionSet.getQuestionSet();

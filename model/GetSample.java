@@ -10,6 +10,7 @@ public class GetSample {
     private Connection conn;
     private GameType gameType = GameType.None;
     private final int listSize = 30;
+    private GenerateQuestionSet generateQuestionSet;
 
     public GetSample() {
         conn = getDatabaseConnection();
@@ -17,7 +18,7 @@ public class GetSample {
         //skicka vidare playersSample till en annan klass som ansvarar för att generera frågor.
         //printPlayerSample(playersSample);
 
-        GenerateQuestionSet generateQuestionSet = new GenerateQuestionSet(playersSample);
+        generateQuestionSet = new GenerateQuestionSet(playersSample);
     }
 
     public Connection getDatabaseConnection() {
@@ -115,5 +116,7 @@ public class GetSample {
         }
     }
 
-
+    public GenerateQuestionSet getGenerateQuestionSet() {
+        return generateQuestionSet;
+    }
 }

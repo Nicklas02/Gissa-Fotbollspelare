@@ -1,5 +1,6 @@
 package controller;
 
+import model.GenerateQuestionSet;
 import model.GetSample;
 
 /**
@@ -20,6 +21,8 @@ public class MainProgram {
 
     public static void main(String[] args) {
             GetSample getSample = new GetSample();
+            GenerateQuestionSet generateQuestionSet = getSample.getGenerateQuestionSet();
 
+            generateQuestionSet
     }
 }

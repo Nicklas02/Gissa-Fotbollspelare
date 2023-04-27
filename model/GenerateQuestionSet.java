@@ -101,5 +101,7 @@ public class GenerateQuestionSet {
         return null;
     }
 
-
+    public QuestionObject[] getQuestionSet() {
+        return questionSet;
+    }
 }

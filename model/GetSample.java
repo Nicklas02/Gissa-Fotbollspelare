@@ -38,6 +38,8 @@ public class GetSample {
 
     public Player[] getSample(GameType gameType, int listSize){
         Player[] playerSample = new Player[listSize];
+        Player player = null;
+        int count = 0;
         //om gametype == none
         if (gameType==GameType.None){
             System.out.println("hey");
@@ -46,8 +48,6 @@ public class GetSample {
                         "order by overall desc;";
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(QUERY);
-                Player player = null;
-                int count = 0;
 
                 while (rs.next()) {
                     player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
@@ -63,8 +63,28 @@ public class GetSample {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        } else if(gameType == GameType.PremierLeague){
+            System.out.println("hey");
+            try {
+                String QUERY = "select * from \"spelare2023\" " +
+                        "order by overall desc;";
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(QUERY);
 
-
+                while (rs.next()) {
+                    player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
+                            , rs.getString("nationality"), rs.getInt("height"));
+                    playerSample[count] = player;
+                    count++;
+                    if (count>25){
+                        break;
+                    }
+                }
+                stmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         //om gametype = only premier league
             //get players sample from PSQL om league_name == English Premier League
@@ -73,7 +93,18 @@ public class GetSample {
 
 
     public void ChangeGameType(){
-        //Ändra gametype entúm till t ex bara premier league
+        if(gameType == GameType.PremierLeague){
+
+        } else if (gameType == GameType.LaLiga) {
+
+        } else if (gameType == GameType.SerieA) {
+
+        } else if (gameType == GameType.Bundesliga) {
+
+        } else if (gameType == GameType.Ligue1) {
+
+        } else {}
+
     }
 
     private void printPlayerSample(Player[] list) {

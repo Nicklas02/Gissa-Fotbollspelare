@@ -11,9 +11,6 @@ public class QuestionObject {
         this.articulatedQuestion = articulatedQuestion;
     }
 
-    public QuestionObject() {
-    }
-
     public Player[] getAlternatives() {
         return alternatives;
     }

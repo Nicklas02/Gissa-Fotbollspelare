@@ -8,11 +8,14 @@ public class GenerateQuestionSet {
     private Player[] alternatives;
     private Random random = new Random();
     private Scanner scanner = new Scanner(System.in);
+    private int numberOfQuestions = 10;
     private Question[] questionSet;
 
     public GenerateQuestionSet(Player[] sample) {
         this.sample=sample;
-        startRound(10); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
+        questionSet= new Question[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
+        //för att sedan skicka till controller
+        startRound(numberOfQuestions); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
 
     private void startRound(int numberOfQuestions) {
@@ -31,6 +34,12 @@ public class GenerateQuestionSet {
         int localRandom = random.nextInt(3);
         if (localRandom==0) {
             return ageQuestion();
+
+            //Alternativ sätt att göra det på är att lagra metodens data i ett questionObject och sedermera skicka vidare
+            //detta till Controllern
+            //t ex
+            int nonLocalIndex = 0;
+            questionSet[nonLocalIndex] = new Question(randomAlternatives(), ageQuestion(), "Vem är äldst?" );
         }
         if (localRandom==1) {
             return heightQuestion();

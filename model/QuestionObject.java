@@ -10,4 +10,31 @@ public class QuestionObject {
         this.correctAnswer = correctAnswer;
         this.articulatedQuestion = articulatedQuestion;
     }
+
+    public QuestionObject() {
+    }
+
+    public Player[] getAlternatives() {
+        return alternatives;
+    }
+
+    public void setAlternatives(Player[] alternatives) {
+        this.alternatives = alternatives;
+    }
+
+    public Player getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(Player correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public String getArticulatedQuestion() {
+        return articulatedQuestion;
+    }
+
+    public void setArticulatedQuestion(String articulatedQuestion) {
+        this.articulatedQuestion = articulatedQuestion;
+    }
 }

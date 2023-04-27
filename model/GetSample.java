@@ -123,7 +123,7 @@ public class GetSample {
                 if (count > 25) {
                     break;
                 }
-                System.out.println(player.toString());
+                //System.out.println(player.toString());
             }
             stmt.close();
             conn.close();

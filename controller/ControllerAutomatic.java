@@ -16,9 +16,11 @@ public class ControllerAutomatic {
     }
 
     private void startController() {
-        GenerateQuestionSet generateQuestionSet = new GenerateQuestionSet();
+        GenerateQuestionSet yyy = new GenerateQuestionSet();
 
-        QuestionAutomatic[] listQuestions = generateQuestionSet.getQuestionSet();
+        yyy.byu
+
+
         int answer =0;
         for(QuestionAutomatic q : listQuestions){
             System.out.println(q.getArticulatedQuestion());

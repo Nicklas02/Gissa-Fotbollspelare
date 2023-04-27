@@ -13,7 +13,7 @@ public class GenerateQuestionSet {
     public GenerateQuestionSet() {
         sampleObject = new GetSample();
         //ta bort buildQuestionSet senare, anrop sker utifrån
-        buildQuestionSet(10); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
+        //buildQuestionSet(10); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
 
     private QuestionAutomatic[] buildQuestionSet(int numberOfQuestions) {

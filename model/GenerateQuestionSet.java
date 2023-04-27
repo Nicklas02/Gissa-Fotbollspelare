@@ -32,7 +32,7 @@ public class GenerateQuestionSet {
     }
 
     private boolean ageQuestion() {
-        System.out.println("Who is the olderst? Answer 1-4");
+        System.out.println("Who is the oldest? Answer 1-4");
         for(int i =0; i<4; i++){
             System.out.println(alternatives[i].getName() + alternatives[i].getAge());
         }
@@ -44,6 +44,11 @@ public class GenerateQuestionSet {
                 return false;
             }
         }
+        return true;
+    }
+    
+    private boolean heightQuestion(){
+        System.out.println("Who is the tallest? Answer 1-4");
         return true;
     }
 

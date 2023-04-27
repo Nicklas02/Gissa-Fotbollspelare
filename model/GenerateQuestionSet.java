@@ -7,6 +7,8 @@ public class GenerateQuestionSet {
     private Player[] sample;
     private Player[] alternatives;
     private Random random = new Random();
+    private Scanner scanner = new Scanner(System.in);
+    private Question[] questionSet;
 
     public GenerateQuestionSet(Player[] sample) {
         this.sample=sample;
@@ -16,14 +18,28 @@ public class GenerateQuestionSet {
     private void startRound(int numberOfQuestions) {
         int localCounter = 0;
         while(localCounter<numberOfQuestions) {
-
-            if (ageQuestion()) {
+            if (randomQuestion()) {
                 System.out.println("Success!");
             } else {
                 System.out.println("Better luck next time!");
             }
             localCounter++;
         }
+    }
+
+    private boolean randomQuestion() {
+        int localRandom = random.nextInt(3);
+        if (localRandom==0) {
+            return ageQuestion();
+        }
+        if (localRandom==1) {
+            return heightQuestion();
+        }
+        if(localRandom==2){
+            return weakFootQuestion();
+        }
+        System.out.println("Error, no question was generate");
+        return false;
     }
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
@@ -37,14 +53,10 @@ public class GenerateQuestionSet {
 
     private boolean ageQuestion() {
         randomAlternatives();
-        System.out.println("Who is the olderst? Answer 1-4");
         System.out.println("Who is the oldest? Answer 1-4");
-
         for(int i =0; i<4; i++){
             System.out.println(alternatives[i].getName() + alternatives[i].getAge());
         }
-
-        Scanner scanner = new Scanner(System.in);
         int answer = scanner.nextInt()-1;
         for (Player p : alternatives){
             if (alternatives[answer].getAge() < p.getAge()){
@@ -59,7 +71,10 @@ public class GenerateQuestionSet {
         return true;
     }
 
-
+    private boolean weakFootQuestion() {
+        System.out.println("Vem är mest enfotad?");
+        return true;
+    }
 
 
 }

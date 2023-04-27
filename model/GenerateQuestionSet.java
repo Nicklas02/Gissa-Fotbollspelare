@@ -26,6 +26,7 @@ public class GenerateQuestionSet {
 
     private QuestionObject randomQuestion() {
         int localRandom = random.nextInt(3);
+        localRandom = 0; //temporär
         if (localRandom==0) {
             return ageQuestion();
         }
@@ -37,7 +38,6 @@ public class GenerateQuestionSet {
         }
         System.out.println("Error, no question was generated, random was: " + localRandom );
         return null;
-
     }
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
@@ -78,18 +78,13 @@ public class GenerateQuestionSet {
     }
 
     private QuestionObject weakFootQuestion() {
-        Player[] alternatives = randomAlternatives();
-        int firstAlternative = 0;
-        Player correctAnswer = alternatives[firstAlternative];
-        for (Player p : alternatives){
-            if(p.getAge()>correctAnswer.getAge()){
-                correctAnswer = p;
-            }
+        Player[] alternatives = new Player[4];
+        for (Player p : sample){
+            //om weakfoot == 1 eller 2 adda till alternatives
+            //om weakfoot == 5 adda till alternatives och correct answer
         }
-        
         String localQuestion = "Vilken spelare är mest enfotad?";
         return new QuestionObject(null, null, localQuestion );
-
     }
 
     //En vanlig getter-metod

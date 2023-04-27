@@ -33,8 +33,13 @@ public class MainProgram {
         int answer =0;
         for(QuestionObject q : listQuestions){
             System.out.println(q.getArticulatedQuestion());
-            for (Player p : q.getAlternatives())
-                System.out.print(p.getName() + " or ");
+
+            int nbr =1;
+            for (Player p : q.getAlternatives()) {
+                System.out.println(nbr + p.getName() + p.getAge());
+                nbr++;
+            }
+
             Scanner scanner = new Scanner(System.in);
             answer = scanner.nextInt()-1;
             if (q.getAlternatives()[answer]==q.getCorrectAnswer()){

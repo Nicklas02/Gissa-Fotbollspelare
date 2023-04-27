@@ -24,12 +24,13 @@ public class Player {
     private String releaseClause;
     private int kitNumber;
 
-    public Player(int id, String name, int age, String nationality, int height) {
+    public Player(int id, String name, int age, String nationality, int height, int weakFoot) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.nationality = nationality;
         this.height = height;
+        this.weakFoot=weakFoot;
     }
 
     public int getId() {

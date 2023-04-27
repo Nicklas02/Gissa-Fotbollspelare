@@ -3,14 +3,16 @@ package model;
 import java.util.Random;
 
 public class GenerateQuestionSet {
+    private GetSample getSample; //Förbindelse till sample objektet. 1:1 förbindelse
     private Player[] sample;
-    private Random random = new Random();
+    private Random random = new Random(); //Används för slumpmässiga frågor liksom för slumpmässiga svarsalternativ
     private QuestionAutomatic[] questionSet;
-    private final int nbrOfAlt = 4;
-    private final int numberOfQuestions = 10;
+    private final int nbrOfAlt = 4; //svarsalternativ
+    private final int numberOfQuestions = 10; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
 
 
     public GenerateQuestionSet() {
+        getSample = new GetSample();
         sample = new GetSample().getSample(GameType.PremierLeague);
         //ta bort buildQuestionSet senare, anrop sker utifrån
         buildQuestionSet(numberOfQuestions); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare

@@ -3,21 +3,19 @@ package model;
 import java.sql.*;
 import java.util.Properties;
 
-//Ansvaret för denna klassen är endast att skapa sample/urval av spelareobjekt från databasen och lagra i en lista
-//Urvalet ska bero på förinställningar. T ex bara premier league eller bara "lätta" spelare
-//Slutligen skickas listan med urvalet av spelare vidare till en annan klass.
+
+/**
+ * Ansvaret för denna klassen är endast att skapa sample/urval av spelareobjekt från databasen och lagra i en lista
+ * Urvalet ska bero på förinställningar. T ex bara premier league eller bara "lätta" spelare
+ * Slutligen skickas listan med urvalet av spelare vidare till en annan klass.
+ */
 public class GetSample {
     private Connection conn;
-    private GameType gameType = GameType.PremierLeague;
-    private final int listSize = 30;
+    private GameType gameType;
+    private final int sampleSize = 30;
 
     public GetSample() {
         conn = getDatabaseConnection();
-        //Player[] playersSample = getSample(gameType, listSize);
-        //skicka vidare playersSample till en annan klass som ansvarar för att generera frågor.
-        //printPlayerSample(playersSample);
-        //generateQuestionSet = new GenerateQuestionSet(playersSample);
-
     }
 
     public Connection getDatabaseConnection() {
@@ -37,12 +35,12 @@ public class GetSample {
     }
 
     public Player[] getSample(GameType gameType) {
-        Player[] playerSample = new Player[listSize];
+        this.gameType=gameType;
+        Player[] playerSample = new Player[sampleSize];
         Player player = null;
         int count = 0;
         ResultSet rs = null;
         Statement stmt = null;
-        //om gametype == none
         if (gameType == GameType.None) {
             try {
                 String QUERY = "select * from \"spelare2023\" " +
@@ -116,7 +114,7 @@ public class GetSample {
         try {
             while (rs.next()) {
                 player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
-                        , rs.getString("nationality"), rs.getInt("height"));
+                        , rs.getString("nationality"), rs.getInt("height"), rs.getInt("weak_foot"));
                 playerSample[count] = player;
                 count++;
                 if (count > 15) {
@@ -129,10 +127,7 @@ public class GetSample {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        //om gametype = only premier league
-        //get players sample from PSQL om league_name == English Premier League
-        return playerSample; //urval/sample kan vara t ex 50 eller 100 Premier League spelare
+        return playerSample;
     }
 
 
@@ -152,6 +147,7 @@ public class GetSample {
 
     }
 
+    //Testmetod
     private void printPlayerSample(Player[] list) {
         for (Player p : list) {
             if (p != null) {

@@ -8,7 +8,7 @@ import java.util.Properties;
 //Slutligen skickas listan med urvalet av spelare vidare till en annan klass.
 public class GetSample {
     private Connection conn;
-    private GameType gameType = GameType.None;
+    private GameType gameType = GameType.PremierLeague;
     private final int listSize = 30;
     private GenerateQuestionSet generateQuestionSet;
 
@@ -37,64 +37,114 @@ public class GetSample {
         }
     }
 
-    public Player[] getSample(GameType gameType, int listSize){
+    public Player[] getSample(GameType gameType, int listSize) {
         Player[] playerSample = new Player[listSize];
         Player player = null;
         int count = 0;
+        ResultSet rs = null;
+        Statement stmt = null;
         //om gametype == none
-        if (gameType==GameType.None){
+        if (gameType == GameType.None) {
             System.out.println("hey");
             try {
                 String QUERY = "select * from \"spelare2023\" " +
                         "order by overall desc;";
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(QUERY);
-
-                while (rs.next()) {
-                    player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
-                    , rs.getString("nationality"), rs.getInt("height"));
-                    playerSample[count] = player;
-                    count++;
-                    if (count>25){
-                        break;
-                    }
-                }
-                stmt.close();
-                conn.close();
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(QUERY);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else if(gameType == GameType.PremierLeague){
+        } else if (gameType == GameType.PremierLeague) {
             System.out.println("hey");
             try {
-                String QUERY = "select * from \"spelare2023\" " +
-                        "order by overall desc;";
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(QUERY);
-
-                while (rs.next()) {
-                    player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
-                            , rs.getString("nationality"), rs.getInt("height"));
-                    playerSample[count] = player;
-                    count++;
-                    if (count>25){
-                        break;
-                    }
-                }
-                stmt.close();
-                conn.close();
+                String QUERY = "select spelare2023.* from spelare2023\n" +
+                        "join clubs \n" +
+                        "on spelare2023.club = clubs.club\n" +
+                        "where clubs.league = 'English Premier League'\n" +
+                        "order by spelare2023.overall desc";
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(QUERY);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else if (gameType == GameType.LaLiga) {
+            System.out.println("hey");
+            try {
+                String QUERY = "select spelare2023.* from spelare2023\n" +
+                        "join clubs \n" +
+                        "on spelare2023.club = clubs.club\n" +
+                        "where clubs.league = 'Spain Primera Division'\n" +
+                        "order by spelare2023.overall desc";
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(QUERY);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else if (gameType == GameType.Bundesliga) {
+            System.out.println("hey");
+            try {
+                String QUERY = "select spelare2023.* from spelare2023\n" +
+                        "join clubs \n" +
+                        "on spelare2023.club = clubs.club\n" +
+                        "where clubs.league = 'German 1. Bundesliga'\n" +
+                        "order by spelare2023.overall desc";
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(QUERY);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else if (gameType == GameType.Ligue1) {
+            System.out.println("hey");
+            try {
+                String QUERY = "select spelare2023.* from spelare2023\n" +
+                        "join clubs \n" +
+                        "on spelare2023.club = clubs.club\n" +
+                        "where clubs.league = 'French Ligue 1'\n" +
+                        "order by spelare2023.overall desc";
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(QUERY);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else if (gameType == GameType.SerieA) {
+            System.out.println("hey");
+            try {
+                String QUERY = "select spelare2023.* from spelare2023\n" +
+                        "join clubs \n" +
+                        "on spelare2023.club = clubs.club\n" +
+                        "where clubs.league = 'Italian Serie A'\n" +
+                        "order by spelare2023.overall desc";
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(QUERY);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+        try {
+            while (rs.next()) {
+                player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
+                        , rs.getString("nationality"), rs.getInt("height"));
+                playerSample[count] = player;
+                count++;
+                if (count > 25) {
+                    break;
+                }
+                System.out.println(player.toString());
+            }
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         //om gametype = only premier league
-            //get players sample from PSQL om league_name == English Premier League
+        //get players sample from PSQL om league_name == English Premier League
         return playerSample; //urval/sample kan vara t ex 50 eller 100 Premier League spelare
     }
 
 
-    public void ChangeGameType(){
-        if(gameType == GameType.PremierLeague){
+    public void ChangeGameType() {
+        if (gameType == GameType.PremierLeague) {
 
         } else if (gameType == GameType.LaLiga) {
 
@@ -104,13 +154,14 @@ public class GetSample {
 
         } else if (gameType == GameType.Ligue1) {
 
-        } else {}
+        } else {
+        }
 
     }
 
     private void printPlayerSample(Player[] list) {
-        for (Player p : list){
-            if(p!=null) {
+        for (Player p : list) {
+            if (p != null) {
                 System.out.println(p.toString());
             }
         }

@@ -50,7 +50,8 @@ public class GetSample {
                 int count = 0;
 
                 while (rs.next()) {
-                    player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age"));
+                    player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
+                    , rs.getString("nationality"), rs.getInt("height"));
                     playerSample[count] = player;
                     count++;
                     if (count>25){

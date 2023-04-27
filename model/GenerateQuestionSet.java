@@ -8,10 +8,13 @@ public class GenerateQuestionSet {
     private Random random = new Random(); //Används för slumpmässiga frågor liksom för slumpmässiga svarsalternativ
     private QuestionAutomatic[] questionSet;
     private final int nbrOfAlt = 4; //svarsalternativ
-    private final int numberOfQuestions = 10; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
+    private int numberOfQuestions; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
+    private GameType gameType;
 
 
-    public GenerateQuestionSet() {
+    public GenerateQuestionSet(int numberOfQuestions, GameType gameType) {
+        this.numberOfQuestions=numberOfQuestions;
+        this.gameType = gameType;
         //ta bort buildQuestionSet senare, anrop sker utifrån
         buildQuestionSet(); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
@@ -20,7 +23,7 @@ public class GenerateQuestionSet {
         if (getSample==null){
             getSample=new GetSample();
         }
-        sample = getSample.getSample(GameType.PremierLeague);
+        sample = getSample.getSample(gameType);
         questionSet= new QuestionAutomatic[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
         //för att sedan skicka till controller
         for (int i=0; i<questionSet.length; i++){

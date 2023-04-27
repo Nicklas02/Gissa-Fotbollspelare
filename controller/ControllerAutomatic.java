@@ -30,7 +30,7 @@ public class ControllerAutomatic {
 
             int nbr =1;
             for (Player p : q.getAlternatives()) {
-                System.out.println(nbr + p.getName() + p.getAge());
+                System.out.println(nbr +"---" + p.getName()+"---" + p.getAge()+"---" + p.getHeight());
                 nbr++;
             }
 

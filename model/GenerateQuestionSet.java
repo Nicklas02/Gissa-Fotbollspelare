@@ -32,8 +32,7 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic randomQuestion() {
-        int localRandom = random.nextInt(3);
-        localRandom = 0; //temporär
+        int localRandom = random.nextInt(2);
         if (localRandom==0) {
             return ageQuestion();
         }
@@ -80,7 +79,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        String localQuestion = "Who is the tallest? Answer 1-4";
+        String localQuestion = "Who is the tallest?";
         return new QuestionAutomatic(alternatives, correctAnswer, localQuestion );
     }
 
@@ -88,7 +87,7 @@ public class GenerateQuestionSet {
         Player[] alternatives = new Player[nbrOfAlt];
         for (Player p : sample){
             //om weakfoot == 1 eller 2 adda till alternatives
-            //om weakfoot == 5 adda till alternatives och correct answer
+            //om weakfoot == 5 adda till alternatives och correct answer. DVS endast 1 5 star weak foot
         }
         String localQuestion = "Vilken spelare är mest enfotad?";
         return new QuestionAutomatic(null, null, localQuestion );

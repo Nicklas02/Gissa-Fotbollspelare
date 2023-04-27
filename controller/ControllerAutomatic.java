@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class ControllerAutomatic {
     private GenerateQuestionSet generateQuestionSet;
+    private QuestionAutomatic[] listQuestions;
 
 
     public ControllerAutomatic() {
@@ -16,7 +17,8 @@ public class ControllerAutomatic {
     }
 
     private void startController() {
-        QuestionAutomatic[] listQuestions  = generateQuestionSet.getQuestionSet();
+        listQuestions = generateQuestionSet.getQuestionSet();
+
 
 
         int answer =0;

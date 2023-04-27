@@ -12,20 +12,20 @@ public class GenerateQuestionSet {
 
 
     public GenerateQuestionSet() {
-        getSample = new GetSample();
-        sample = new GetSample().getSample(GameType.PremierLeague);
         //ta bort buildQuestionSet senare, anrop sker utifrån
-        buildQuestionSet(numberOfQuestions); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
+        buildQuestionSet(); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
 
-    private void buildQuestionSet(int numberOfQuestions) {
-
+    private void buildQuestionSet() {
+        if (getSample==null){
+            getSample=new GetSample();
+        }
+        sample = getSample.getSample(GameType.PremierLeague);
         questionSet= new QuestionAutomatic[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
         //för att sedan skicka till controller
         for (int i=0; i<questionSet.length; i++){
             questionSet[i] = randomQuestion();
         }
-
     }
 
     private QuestionAutomatic randomQuestion() {

@@ -121,7 +121,7 @@ public class GetSample {
                         , rs.getString("nationality"), rs.getInt("height"));
                 playerSample[count] = player;
                 count++;
-                if (count > listSize) {
+                if (count > 5) {
                     break;
                 }
                 //System.out.println(player.toString());

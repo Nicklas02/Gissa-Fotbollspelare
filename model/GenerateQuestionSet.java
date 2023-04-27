@@ -6,28 +6,25 @@ public class GenerateQuestionSet {
     private GetSample sampleObject;
     private Player[] sample;
     private Random random = new Random();
-    private int numberOfQuestions = 10;
     private QuestionAutomatic[] questionSet;
+    private final int nbrOfAlt = 4;
 
 
     public GenerateQuestionSet() {
         sampleObject = new GetSample();
-        updateSample();
         //ta bort buildQuestionSet senare, anrop sker utifrån
-        buildQuestionSet(numberOfQuestions); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
+        buildQuestionSet(10); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
 
-    private void updateSample() {
-        int listSize = 10;
-        sample = sampleObject.getSample(GameType.PremierLeague, listSize);
-    }
+    private QuestionAutomatic[] buildQuestionSet(int numberOfQuestions) {
+        sample = sampleObject.getSample(GameType.PremierLeague, numberOfQuestions); //hårdkodad
 
-    private void buildQuestionSet(int numberOfQuestions) {
         questionSet= new QuestionAutomatic[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
         //för att sedan skicka till controller
         for (int i=0; i<questionSet.length; i++){
             questionSet[i] = randomQuestion();
         }
+        return questionSet;
     }
 
     private QuestionAutomatic randomQuestion() {
@@ -48,9 +45,9 @@ public class GenerateQuestionSet {
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {
-        int startingPos = random.nextInt(20);
-        Player[] alternatives = new Player[4];
-        for (int i=0; i<4; i++){
+        int startingPos = random.nextInt(sample.length-nbrOfAlt);
+        Player[] alternatives = new Player[nbrOfAlt];
+        for (int i=0; i<nbrOfAlt; i++){
             alternatives[i] = sample[startingPos++];
         }
         return alternatives;
@@ -84,7 +81,7 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic weakFootQuestion() {
-        Player[] alternatives = new Player[4];
+        Player[] alternatives = new Player[nbrOfAlt];
         for (Player p : sample){
             //om weakfoot == 1 eller 2 adda till alternatives
             //om weakfoot == 5 adda till alternatives och correct answer
@@ -93,8 +90,4 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(null, null, localQuestion );
     }
 
-    //En vanlig getter-metod
-    public QuestionAutomatic[] getQuestionSet() {
-        return questionSet;
-    }
 }

@@ -3,28 +3,27 @@ package model;
 import java.util.Random;
 
 public class GenerateQuestionSet {
-    private GetSample sampleObject;
     private Player[] sample;
     private Random random = new Random();
     private QuestionAutomatic[] questionSet;
     private final int nbrOfAlt = 4;
+    private final int numberOfQuestions = 10;
 
 
     public GenerateQuestionSet() {
-        sampleObject = new GetSample();
+        sample = new GetSample().getSample(GameType.PremierLeague);
         //ta bort buildQuestionSet senare, anrop sker utifrån
-        //buildQuestionSet(10); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
+        buildQuestionSet(numberOfQuestions); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
 
-    private QuestionAutomatic[] buildQuestionSet(int numberOfQuestions) {
-        sample = sampleObject.getSample(GameType.PremierLeague, numberOfQuestions); //hårdkodad
+    private void buildQuestionSet(int numberOfQuestions) {
 
         questionSet= new QuestionAutomatic[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
         //för att sedan skicka till controller
         for (int i=0; i<questionSet.length; i++){
             questionSet[i] = randomQuestion();
         }
-        return questionSet;
+
     }
 
     private QuestionAutomatic randomQuestion() {
@@ -45,7 +44,7 @@ public class GenerateQuestionSet {
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {
-        int startingPos = random.nextInt(sample.length-nbrOfAlt);
+        int startingPos = random.nextInt(numberOfQuestions);
         Player[] alternatives = new Player[nbrOfAlt];
         for (int i=0; i<nbrOfAlt; i++){
             alternatives[i] = sample[startingPos++];
@@ -90,4 +89,8 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(null, null, localQuestion );
     }
 
+
+    public QuestionAutomatic[] getQuestionSet() {
+        return questionSet;
+    }
 }

@@ -1,24 +1,22 @@
 package controller;
 
 import model.GenerateQuestionSet;
-import model.GetSample;
 import model.Player;
 import model.QuestionAutomatic;
 
 import java.util.Scanner;
 
 public class ControllerAutomatic {
+    private GenerateQuestionSet generateQuestionSet;
 
 
     public ControllerAutomatic() {
-
+        generateQuestionSet = new GenerateQuestionSet();
         startController();
     }
 
     private void startController() {
-        GenerateQuestionSet yyy = new GenerateQuestionSet();
-
-        yyy.byu
+        QuestionAutomatic[] listQuestions  = generateQuestionSet.getQuestionSet();
 
 
         int answer =0;

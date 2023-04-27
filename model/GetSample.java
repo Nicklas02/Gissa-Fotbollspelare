@@ -9,7 +9,7 @@ import java.util.Properties;
 public class GetSample {
     private Connection conn;
     private GameType gameType = GameType.PremierLeague;
-    private int listSize;
+    private final int listSize = 30;
     private GenerateQuestionSet generateQuestionSet;
 
     public GetSample() {
@@ -37,8 +37,7 @@ public class GetSample {
         }
     }
 
-    public Player[] getSample(GameType gameType, int listSize) {
-        this.listSize=listSize;
+    public Player[] getSample(GameType gameType) {
         Player[] playerSample = new Player[listSize];
         Player player = null;
         int count = 0;
@@ -121,7 +120,7 @@ public class GetSample {
                         , rs.getString("nationality"), rs.getInt("height"));
                 playerSample[count] = player;
                 count++;
-                if (count > 5) {
+                if (count > 15) {
                     break;
                 }
                 //System.out.println(player.toString());
@@ -162,7 +161,4 @@ public class GetSample {
         }
     }
 
-    public GenerateQuestionSet getGenerateQuestionSet() {
-        return generateQuestionSet;
-    }
 }

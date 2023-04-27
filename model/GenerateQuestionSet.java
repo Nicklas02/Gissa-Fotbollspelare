@@ -8,30 +8,35 @@ public class GenerateQuestionSet {
     private Player[] alternatives;
     private Random random = new Random();
 
-
     public GenerateQuestionSet(Player[] sample) {
         this.sample=sample;
-        while(true) {
-            prepareQuestion();
+        startRound(10); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
+    }
+
+    private void startRound(int numberOfQuestions) {
+        int localCounter = 0;
+        while(localCounter<numberOfQuestions) {
+
             if (ageQuestion()) {
                 System.out.println("Success!");
             } else {
                 System.out.println("Better luck next time!");
             }
+            localCounter++;
         }
     }
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
-    private void prepareQuestion() {
+    private void randomAlternatives() {
         int startingPos = random.nextInt(20);
         alternatives = new Player[4];
         for (int i=0; i<4; i++){
             alternatives[i] = sample[startingPos++];
         }
-
     }
 
     private boolean ageQuestion() {
+        randomAlternatives();
         System.out.println("Who is the olderst? Answer 1-4");
         for(int i =0; i<4; i++){
             System.out.println(alternatives[i].getName() + alternatives[i].getAge());

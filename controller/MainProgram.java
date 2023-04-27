@@ -3,7 +3,7 @@ package controller;
 import model.GenerateQuestionSet;
 import model.GetSample;
 import model.Player;
-import model.QuestionObject;
+import model.QuestionAutomatic;
 
 import java.util.Scanner;
 
@@ -29,9 +29,9 @@ public class MainProgram {
     private static void testGetSample_testGenerateQuetsionSet_testQuestionObject() {
         GetSample getSample = new GetSample();
         GenerateQuestionSet generateQuestionSet = getSample.getGenerateQuestionSet();
-        QuestionObject[] listQuestions = generateQuestionSet.getQuestionSet();
+        QuestionAutomatic[] listQuestions = generateQuestionSet.getQuestionSet();
         int answer =0;
-        for(QuestionObject q : listQuestions){
+        for(QuestionAutomatic q : listQuestions){
             System.out.println(q.getArticulatedQuestion());
 
             int nbr =1;

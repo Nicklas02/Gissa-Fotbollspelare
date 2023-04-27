@@ -1,11 +1,11 @@
 package model;
 
-public class QuestionObject {
+public class QuestionAutomatic {
     private Player[] alternatives;
     private Player correctAnswer;
     private String articulatedQuestion;
 
-    public QuestionObject(Player[] alternatives, Player correctAnswer, String articulatedQuestion) {
+    public QuestionAutomatic(Player[] alternatives, Player correctAnswer, String articulatedQuestion) {
         this.alternatives = alternatives;
         this.correctAnswer = correctAnswer;
         this.articulatedQuestion = articulatedQuestion;

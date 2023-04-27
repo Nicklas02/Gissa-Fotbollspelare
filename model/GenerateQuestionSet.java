@@ -1,13 +1,12 @@
 package model;
 
 import java.util.Random;
-import java.util.Scanner;
 
 public class GenerateQuestionSet {
     private Player[] sample;
     private Random random = new Random();
     private int numberOfQuestions = 10;
-    private QuestionObject[] questionSet;
+    private QuestionAutomatic[] questionSet;
 
 
     public GenerateQuestionSet(Player[] sample) {
@@ -17,14 +16,14 @@ public class GenerateQuestionSet {
     }
 
     private void buildQuestionSet(int numberOfQuestions) {
-        questionSet= new QuestionObject[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
+        questionSet= new QuestionAutomatic[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
         //för att sedan skicka till controller
         for (int i=0; i<questionSet.length; i++){
             questionSet[i] = randomQuestion();
         }
     }
 
-    private QuestionObject randomQuestion() {
+    private QuestionAutomatic randomQuestion() {
         int localRandom = random.nextInt(3);
         localRandom = 0; //temporär
         if (localRandom==0) {
@@ -51,7 +50,7 @@ public class GenerateQuestionSet {
     }
 
     //lagrar metodens data i ett questionObject så att controllerklasserna sedermera kan hämta alla QuestionsObject
-    private QuestionObject ageQuestion() {
+    private QuestionAutomatic ageQuestion() {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
         Player correctAnswer = alternatives[firstAlternative];
@@ -61,10 +60,10 @@ public class GenerateQuestionSet {
             }
         }
         String localQuestion = "vem är äldst?";
-        return new QuestionObject(alternatives, correctAnswer, localQuestion );
+        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion );
     }
     
-    private QuestionObject heightQuestion(){
+    private QuestionAutomatic heightQuestion(){
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
         Player correctAnswer = alternatives[firstAlternative];
@@ -74,21 +73,21 @@ public class GenerateQuestionSet {
             }
         }
         String localQuestion = "Who is the tallest? Answer 1-4";
-        return new QuestionObject(alternatives, correctAnswer, localQuestion );
+        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion );
     }
 
-    private QuestionObject weakFootQuestion() {
+    private QuestionAutomatic weakFootQuestion() {
         Player[] alternatives = new Player[4];
         for (Player p : sample){
             //om weakfoot == 1 eller 2 adda till alternatives
             //om weakfoot == 5 adda till alternatives och correct answer
         }
         String localQuestion = "Vilken spelare är mest enfotad?";
-        return new QuestionObject(null, null, localQuestion );
+        return new QuestionAutomatic(null, null, localQuestion );
     }
 
     //En vanlig getter-metod
-    public QuestionObject[] getQuestionSet() {
+    public QuestionAutomatic[] getQuestionSet() {
         return questionSet;
     }
 }

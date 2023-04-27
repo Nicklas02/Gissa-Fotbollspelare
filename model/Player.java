@@ -32,6 +32,8 @@ public class Player {
         this.height = height;
     }
 
+    public Player() {
+    }
 
     public int getId() {
         return id;

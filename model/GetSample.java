@@ -10,7 +10,6 @@ public class GetSample {
     private Connection conn;
     private GameType gameType = GameType.PremierLeague;
     private final int listSize = 30;
-    private GenerateQuestionSet generateQuestionSet;
 
     public GetSample() {
         conn = getDatabaseConnection();

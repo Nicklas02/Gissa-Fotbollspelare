@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class GenerateQuestionSet {
     private Player[] sample;
-    private Player[] alternatives;
     private Random random = new Random();
     private int numberOfQuestions = 10;
     private QuestionObject[] questionSet;
@@ -23,17 +22,6 @@ public class GenerateQuestionSet {
         for (int i=0; i<questionSet.length; i++){
             questionSet[i] = randomQuestion();
         }
-     /*   int localCounter = 0;
-        while(localCounter<questionSet.length) {
-            questionSet[i] = qu
-
-            if (randomQuestion()) {
-                System.out.println("Success!");
-            } else {
-                System.out.println("Better luck next time!");
-            }
-            localCounter++;
-        }*/
     }
 
     private QuestionObject randomQuestion() {
@@ -44,7 +32,7 @@ public class GenerateQuestionSet {
         if (localRandom==1) {
             return heightQuestion();
         }
-        if (localRandom==1) {
+        if (localRandom==2) {
             return weakFootQuestion();
         }
         System.out.println("Error, no question was generated, random was: " + localRandom );
@@ -55,17 +43,15 @@ public class GenerateQuestionSet {
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {
         int startingPos = random.nextInt(20);
-        alternatives = new Player[4];
+        Player[] alternatives = new Player[4];
         for (int i=0; i<4; i++){
             alternatives[i] = sample[startingPos++];
         }
         return alternatives;
     }
 
+    //lagrar metodens data i ett questionObject så att controllerklasserna sedermera kan hämta alla QuestionsObject
     private QuestionObject ageQuestion() {
-        //Alternativ sätt att göra det på är att lagra metodens data i ett questionObject och sedermera skicka vidare
-        //detta till Controllern
-        //t ex
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
         Player correctAnswer = alternatives[firstAlternative];
@@ -75,32 +61,38 @@ public class GenerateQuestionSet {
             }
         }
         String localQuestion = "vem är äldst?";
-
         return new QuestionObject(alternatives, correctAnswer, localQuestion );
-
-        /*System.out.println("Who is the oldest? Answer 1-4");
-        for(int i =0; i<4; i++){
-            System.out.println(alternatives[i].getName() + alternatives[i].getAge());
-        }
-        int answer = scanner.nextInt()-1;
-        for (Player p : alternatives){
-            if (alternatives[answer].getAge() < p.getAge()){
-                return false;
-            }
-        }*/
-
     }
     
     private QuestionObject heightQuestion(){
-        System.out.println("Who is the tallest? Answer 1-4");
-        return null;
+        Player[] alternatives = randomAlternatives();
+        int firstAlternative = 0;
+        Player correctAnswer = alternatives[firstAlternative];
+        for (Player p : alternatives){
+            if(p.getHeight()>correctAnswer.getHeight()){
+                correctAnswer = p;
+            }
+        }
+        String localQuestion = "Who is the tallest? Answer 1-4";
+        return new QuestionObject(alternatives, correctAnswer, localQuestion );
     }
 
     private QuestionObject weakFootQuestion() {
-        System.out.println("Vem är mest enfotad?");
-        return null;
+        Player[] alternatives = randomAlternatives();
+        int firstAlternative = 0;
+        Player correctAnswer = alternatives[firstAlternative];
+        for (Player p : alternatives){
+            if(p.getAge()>correctAnswer.getAge()){
+                correctAnswer = p;
+            }
+        }
+        
+        String localQuestion = "Vilken spelare är mest enfotad?";
+        return new QuestionObject(null, null, localQuestion );
+
     }
 
+    //En vanlig getter-metod
     public QuestionObject[] getQuestionSet() {
         return questionSet;
     }

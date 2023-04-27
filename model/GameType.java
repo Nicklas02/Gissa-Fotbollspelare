@@ -2,5 +2,9 @@ package model;
 
 public enum GameType {
     None,
-    PremierLeague
+    PremierLeague,
+    LaLiga,
+    Bundesliga,
+    Ligue1,
+    SerieA
 }

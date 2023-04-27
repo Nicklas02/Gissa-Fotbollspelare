@@ -16,8 +16,8 @@ public class ControllerAutomatic {
     }
 
     private void startController() {
-        GetSample getSample = new GetSample();
-        GenerateQuestionSet generateQuestionSet = getSample.getGenerateQuestionSet();
+        GenerateQuestionSet generateQuestionSet = new GenerateQuestionSet();
+
         QuestionAutomatic[] listQuestions = generateQuestionSet.getQuestionSet();
         int answer =0;
         for(QuestionAutomatic q : listQuestions){

@@ -22,7 +22,7 @@ public class MainProgram {
         // create object of controller
         //Controller controller = new Controller("files/questions.txt");
 
-
+        ControllerAutomatic controllerAutomatic = new ControllerAutomatic();
     }
 
 

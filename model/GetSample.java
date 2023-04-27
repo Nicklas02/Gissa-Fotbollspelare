@@ -9,16 +9,16 @@ import java.util.Properties;
 public class GetSample {
     private Connection conn;
     private GameType gameType = GameType.PremierLeague;
-    private final int listSize = 30;
+    private int listSize;
     private GenerateQuestionSet generateQuestionSet;
 
     public GetSample() {
         conn = getDatabaseConnection();
-        Player[] playersSample = getSample(gameType, listSize);
+        //Player[] playersSample = getSample(gameType, listSize);
         //skicka vidare playersSample till en annan klass som ansvarar för att generera frågor.
         //printPlayerSample(playersSample);
+        //generateQuestionSet = new GenerateQuestionSet(playersSample);
 
-        generateQuestionSet = new GenerateQuestionSet(playersSample);
     }
 
     public Connection getDatabaseConnection() {
@@ -38,6 +38,7 @@ public class GetSample {
     }
 
     public Player[] getSample(GameType gameType, int listSize) {
+        this.listSize=listSize;
         Player[] playerSample = new Player[listSize];
         Player player = null;
         int count = 0;
@@ -120,7 +121,7 @@ public class GetSample {
                         , rs.getString("nationality"), rs.getInt("height"));
                 playerSample[count] = player;
                 count++;
-                if (count > 25) {
+                if (count > listSize) {
                     break;
                 }
                 //System.out.println(player.toString());

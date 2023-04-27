@@ -3,16 +3,23 @@ package model;
 import java.util.Random;
 
 public class GenerateQuestionSet {
+    private GetSample sampleObject;
     private Player[] sample;
     private Random random = new Random();
     private int numberOfQuestions = 10;
     private QuestionAutomatic[] questionSet;
 
 
-    public GenerateQuestionSet(Player[] sample) {
-        this.sample=sample;
+    public GenerateQuestionSet() {
+        sampleObject = new GetSample();
+        updateSample();
         //ta bort buildQuestionSet senare, anrop sker utifrån
         buildQuestionSet(numberOfQuestions); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
+    }
+
+    private void updateSample() {
+        int listSize = 10;
+        sample = sampleObject.getSample(GameType.PremierLeague, listSize);
     }
 
     private void buildQuestionSet(int numberOfQuestions) {

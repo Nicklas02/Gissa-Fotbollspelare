@@ -45,7 +45,6 @@ public class GetSample {
         Statement stmt = null;
         //om gametype == none
         if (gameType == GameType.None) {
-            System.out.println("hey");
             try {
                 String QUERY = "select * from \"spelare2023\" " +
                         "order by overall desc;";
@@ -55,7 +54,6 @@ public class GetSample {
                 e.printStackTrace();
             }
         } else if (gameType == GameType.PremierLeague) {
-            System.out.println("hey");
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -68,7 +66,6 @@ public class GetSample {
                 e.printStackTrace();
             }
         } else if (gameType == GameType.LaLiga) {
-            System.out.println("hey");
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -81,7 +78,6 @@ public class GetSample {
                 e.printStackTrace();
             }
         } else if (gameType == GameType.Bundesliga) {
-            System.out.println("hey");
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -94,7 +90,6 @@ public class GetSample {
                 e.printStackTrace();
             }
         } else if (gameType == GameType.Ligue1) {
-            System.out.println("hey");
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -107,7 +102,6 @@ public class GetSample {
                 e.printStackTrace();
             }
         } else if (gameType == GameType.SerieA) {
-            System.out.println("hey");
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -129,7 +123,7 @@ public class GetSample {
                 if (count > 25) {
                     break;
                 }
-                System.out.println(player.toString());
+                //System.out.println(player.toString());
             }
             stmt.close();
             conn.close();

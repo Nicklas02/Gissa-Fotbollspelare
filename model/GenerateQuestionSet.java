@@ -87,7 +87,7 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic weakFootQuestion() {
-        Player[] alternatives = randomAlternatives();
+        Player[] alternatives = null;
         boolean badWeakFoot = false;
         while (!badWeakFoot) {
             alternatives = randomAlternatives();
@@ -111,7 +111,7 @@ public class GenerateQuestionSet {
 
 
     private QuestionAutomatic kitNum10() {
-        Player[] alternatives = randomAlternatives();
+        Player[] alternatives = null;
         boolean kitNum10 = false;
         while (!kitNum10) {
             alternatives = randomAlternatives();

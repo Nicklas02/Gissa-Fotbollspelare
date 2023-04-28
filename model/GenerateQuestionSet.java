@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 
 public class GenerateQuestionSet {
@@ -70,7 +72,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        HashSet<Player> corrAnswers = new HashSet<>();
+        ArrayList<Player> corrAnswers = new ArrayList<>();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
             if (p.getAge() == correctAnswer.getAge()) {
@@ -90,7 +92,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        HashSet<Player> corrAnswers = new HashSet<>();
+        ArrayList<Player> corrAnswers = new ArrayList<>();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
             if (p.getHeight() == correctAnswer.getHeight()) {
@@ -120,7 +122,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        HashSet<Player> corrAnswers = new HashSet<>();
+        ArrayList<Player> corrAnswers = new ArrayList<>();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
             if (p.getWeakFoot() == correctAnswer.getWeakFoot()) {
@@ -129,6 +131,7 @@ public class GenerateQuestionSet {
         }
         String localQuestion = "Vilken spelare är mest enfotad?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
+
     }
 
 
@@ -144,7 +147,7 @@ public class GenerateQuestionSet {
                 }
             }
         }
-        HashSet<Player> corrAnswers = new HashSet<>();
+        ArrayList<Player> corrAnswers = new ArrayList<>();
         for (Player p : alternatives) {
             if (p.getKitNumber() == 10) {
                  corrAnswers.add(p);

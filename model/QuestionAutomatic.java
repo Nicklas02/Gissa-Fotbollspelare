@@ -1,13 +1,15 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class QuestionAutomatic {
     private Player[] alternatives;
-    private HashSet<Player> correctAnswers;
+    private ArrayList<Player> correctAnswers;
     private String articulatedQuestion;
 
-    public QuestionAutomatic(Player[] alternatives, HashSet<Player> correctAnswers, String articulatedQuestion) {
+    public QuestionAutomatic(Player[] alternatives, ArrayList<Player> correctAnswers, String articulatedQuestion) {
         this.alternatives = alternatives;
         this.correctAnswers = correctAnswers;
         this.articulatedQuestion = articulatedQuestion;
@@ -21,11 +23,11 @@ public class QuestionAutomatic {
         this.alternatives = alternatives;
     }
 
-    public HashSet<Player> getCorrectAnswer() {
+    public ArrayList<Player> getCorrectAnswer() {
         return correctAnswers;
     }
 
-    public void setCorrectAnswer(HashSet<Player> correctAnswers) {
+    public void setCorrectAnswer(ArrayList<Player> correctAnswers) {
         this.correctAnswers = correctAnswers;
     }
 

@@ -11,6 +11,7 @@ public class ControllerAutomatic {
     private HighScoreFromDatabase highScoreList;
     private GameType gameType;
     private Difficulty difficulty;
+    private final Scanner scanner = new Scanner(System.in);
 
 
     public ControllerAutomatic() {
@@ -31,7 +32,6 @@ public class ControllerAutomatic {
         for(int i=0; i<enumValues.length; i++){
             System.out.println(i + ". " + enumValues[i]);
         }
-        Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         gameType = GameType.valueOf(enumValues[choice]);
         System.out.println("Select difficulty: 1 for easy or 2 for hard");
@@ -48,27 +48,23 @@ public class ControllerAutomatic {
         if(gameType!=null && difficulty!=null) {
             GenerateQuestionSet generateQuestionSet = new GenerateQuestionSet(gameType, difficulty);
             questionsList = generateQuestionSet.buildNewQuestionSet();
-            //listQuestions = generateQuestionSet.getQuestionSet();
         } else {
             System.out.println("Failure caused by game setup parameters");
         }
     }
 
     private void startQuiz() {
-        Scanner scanner = new Scanner(System.in);
-        int answer = 0;
+        int answer;
         int score = 0;
         String name;
         for (QuestionAutomatic q : questionsList) {
             System.out.println(q.getArticulatedQuestion());
-
-            int nbr = 1;
+            int nbrAlternative = 1;
             for (Player p : q.getAlternatives()) {
-                System.out.println(nbr + "---" + p.getName() + "---" + p.getAge() + "---" + p.getHeight() + "---" + p.getWeakFoot()
+                System.out.println(nbrAlternative + "---" + p.getName() + "---" + p.getAge() + "---" + p.getHeight() + "---" + p.getWeakFoot()
                         + "---" + p.getKitNumber());
-                nbr++;
+                nbrAlternative++;
             }
-
             answer = scanner.nextInt() - 1;
             if (q.getCorrectAnswers().contains(q.getAlternatives()[answer])) {
                 System.out.println("Success!");

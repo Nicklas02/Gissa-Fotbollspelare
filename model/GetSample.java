@@ -34,6 +34,9 @@ public class GetSample {
     }
 
     public Player[] getSample(GameType gameType, Difficulty difficulty) {
+        if(conn==null) {
+            conn = getDatabaseConnection();
+        }
         this.gameType = gameType;
         if(difficulty==Difficulty.Easy){
             sampleSize = 8;
@@ -46,9 +49,7 @@ public class GetSample {
         int count = 0;
         ResultSet rs = null;
         Statement stmt = null;
-        if(conn==null) {
-            conn = getDatabaseConnection();
-        }
+
         if (gameType == GameType.None) {
             try {
                 String QUERY = "select * from \"spelare2023\" " +

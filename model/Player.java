@@ -30,7 +30,7 @@ public class Player {
         this.age = age;
         this.nationality = nationality;
         this.height = height;
-        this.weakFoot=weakFoot;
+        this.weakFoot = weakFoot;
         this.kitNumber = kitNumber;
     }
 

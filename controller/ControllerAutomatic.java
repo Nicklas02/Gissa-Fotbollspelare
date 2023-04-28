@@ -23,21 +23,21 @@ public class ControllerAutomatic {
 
     private void startQuiz() {
         Scanner scanner = new Scanner(System.in);
-        int answer =0;
-        int score=0;
+        int answer = 0;
+        int score = 0;
         String name;
-        for(QuestionAutomatic q : listQuestions){
+        for (QuestionAutomatic q : listQuestions) {
             System.out.println(q.getArticulatedQuestion());
 
-            int nbr =1;
+            int nbr = 1;
             for (Player p : q.getAlternatives()) {
-                System.out.println(nbr +"---" + p.getName()+"---" + p.getAge()+"---" + p.getHeight()+"---" + p.getWeakFoot()
-                + "---" + p.getKitNumber());
+                System.out.println(nbr + "---" + p.getName() + "---" + p.getAge() + "---" + p.getHeight() + "---" + p.getWeakFoot()
+                        + "---" + p.getKitNumber());
                 nbr++;
             }
 
-            answer = scanner.nextInt()-1;
-            if (q.getCorrectAnswer().contains(q.getAlternatives()[answer])){
+            answer = scanner.nextInt() - 1;
+            if (q.getCorrectAnswer().contains(q.getAlternatives()[answer])) {
                 System.out.println("Success!");
                 score++;
             } else {
@@ -48,7 +48,7 @@ public class ControllerAutomatic {
         name = scanner.next();
         highScoreList.newScoreToDatabase(name, score);
         System.out.println("Game over");
-        System.out.println("Your score was: "+score+"/10");
+        System.out.println("Your score was: " + score + "/10");
     }
 
 }

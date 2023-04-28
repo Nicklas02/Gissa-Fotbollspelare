@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Random;
 
 public class GenerateQuestionSet {
@@ -150,7 +148,7 @@ public class GenerateQuestionSet {
         ArrayList<Player> corrAnswers = new ArrayList<>();
         for (Player p : alternatives) {
             if (p.getKitNumber() == 10) {
-                 corrAnswers.add(p);
+                corrAnswers.add(p);
             }
         }
         String localQuestion = "Vilken spelare har tröjnummer 10?";

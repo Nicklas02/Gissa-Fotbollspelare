@@ -69,7 +69,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        String localQuestion = "Vem är äldst?";
+        String localQuestion = "Vilken spelare är äldst?";
         return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
     }
 
@@ -82,7 +82,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        String localQuestion = "Vem är längst?";
+        String localQuestion = "Vilken spelare är längst?";
         return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
     }
 
@@ -129,7 +129,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        String localQuestion = "Vem har tröjnummer 10?";
+        String localQuestion = "Vilken spelare har tröjnummer 10?";
         return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
     }
 

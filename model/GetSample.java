@@ -12,7 +12,7 @@ import java.util.Properties;
 public class GetSample {
     private Connection conn = null;
     private GameType gameType;
-    private final int sampleSize = 100;
+    private int sampleSize;
 
     public GetSample() {
     }
@@ -33,17 +33,22 @@ public class GetSample {
         }
     }
 
-    public Player[] getSample(GameType gameType) {
-        if(conn==null) {
-            conn = getDatabaseConnection();
-        }
-
+    public Player[] getSample(GameType gameType, Difficulty difficulty) {
         this.gameType = gameType;
+        if(difficulty==Difficulty.Easy){
+            sampleSize = 8;
+        }
+        if(difficulty==Difficulty.Hard){
+            sampleSize=100;
+        }
         Player[] playerSample = new Player[sampleSize];
         Player player = null;
         int count = 0;
         ResultSet rs = null;
         Statement stmt = null;
+        if(conn==null) {
+            conn = getDatabaseConnection();
+        }
         if (gameType == GameType.None) {
             try {
                 String QUERY = "select * from \"spelare2023\" " +
@@ -115,6 +120,7 @@ public class GetSample {
             }
         }
         try {
+            count=0;
             while (rs.next()) {
                 player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
                         , rs.getString("nationality"), rs.getInt("height"), rs.getInt("weak_foot")

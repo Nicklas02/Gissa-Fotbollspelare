@@ -3,23 +3,24 @@ package controller;
 import model.*;
 import java.util.Scanner;
 
-
+/**
+ * Målet med klassen är att sköta det logiska flödet i anrop till model-klasserna för att få fram frågor.
+ */
 public class ControllerAutomatic {
-    private QuestionAutomatic[] listQuestions;
+    private QuestionAutomatic[] questionsList;
     private HighScoreFromDatabase highScoreList;
-    private int numOfQuestions;
     private GameType gameType;
+    private Difficulty difficulty;
 
 
     public ControllerAutomatic() {
-        setGameConditions();
+        selectGameType();
         displayLeaderboard();
-        getQuestions(); //skapar och hämtar dataset utifrån premisserna 10 frågor och premierleague-kategori
-        startQuiz(); //Konsolbaserat lokalt gui
+        fetchQuestions();
+        startQuiz(); //Detta är ett temporärt konsolbaserat GUI
     }
 
-    private void setGameConditions() {
-        numOfQuestions=10;
+    private void selectGameType() {
         String[] enumValues = {"None",
                 "PremierLeague",
                 "LaLiga",
@@ -31,22 +32,22 @@ public class ControllerAutomatic {
             System.out.println(i + ". " + enumValues[i]);
         }
         Scanner scanner = new Scanner(System.in);
-        while(gameType==null) {
-            int choice = scanner.nextInt();
-            if (choice>=0 && choice<=5) {
-                gameType = GameType.valueOf(enumValues[choice]);
-            }
+        int choice = scanner.nextInt();
+        gameType = GameType.valueOf(enumValues[choice]);
+        System.out.println("Select difficulty: 1 for easy or 2 for hard");
+        choice = scanner.nextInt();
+        if (choice==1){
+            difficulty = Difficulty.Easy;
+        } else {
+            difficulty = Difficulty.Hard;
         }
-
-
-        System.out.println(gameType);
+        System.out.println("You started a " + gameType + " game " + "on "+ difficulty);
     }
 
-    //maximum number of questions is 50-4 = 46;
-    private void getQuestions() {
-        if(gameType!=null && numOfQuestions>5) {
-            GenerateQuestionSet generateQuestionSet = new GenerateQuestionSet(numOfQuestions, gameType);
-            listQuestions = generateQuestionSet.buildNewQuestionSet();
+    private void fetchQuestions() {
+        if(gameType!=null && difficulty!=null) {
+            GenerateQuestionSet generateQuestionSet = new GenerateQuestionSet(gameType, difficulty);
+            questionsList = generateQuestionSet.buildNewQuestionSet();
             //listQuestions = generateQuestionSet.getQuestionSet();
         } else {
             System.out.println("Failure caused by game setup parameters");
@@ -58,7 +59,7 @@ public class ControllerAutomatic {
         int answer = 0;
         int score = 0;
         String name;
-        for (QuestionAutomatic q : listQuestions) {
+        for (QuestionAutomatic q : questionsList) {
             System.out.println(q.getArticulatedQuestion());
 
             int nbr = 1;

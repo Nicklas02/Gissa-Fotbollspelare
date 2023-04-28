@@ -9,13 +9,14 @@ public class GenerateQuestionSet {
     private Random random = new Random(); //Används för slumpmässiga frågor liksom för slumpmässiga svarsalternativ
     private QuestionAutomatic[] questionSet;
     private final int nbrOfAlt = 4; //svarsalternativ
-    private int numberOfQuestions; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
+    private static final int NUMBER_OF_QUESTIONS = 10; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
     private GameType gameType;
+    private Difficulty difficulty;
 
 
-    public GenerateQuestionSet(int numberOfQuestions, GameType gameType) {
-        this.numberOfQuestions = numberOfQuestions;
+    public GenerateQuestionSet(GameType gameType, Difficulty difficulty) {
         this.gameType = gameType;
+        this.difficulty=difficulty;
         //ta bort buildQuestionSet senare, anrop sker utifrån
         //buildNewQuestionSet(); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
@@ -23,14 +24,14 @@ public class GenerateQuestionSet {
     public QuestionAutomatic[] buildNewQuestionSet() {
         if (getSample == null) {
             getSample = new GetSample();
-        }
+        } else
 
         try{Thread.sleep(3000);} catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        sample = getSample.getSample(gameType);
-        questionSet = new QuestionAutomatic[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
+        sample = getSample.getSample(gameType, difficulty);
+        questionSet = new QuestionAutomatic[NUMBER_OF_QUESTIONS]; //En alternativ lösning är att skapa en lista med QuestionObjects
         //för att sedan skicka till controller
         for (int i = 0; i < questionSet.length; i++) {
             questionSet[i] = randomQuestion();
@@ -61,7 +62,7 @@ public class GenerateQuestionSet {
     private Player[] randomAlternatives() {
         Player[] alternatives = new Player[nbrOfAlt];
         for (int i = 0; i < nbrOfAlt; i++) {
-            int pos = random.nextInt(sample.length);
+            int pos = random.nextInt(sample.length-4);
             alternatives[i] = sample[pos];
         }
         return alternatives;
@@ -162,7 +163,4 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
-    public QuestionAutomatic[] getQuestionSet() {
-        return questionSet;
-    }
 }

@@ -1,8 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 public class QuestionAutomatic {
     private Player[] alternatives;
@@ -23,11 +21,11 @@ public class QuestionAutomatic {
         this.alternatives = alternatives;
     }
 
-    public ArrayList<Player> getCorrectAnswer() {
+    public ArrayList<Player> getCorrectAnswers() {
         return correctAnswers;
     }
 
-    public void setCorrectAnswer(ArrayList<Player> correctAnswers) {
+    public void setCorrectAnswers(ArrayList<Player> correctAnswers) {
         this.correctAnswers = correctAnswers;
     }
 

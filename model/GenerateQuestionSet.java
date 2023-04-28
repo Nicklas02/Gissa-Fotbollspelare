@@ -13,45 +13,48 @@ public class GenerateQuestionSet {
 
 
     public GenerateQuestionSet(int numberOfQuestions, GameType gameType) {
-        this.numberOfQuestions=numberOfQuestions;
+        this.numberOfQuestions = numberOfQuestions;
         this.gameType = gameType;
         //ta bort buildQuestionSet senare, anrop sker utifrån
         buildQuestionSet(); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
 
     private void buildQuestionSet() {
-        if (getSample==null){
-            getSample=new GetSample();
+        if (getSample == null) {
+            getSample = new GetSample();
         }
         sample = getSample.getSample(gameType);
-        questionSet= new QuestionAutomatic[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
+        questionSet = new QuestionAutomatic[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
         //för att sedan skicka till controller
-        for (int i=0; i<questionSet.length; i++){
+        for (int i = 0; i < questionSet.length; i++) {
             questionSet[i] = randomQuestion();
         }
     }
 
     private QuestionAutomatic randomQuestion() {
-        int localRandom = random.nextInt(2);
-        if (localRandom==0) {
+        int localRandom = random.nextInt(4);
+        if (localRandom == 0) {
             return ageQuestion();
         }
-        if (localRandom==1) {
+        if (localRandom == 1) {
             return heightQuestion();
         }
-        if (localRandom==2) {
+        if (localRandom == 2) {
             return weakFootQuestion();
         }
-        System.out.println("Error, no question was generated, random was: " + localRandom );
+        if (localRandom == 3) {
+            return kitNum10();
+        }
+        System.out.println("Error, no question was generated, random was: " + localRandom);
         return null;
     }
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {
-        int startingPos = random.nextInt(numberOfQuestions);
         Player[] alternatives = new Player[nbrOfAlt];
-        for (int i=0; i<nbrOfAlt; i++){
-            alternatives[i] = sample[startingPos++];
+        for (int i = 0; i < nbrOfAlt; i++) {
+            int pos = random.nextInt(sample.length);
+            alternatives[i] = sample[pos];
         }
         return alternatives;
     }
@@ -61,38 +64,74 @@ public class GenerateQuestionSet {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
         Player correctAnswer = alternatives[firstAlternative];
-        for (Player p : alternatives){
-            if(p.getAge()>correctAnswer.getAge()){
+        for (Player p : alternatives) {
+            if (p.getAge() > correctAnswer.getAge()) {
                 correctAnswer = p;
             }
         }
-        String localQuestion = "vem är äldst?";
-        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion );
+        String localQuestion = "Vem är äldst?";
+        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
     }
-    
-    private QuestionAutomatic heightQuestion(){
+
+    private QuestionAutomatic heightQuestion() {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
         Player correctAnswer = alternatives[firstAlternative];
-        for (Player p : alternatives){
-            if(p.getHeight()>correctAnswer.getHeight()){
+        for (Player p : alternatives) {
+            if (p.getHeight() > correctAnswer.getHeight()) {
                 correctAnswer = p;
             }
         }
-        String localQuestion = "Who is the tallest?";
-        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion );
+        String localQuestion = "Vem är längst?";
+        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
     }
 
     private QuestionAutomatic weakFootQuestion() {
-        Player[] alternatives = new Player[nbrOfAlt];
-        for (Player p : sample){
-            //om weakfoot == 1 eller 2 adda till alternatives
-            //om weakfoot == 5 adda till alternatives och correct answer. DVS endast 1 5 star weak foot
+        Player[] alternatives = randomAlternatives();
+        boolean badWeakFoot = false;
+        while (!badWeakFoot) {
+            alternatives = randomAlternatives();
+            for (Player alternative : alternatives) {
+                if (alternative.getWeakFoot() <= 2) {
+                    badWeakFoot = true;
+                    break;
+                }
+            }
+        }
+        int firstAlternative = 0;
+        Player correctAnswer = alternatives[firstAlternative];
+        for (Player p : alternatives) {
+            if (p.getWeakFoot() < correctAnswer.getWeakFoot()) {
+                correctAnswer = p;
+            }
         }
         String localQuestion = "Vilken spelare är mest enfotad?";
-        return new QuestionAutomatic(null, null, localQuestion );
+        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
     }
 
+
+    private QuestionAutomatic kitNum10() {
+        Player[] alternatives = randomAlternatives();
+        boolean kitNum10 = false;
+        while (!kitNum10) {
+            alternatives = randomAlternatives();
+            for (Player alternative : alternatives) {
+                if (alternative.getKitNumber() == 10) {
+                    kitNum10 = true;
+                    break;
+                }
+            }
+        }
+        int firstAlternative = 0;
+        Player correctAnswer = alternatives[firstAlternative];
+        for (Player p : alternatives) {
+            if (p.getKitNumber() == 10) {
+                correctAnswer = p;
+            }
+        }
+        String localQuestion = "Vem har tröjnummer 10?";
+        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
+    }
 
     public QuestionAutomatic[] getQuestionSet() {
         return questionSet;

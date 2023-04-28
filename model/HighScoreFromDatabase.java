@@ -8,7 +8,6 @@ public class HighScoreFromDatabase {
     private final int listSize = 10;
 
     public HighScoreFromDatabase() {
-        //newScoreToDatabase();
         String[] s = readList();
         for(int i=0; i<listSize; i++){
             System.out.println(s[i]);

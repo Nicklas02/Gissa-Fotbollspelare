@@ -24,13 +24,14 @@ public class Player {
     private String releaseClause;
     private int kitNumber;
 
-    public Player(int id, String name, int age, String nationality, int height, int weakFoot) {
+    public Player(int id, String name, int age, String nationality, int height, int weakFoot, int kitNumber) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.nationality = nationality;
         this.height = height;
         this.weakFoot=weakFoot;
+        this.kitNumber = kitNumber;
     }
 
     public int getId() {
@@ -51,6 +52,14 @@ public class Player {
 
     public int getHeight() {
         return height;
+    }
+
+    public int getWeakFoot() {
+        return weakFoot;
+    }
+
+    public int getKitNumber() {
+        return kitNumber;
     }
 
     @Override

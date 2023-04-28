@@ -12,7 +12,7 @@ import java.util.Properties;
 public class GetSample {
     private Connection conn;
     private GameType gameType;
-    private final int sampleSize = 30;
+    private final int sampleSize = 100;
 
     public GetSample() {
         conn = getDatabaseConnection();
@@ -114,10 +114,11 @@ public class GetSample {
         try {
             while (rs.next()) {
                 player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
-                        , rs.getString("nationality"), rs.getInt("height"), rs.getInt("weak_foot"));
+                        , rs.getString("nationality"), rs.getInt("height"), rs.getInt("weak_foot")
+                        , rs.getInt("kit_number"));
                 playerSample[count] = player;
                 count++;
-                if (count > 15) {
+                if (count >= sampleSize) {
                     break;
                 }
                 //System.out.println(player.toString());

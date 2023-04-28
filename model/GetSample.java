@@ -10,12 +10,11 @@ import java.util.Properties;
  * Slutligen skickas listan med urvalet av spelare vidare till en annan klass.
  */
 public class GetSample {
-    private Connection conn;
+    private Connection conn = null;
     private GameType gameType;
     private final int sampleSize = 100;
 
     public GetSample() {
-        conn = getDatabaseConnection();
     }
 
     public Connection getDatabaseConnection() {
@@ -35,6 +34,10 @@ public class GetSample {
     }
 
     public Player[] getSample(GameType gameType) {
+        if(conn==null) {
+            conn = getDatabaseConnection();
+        }
+
         this.gameType = gameType;
         Player[] playerSample = new Player[sampleSize];
         Player player = null;
@@ -157,4 +160,7 @@ public class GetSample {
         }
     }
 
+    public Boolean isConn() {
+        return conn!=null;
+    }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GenerateQuestionSet {
-    private GetSample getSample; //Förbindelse till sample objektet. 1:1 förbindelse
+    private GetSample getSample =null; //Förbindelse till sample objektet. 1:1 förbindelse
     private Player[] sample;
     private Random random = new Random(); //Används för slumpmässiga frågor liksom för slumpmässiga svarsalternativ
     private QuestionAutomatic[] questionSet;
@@ -17,19 +17,26 @@ public class GenerateQuestionSet {
         this.numberOfQuestions = numberOfQuestions;
         this.gameType = gameType;
         //ta bort buildQuestionSet senare, anrop sker utifrån
-        buildQuestionSet(); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
+        //buildNewQuestionSet(); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
 
-    private void buildQuestionSet() {
+    public QuestionAutomatic[] buildNewQuestionSet() {
         if (getSample == null) {
             getSample = new GetSample();
         }
+
+        try{Thread.sleep(3000);} catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         sample = getSample.getSample(gameType);
         questionSet = new QuestionAutomatic[numberOfQuestions]; //En alternativ lösning är att skapa en lista med QuestionObjects
         //för att sedan skicka till controller
         for (int i = 0; i < questionSet.length; i++) {
             questionSet[i] = randomQuestion();
         }
+        return questionSet;
+
     }
 
     private QuestionAutomatic randomQuestion() {
@@ -65,11 +72,11 @@ public class GenerateQuestionSet {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
         Player correctAnswer = alternatives[firstAlternative];
-        for (Player p : alternatives) {
+        /*for (Player p : alternatives) {
             if (p.getAge() > correctAnswer.getAge()) {
                 correctAnswer = p;
             }
-        }
+        }*/
         ArrayList<Player> corrAnswers = new ArrayList<>();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {

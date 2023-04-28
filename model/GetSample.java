@@ -39,7 +39,7 @@ public class GetSample {
         }
         this.gameType = gameType;
         if(difficulty==Difficulty.Easy){
-            sampleSize = 25; //fungerar ej när för låg Fortsätta HÄR nästa vecka
+            sampleSize = 25; //fungerar ej när för låg Fortsätta HÄR nästa vecka ***
         }
         if(difficulty==Difficulty.Hard){
             sampleSize=100;

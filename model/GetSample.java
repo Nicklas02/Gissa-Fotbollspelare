@@ -35,7 +35,7 @@ public class GetSample {
     }
 
     public Player[] getSample(GameType gameType) {
-        this.gameType=gameType;
+        this.gameType = gameType;
         Player[] playerSample = new Player[sampleSize];
         Player player = null;
         int count = 0;

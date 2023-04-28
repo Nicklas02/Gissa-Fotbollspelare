@@ -9,7 +9,7 @@ public class HighScoreFromDatabase {
 
     public HighScoreFromDatabase() {
         String[] s = readList();
-        for(int i=0; i<listSize; i++){
+        for (int i = 0; i < listSize; i++) {
             System.out.println(s[i]);
         }
     }
@@ -30,7 +30,7 @@ public class HighScoreFromDatabase {
         }
     }
 
-    public void newScoreToDatabase(String name, int score){
+    public void newScoreToDatabase(String name, int score) {
         conn = getDatabaseConnection();
         try {
             String QUERY = "insert into \"highscorelist\" (name, score)\n" +
@@ -46,7 +46,7 @@ public class HighScoreFromDatabase {
         }
     }
 
-    public String[] readList(){
+    public String[] readList() {
         String[] highScoreList = new String[listSize];
         int i = 0;
         conn = getDatabaseConnection();
@@ -57,7 +57,7 @@ public class HighScoreFromDatabase {
             ResultSet rs = stmt.executeQuery(QUERY);
 
             while (rs.next() && i < listSize) {
-                highScoreList[i] = String.format(i + 1 + " " + rs.getString("name") + " " +rs.getInt("score"));
+                highScoreList[i] = String.format(i + 1 + " " + rs.getString("name") + " " + rs.getInt("score"));
                 i++;
             }
         } catch (SQLException e) {

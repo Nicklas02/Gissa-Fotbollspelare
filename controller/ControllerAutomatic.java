@@ -37,7 +37,7 @@ public class ControllerAutomatic {
             }
 
             answer = scanner.nextInt()-1;
-            if (q.getAlternatives()[answer]==q.getCorrectAnswer()){
+            if (q.getCorrectAnswer().contains(q.getAlternatives()[answer])){
                 System.out.println("Success!");
                 score++;
             } else {

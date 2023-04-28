@@ -1,13 +1,15 @@
 package model;
 
+import java.util.HashSet;
+
 public class QuestionAutomatic {
     private Player[] alternatives;
-    private Player correctAnswer;
+    private HashSet<Player> correctAnswers;
     private String articulatedQuestion;
 
-    public QuestionAutomatic(Player[] alternatives, Player correctAnswer, String articulatedQuestion) {
+    public QuestionAutomatic(Player[] alternatives, HashSet<Player> correctAnswers, String articulatedQuestion) {
         this.alternatives = alternatives;
-        this.correctAnswer = correctAnswer;
+        this.correctAnswers = correctAnswers;
         this.articulatedQuestion = articulatedQuestion;
     }
 
@@ -19,12 +21,12 @@ public class QuestionAutomatic {
         this.alternatives = alternatives;
     }
 
-    public Player getCorrectAnswer() {
-        return correctAnswer;
+    public HashSet<Player> getCorrectAnswer() {
+        return correctAnswers;
     }
 
-    public void setCorrectAnswer(Player correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setCorrectAnswer(HashSet<Player> correctAnswers) {
+        this.correctAnswers = correctAnswers;
     }
 
     public String getArticulatedQuestion() {

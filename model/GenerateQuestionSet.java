@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashSet;
 import java.util.Random;
 
 public class GenerateQuestionSet {
@@ -69,8 +70,15 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
+        HashSet<Player> corrAnswers = new HashSet<>();
+        corrAnswers.add(correctAnswer);
+        for (Player p : alternatives) {
+            if (p.getAge() == correctAnswer.getAge()) {
+                corrAnswers.add(p);
+            }
+        }
         String localQuestion = "Vilken spelare är äldst?";
-        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
+        return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
     private QuestionAutomatic heightQuestion() {
@@ -82,8 +90,15 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
+        HashSet<Player> corrAnswers = new HashSet<>();
+        corrAnswers.add(correctAnswer);
+        for (Player p : alternatives) {
+            if (p.getHeight() == correctAnswer.getHeight()) {
+                corrAnswers.add(p);
+            }
+        }
         String localQuestion = "Vilken spelare är längst?";
-        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
+        return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
     private QuestionAutomatic weakFootQuestion() {
@@ -105,8 +120,15 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
+        HashSet<Player> corrAnswers = new HashSet<>();
+        corrAnswers.add(correctAnswer);
+        for (Player p : alternatives) {
+            if (p.getWeakFoot() == correctAnswer.getWeakFoot()) {
+                corrAnswers.add(p);
+            }
+        }
         String localQuestion = "Vilken spelare är mest enfotad?";
-        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
+        return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
 
@@ -122,15 +144,14 @@ public class GenerateQuestionSet {
                 }
             }
         }
-        int firstAlternative = 0;
-        Player correctAnswer = alternatives[firstAlternative];
+        HashSet<Player> corrAnswers = new HashSet<>();
         for (Player p : alternatives) {
             if (p.getKitNumber() == 10) {
-                correctAnswer = p;
+                 corrAnswers.add(p);
             }
         }
         String localQuestion = "Vilken spelare har tröjnummer 10?";
-        return new QuestionAutomatic(alternatives, correctAnswer, localQuestion);
+        return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
     public QuestionAutomatic[] getQuestionSet() {

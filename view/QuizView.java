@@ -45,9 +45,10 @@ public class QuizView {
         background.setBounds(0, 0, 800, 600);
         frame.add(background);
         questionNumber = new JLabel();
-        questionNumber.setBounds(500, 50, 100, 40);
+        questionNumber.setBounds(490, 5, 90, 30);
         questionNumber.setFont(font);
         //colour for fonts
+        questionNumber.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         questionNumber.setForeground(Color.blue);
         background.add(questionNumber);
 
@@ -57,9 +58,11 @@ public class QuizView {
         background.add(rightOrWrong);
 
         questionLabel = new JLabel();
-        questionLabel.setBounds(50, 50, 600, 30);
+        questionLabel.setBounds(50, 60, 600, 30);
         questionLabel.setFont(font);
         //colour fonts
+        questionLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
+        questionLabel.setSize(450,20);
         questionLabel.setForeground(Color.black);
         background.add(questionLabel);
 
@@ -70,6 +73,7 @@ public class QuizView {
         optionButtons[0].setFont(font);
         optionGroup.add(optionButtons[0]);
         background.add(optionButtons[0]);
+
 
         optionButtons[1] = new JRadioButton();
         optionButtons[1].setBounds(400, 100, 300, 30);
@@ -90,6 +94,8 @@ public class QuizView {
         background.add(optionButtons[3]);
         nextButton = new JButton("Next");
         nextButton.setBounds(350, 220, 100, 30);
+        nextButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
         nextButton.setFont(font);
         nextButton.addActionListener(new ActionListener() {
             @Override

@@ -39,14 +39,14 @@ public class GetSample {
         }
         this.gameType = gameType;
         if(difficulty==Difficulty.Easy){
-            sampleSize = 8;
+            sampleSize = 25; //fungerar ej när för låg Fortsätta HÄR nästa vecka
         }
         if(difficulty==Difficulty.Hard){
             sampleSize=100;
         }
         Player[] playerSample = new Player[sampleSize];
-        Player player = null;
-        int count = 0;
+        Player player;
+        int count;
         ResultSet rs = null;
         Statement stmt = null;
 
@@ -141,7 +141,7 @@ public class GetSample {
         return playerSample;
     }
 
-
+/*
     public void ChangeGameType() {
         if (gameType == GameType.PremierLeague) {
 
@@ -156,18 +156,8 @@ public class GetSample {
         } else {
         }
 
-    }
+    }*/
 
     //Testmetod
-    private void printPlayerSample(Player[] list) {
-        for (Player p : list) {
-            if (p != null) {
-                System.out.println(p.toString());
-            }
-        }
-    }
 
-    public Boolean isConn() {
-        return conn!=null;
-    }
 }

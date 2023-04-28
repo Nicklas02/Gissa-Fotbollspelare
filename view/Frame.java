@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Frame extends JFrame{
 
-    JButton button;
+    JButton start;
     JLabel label;
     public Frame(){
         this.setTitle("Gissa Fotbollsspelare");
@@ -13,13 +13,30 @@ public class Frame extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.setResizable(false);
-        this.setLayout(new FlowLayout());
+        this.setLayout(null);
 
-        button = new JButton("Starta spelet");
-        label = new JLabel("Hej");
+
+      //  JPanel panel = new JPanel();
+        // Lägg till en bild i panelen
+         //ImageIcon icon = new ImageIcon("football.jpg");
+         //JLabel label = new JLabel(icon);
+        // panel.add(label);
+        //this.getContentPane().setBackground(Color.RED);
+
+        start = new JButton("Starta spelet");
+        label = new JLabel("Välkommen till Gissa Fotbollsspelare!");
+
 
         this.add(label);
-        this.add(button);
+        label.setBounds(300, 0, 280, 40);
+
+
+        this.add(start);
+        start.setBounds(315, 200, 180, 40);
+
+
+
+
     }
 
 

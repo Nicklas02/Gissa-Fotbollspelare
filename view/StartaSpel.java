@@ -15,8 +15,8 @@ public class StartaSpel extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new OverlayLayout(panel)); // OverlayLayout för att lägga knappen över bilden
 
-        // Lägg till en bild i panelen
-       // ImageIcon icon = new ImageIcon("football.jpg");
+        //Lägg till en bild i panelen
+        //ImageIcon icon = new ImageIcon("football.jpg");
         //JLabel label = new JLabel(icon);
         //panel.add(label);
 

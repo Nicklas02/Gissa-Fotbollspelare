@@ -8,13 +8,13 @@ Adam
 10
 test7
 5
+O
+4
 test4
 2
-test3
-1
 test8
 1
 test9
 1
-test6
+test3
 1

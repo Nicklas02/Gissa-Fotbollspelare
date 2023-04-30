@@ -18,7 +18,9 @@ public class Controller {
     private int score;
     private int lastScore;
     private HighScore highScoreList;
-    //Test
+    private static final int TOP_TEN = 10;
+    //the HUNDRED_PERCENT constant is used in the nextQuestion() method while calculating the percentage.
+    private static final int HUNDRED_PERCENT = 100;
 
     /**
      * Parameter constrictor that used to create object of Controller.
@@ -58,7 +60,7 @@ public class Controller {
             this.quizView.setNextButtonTextToFinish();
         }
         if (this.quiz.getCurrentQuestion().isCorrect(this.quizView.getUserAnswer())) {
-            lastScore = 1;////presentag
+            lastScore = 1;
             this.quizView.showRightOrWrong("You answered correct!");
         } else {
             lastScore = 0;
@@ -66,9 +68,7 @@ public class Controller {
         }
         this.score += lastScore;
         if (!(this.quiz.hasNextQuestion())) {
-            int percent = 100;
-//presentag
-            this.quizView.showGameOverMessage("game over", this.score * percent / this.quiz.getTotalNumberQuestions());
+            this.quizView.showGameOverMessage("game over", this.score * HUNDRED_PERCENT / this.quiz.getTotalNumberQuestions());
             onLeaderboard();
             return;
         }
@@ -85,30 +85,31 @@ public class Controller {
      */
     public void onLeaderboard() {
         getHighScoreList();
-        int[] listScore = highScoreList.getScore();
-        String[] listName = highScoreList.getName();
+        int[] highScores = highScoreList.getScore();
+        String[] highScoreNames = highScoreList.getName();
 
-        if (score > listScore[9]) {
-            String name = JOptionPane.showInputDialog(null, "You are in the Top10! \n" + "Enter name");
-            listScore[9] = score;
-            listName[9] = name;
+        if (score > highScores[TOP_TEN - 1]) {
+            String name = JOptionPane.showInputDialog(null, "You are in the Top 10! \n" + "Enter name");
+            highScores[TOP_TEN - 1] = score;
+            highScoreNames[TOP_TEN - 1] = name;
         }
-        for (int i = 0; i < listScore.length; i++) {
-            for (int j = i + 1; j < listScore.length; j++) {
-                int tmp;
-                String temp;
-                if (listScore[i] < listScore[j]) {
-                    tmp = listScore[i];
-                    listScore[i] = listScore[j];
-                    listScore[j] = tmp;
-                    temp = listName[i];
-                    listName[i] = listName[j];
-                    listName[j] = temp;
+        for (int i = 0; i < highScores.length; i++) {
+            for (int j = i + 1; j < highScores.length; j++) {
+                int tempScore;
+                String tempName;
+                if (highScores[i] < highScores[j]) {
+                    tempScore = highScores[i];
+                    highScores[i] = highScores[j];
+                    highScores[j] = tempScore;
+                    tempName = highScoreNames[i];
+                    highScoreNames[i] = highScoreNames[j];
+                    highScoreNames[j] = tempName;
                 }
             }
         }
-        highScoreList.writeToList(listName, listScore);
+        highScoreList.writeToList(highScoreNames, highScores);
     }
+
 
     /**
      * @return the highscorelist to the mainframe.

@@ -54,25 +54,49 @@ public class GenerateQuestionSet {
             return Overall();
         }
         if(localRandom==5){
-            //Matyin
+            return Nationality(); //Adam
         }
         if(localRandom==6){
-            //Matyin
+            return Club(); //Adan
         }
         if(localRandom==7){
-            //Adam
+            return Position(); //ADam
         }
         if(localRandom==8){
-            //Adam
+            return Weight();
         }
         if(localRandom==9){
-            //Adam
+            return SkillMoves();
         }
         if(localRandom==10){
-            //Adam
+            return Wage();
         }
 
         System.out.println("Error, no question was generated, random was: " + localRandom);
+        return null;
+    }
+
+    private QuestionAutomatic Wage() {
+        return null;
+    }
+
+    private QuestionAutomatic SkillMoves() {
+        return null;
+    }
+
+    private QuestionAutomatic Weight() {
+        return null;
+    }
+
+    private QuestionAutomatic Position() {
+        return null;
+    }
+
+    private QuestionAutomatic Club() {
+        return null;
+    }
+
+    private QuestionAutomatic Nationality() {
         return null;
     }
 

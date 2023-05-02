@@ -24,7 +24,7 @@ public class Player {
     private String releaseClause;
     private int kitNumber;
 
-    public Player(int id, String name, int age, String nationality, int height, int weakFoot, int kitNumber, int overall) {
+    public Player(int id, String name, int age, String nationality, int height, int weakFoot, int kitNumber, int overall, String wage) {
         this.id = id;
         this.name = name;
         this.age = age;

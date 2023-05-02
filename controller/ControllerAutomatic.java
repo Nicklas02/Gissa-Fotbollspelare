@@ -62,7 +62,7 @@ public class ControllerAutomatic {
             int nbrAlternative = 1;
             for (Player p : q.getAlternatives()) {
                  System.out.println(nbrAlternative + "---" + p.getName() + "---" + p.getAge() + "---" + p.getHeight() + "---" + p.getWeakFoot()
-                        + "---" + p.getKitNumber());
+                        + "---" + p.getKitNumber() + " Ovr:" + p.getOverall());
                 //System.out.println(nbrAlternative + ". " + p.getName());
                 nbrAlternative++;
             }

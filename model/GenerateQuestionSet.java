@@ -50,7 +50,7 @@ public class GenerateQuestionSet {
             return kitNum10();
         }
         if(localRandom==4){
-            //Matyin
+            return Overall();
         }
         if(localRandom==5){
             //Matyin
@@ -75,11 +75,16 @@ public class GenerateQuestionSet {
         return null;
     }
 
-    quesitonsABoutSPecificPlayer{
-        random attribute
-                Random fake alternatives
-                Create question
+    private QuestionAutomatic Overall() {
+        int randomBeast = random.nextInt(10); //a random player bound 10 means a very good player
+        corrAnswers.clear();
+        Player correctAnswer = sample[randomBeast];
+        corrAnswers.add(correctAnswer);
+        Player[] alternatives  = randomAlternatives();
+        alternatives[random.nextInt(alternatives.length)] = correctAnswer;
+        return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
+
 
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)

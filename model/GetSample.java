@@ -124,7 +124,7 @@ public class GetSample {
             while (rs.next()) {
                 player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
                         , rs.getString("nationality"), rs.getInt("height"), rs.getInt("weak_foot")
-                        , rs.getInt("kit_number"));
+                        , rs.getInt("kit_number"), rs.getInt("overall"));
                 playerSample[count] = player;
                 count++;
                 if (count >= sampleSize) {

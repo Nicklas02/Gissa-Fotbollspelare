@@ -50,6 +50,12 @@ public class GenerateQuestionSet {
         return null;
     }
 
+    quesitonsABoutSPecificPlayer{
+        random attribute
+                Random fake alternatives
+                Create question
+    }
+
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {

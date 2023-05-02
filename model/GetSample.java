@@ -11,10 +11,18 @@ import java.util.Properties;
  */
 public class GetSample {
     private Connection conn = null;
-    private GameType gameType;
     private int sampleSize;
+    private GameType gameType;
 
-    public GetSample() {
+    public GetSample(GameType gameType, Difficulty difficulty) {
+        if(difficulty==Difficulty.Easy){
+            sampleSize = 18; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
+        }
+        if(difficulty==Difficulty.Hard){
+            sampleSize=250;
+        }
+        this.gameType=gameType;
+        conn = getDatabaseConnection();
     }
 
     public Connection getDatabaseConnection() {
@@ -33,24 +41,14 @@ public class GetSample {
         }
     }
 
-    public Player[] getSample(GameType gameType, Difficulty difficulty) {
-        conn = getDatabaseConnection();
+    public Player[] getSample() {
 
-        this.gameType = gameType;
-        if(difficulty==Difficulty.Easy){
-            sampleSize = 30; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
-            System.out.println("Easy programmed");
-        }
-        if(difficulty==Difficulty.Hard){
-            sampleSize=100;
-        }
         Player[] playerSample = new Player[sampleSize];
         Player player;
         int count;
         ResultSet rs = null;
         Statement stmt = null;
-
-        if (gameType == GameType.None) {
+        if (this.gameType == GameType.None) {
             try {
                 String QUERY = "select * from \"spelare2023\" " +
                         "order by overall desc;";
@@ -59,7 +57,7 @@ public class GetSample {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else if (gameType == GameType.PremierLeague) {
+        } else if (this.gameType == GameType.PremierLeague) {
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -71,7 +69,7 @@ public class GetSample {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else if (gameType == GameType.LaLiga) {
+        } else if (this.gameType == GameType.LaLiga) {
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -83,7 +81,7 @@ public class GetSample {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else if (gameType == GameType.Bundesliga) {
+        } else if (this.gameType == GameType.Bundesliga) {
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -95,7 +93,7 @@ public class GetSample {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else if (gameType == GameType.Ligue1) {
+        } else if (this.gameType == GameType.Ligue1) {
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -107,7 +105,7 @@ public class GetSample {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        } else if (gameType == GameType.SerieA) {
+        } else if (this.gameType == GameType.SerieA) {
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -138,7 +136,14 @@ public class GetSample {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //testPrintSample(playerSample);
         return playerSample;
+    }
+
+    private void testPrintSample(Player[] playerSample) {
+        for (Player p : playerSample){
+            System.out.println(p.getName());
+        }
     }
 
 /*

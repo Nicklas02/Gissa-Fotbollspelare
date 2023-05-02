@@ -15,24 +15,26 @@ public class GenerateQuestionSet {
     public GenerateQuestionSet(GameType gameType, Difficulty difficulty) {
         this.gameType = gameType;
         this.difficulty = difficulty;
-        //ta bort buildQuestionSet senare, anrop sker utifrån
-        //buildNewQuestionSet(); //mängd frågor kan eventuellt lägga till spelets längd som in-parameter senare
     }
 
     public QuestionAutomatic[] buildNewQuestionSet() {
-        GetSample getSample = new GetSample();
-        sample = getSample.getSample(gameType, difficulty);
-        QuestionAutomatic[] questionSet = new QuestionAutomatic[NUMBER_OF_QUESTIONS]; //En alternativ lösning är att skapa en lista med QuestionObjects
-        //för att sedan skicka till controller
+        GetSample getSample = new GetSample(gameType, difficulty);
+        sample = getSample.getSample();
+        QuestionAutomatic[] questionSet = new QuestionAutomatic[NUMBER_OF_QUESTIONS];
         for (int i = 0; i < questionSet.length; i++) {
             questionSet[i] = randomQuestion();
         }
         return questionSet;
-
     }
 
     private QuestionAutomatic randomQuestion() {
-        int localRandom = random.nextInt(4);
+        int localRandom;
+        if(difficulty==Difficulty.Easy){
+            localRandom = random.nextInt(2);
+        } else {
+            localRandom = random.nextInt(4);
+        }
+
         if (localRandom == 0) {
             return ageQuestion();
         }
@@ -55,7 +57,7 @@ public class GenerateQuestionSet {
         int nbrOfAlt = 4;
         Player[] alternatives = new Player[nbrOfAlt];
         for (int i = 0; i < nbrOfAlt; i++) {
-            int pos = random.nextInt(sample.length-4);
+            int pos = random.nextInt(sample.length);
             alternatives[i] = sample[pos];
         }
         return alternatives;

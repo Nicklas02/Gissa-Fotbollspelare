@@ -22,7 +22,7 @@ public class HighScoreFromDatabase {
         //String backup user = "am7496"; "xlousk70"
         try {
             Connection conn = DriverManager.getConnection(url, props);
-            System.out.println("Connection (HighscoreList Established");
+            System.out.println("Connection (HighScoreList) Established");
             return conn;
         } catch (Exception e) {
             e.printStackTrace();

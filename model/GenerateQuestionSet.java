@@ -75,11 +75,6 @@ public class GenerateQuestionSet {
         return null;
     }
 
-    quesitonsABoutSPecificPlayer{
-        random attribute
-                Random fake alternatives
-                Create question
-    }
 
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
@@ -170,8 +165,8 @@ public class GenerateQuestionSet {
 
 
     private QuestionAutomatic kitNum10() {
-        Player[] alternatives = null;
-        boolean kitNum10 = false;
+        Player[] alternatives = randomAlternatives();
+       /* boolean kitNum10 = false;
         while (!kitNum10) {
             alternatives = randomAlternatives();
             for (Player alternative : alternatives) {
@@ -181,13 +176,21 @@ public class GenerateQuestionSet {
                 }
             }
         }
+
+        */
         corrAnswers.clear();
+        int correctAnswer = random.nextInt(4);
+        corrAnswers.add(alternatives[correctAnswer]);
+
+        /*corrAnswers.clear();
         for (Player p : alternatives) {
             if (p.getKitNumber() == 10) {
                 corrAnswers.add(p);
             }
         }
-        String localQuestion = "Vilken spelare har tröjnummer 10?";
+
+         */
+        String localQuestion = "Vilken spelare har tröjnummer " + alternatives[correctAnswer].getKitNumber() + "?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 

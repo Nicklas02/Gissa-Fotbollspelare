@@ -34,12 +34,12 @@ public class GetSample {
     }
 
     public Player[] getSample(GameType gameType, Difficulty difficulty) {
-        if(conn==null) {
-            conn = getDatabaseConnection();
-        }
+        conn = getDatabaseConnection();
+
         this.gameType = gameType;
         if(difficulty==Difficulty.Easy){
-            sampleSize = 25; //fungerar ej när för låg Fortsätta HÄR nästa vecka ***
+            sampleSize = 30; //fungerar ej när för låg Fortsätta HÄR nästa vecka ***
+            System.out.println("Easy programmed");
         }
         if(difficulty==Difficulty.Hard){
             sampleSize=100;

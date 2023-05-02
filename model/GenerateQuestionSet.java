@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GenerateQuestionSet {
-    private GetSample getSample =null; //Förbindelse till sample objektet. 1:1 förbindelse
+     //Förbindelse till sample objektet. 1:1 förbindelse
     private Player[] sample;
     private final Random random = new Random(); //Används för slumpmässiga frågor liksom för slumpmässiga svarsalternativ
     private static final int NUMBER_OF_QUESTIONS = 10; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
@@ -20,9 +20,7 @@ public class GenerateQuestionSet {
     }
 
     public QuestionAutomatic[] buildNewQuestionSet() {
-        if (getSample == null) {
-            getSample = new GetSample();
-        }
+        GetSample getSample = new GetSample();
         sample = getSample.getSample(gameType, difficulty);
         QuestionAutomatic[] questionSet = new QuestionAutomatic[NUMBER_OF_QUESTIONS]; //En alternativ lösning är att skapa en lista med QuestionObjects
         //för att sedan skicka till controller

@@ -10,6 +10,7 @@ public class GenerateQuestionSet {
     private static final int NUMBER_OF_QUESTIONS = 10; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
     private final GameType gameType;
     private final Difficulty difficulty;
+    ArrayList<Player> corrAnswers = new ArrayList<>();
 
 
     public GenerateQuestionSet(GameType gameType, Difficulty difficulty) {
@@ -73,7 +74,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        ArrayList<Player> corrAnswers = new ArrayList<>();
+        corrAnswers.clear();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
             if (p.getAge() == correctAnswer.getAge()) {
@@ -94,7 +95,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        ArrayList<Player> corrAnswers = new ArrayList<>();
+        corrAnswers.clear();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
             if (p.getHeight() == correctAnswer.getHeight()) {
@@ -124,7 +125,7 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        ArrayList<Player> corrAnswers = new ArrayList<>();
+        corrAnswers.clear();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
             if (p.getWeakFoot() == correctAnswer.getWeakFoot()) {
@@ -149,7 +150,7 @@ public class GenerateQuestionSet {
                 }
             }
         }
-        ArrayList<Player> corrAnswers = new ArrayList<>();
+        corrAnswers.clear();
         for (Player p : alternatives) {
             if (p.getKitNumber() == 10) {
                 corrAnswers.add(p);

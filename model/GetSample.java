@@ -38,7 +38,7 @@ public class GetSample {
 
         this.gameType = gameType;
         if(difficulty==Difficulty.Easy){
-            sampleSize = 30; //fungerar ej när för låg Fortsätta HÄR nästa vecka ***
+            sampleSize = 30; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
             System.out.println("Easy programmed");
         }
         if(difficulty==Difficulty.Hard){

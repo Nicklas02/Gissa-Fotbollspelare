@@ -75,6 +75,7 @@ public class GenerateQuestionSet {
         return null;
     }
 
+<<<<<<< HEAD
     private QuestionAutomatic Overall() {
         int randomBeast = random.nextInt(10); //a random player bound 10 means a very good player
         corrAnswers.clear();
@@ -84,6 +85,8 @@ public class GenerateQuestionSet {
         alternatives[random.nextInt(alternatives.length)] = correctAnswer;
         return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
+=======
+>>>>>>> 0c76e4edbc8860b82c7feda18df7812446d451f0
 
 
 
@@ -175,8 +178,8 @@ public class GenerateQuestionSet {
 
 
     private QuestionAutomatic kitNum10() {
-        Player[] alternatives = null;
-        boolean kitNum10 = false;
+        Player[] alternatives = randomAlternatives();
+       /* boolean kitNum10 = false;
         while (!kitNum10) {
             alternatives = randomAlternatives();
             for (Player alternative : alternatives) {
@@ -186,13 +189,21 @@ public class GenerateQuestionSet {
                 }
             }
         }
+
+        */
         corrAnswers.clear();
+        int correctAnswer = random.nextInt(4);
+        corrAnswers.add(alternatives[correctAnswer]);
+
+        /*corrAnswers.clear();
         for (Player p : alternatives) {
             if (p.getKitNumber() == 10) {
                 corrAnswers.add(p);
             }
         }
-        String localQuestion = "Vilken spelare har tröjnummer 10?";
+
+         */
+        String localQuestion = "Vilken spelare har tröjnummer " + alternatives[correctAnswer].getKitNumber() + "?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 

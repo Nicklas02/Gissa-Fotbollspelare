@@ -72,6 +72,11 @@ public class GenerateQuestionSet {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
         Player correctAnswer = alternatives[firstAlternative];
+        for (Player p : alternatives) {
+            if (p.getAge() > correctAnswer.getAge()) {
+                correctAnswer = p;
+            }
+        }
         ArrayList<Player> corrAnswers = new ArrayList<>();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {

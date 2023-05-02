@@ -15,7 +15,11 @@ public class GetSample {
     private GameType gameType;
 
     public GetSample(GameType gameType, Difficulty difficulty) {
+<<<<<<< Updated upstream
         if(difficulty==Difficulty.Normal){
+=======
+        if(difficulty==Difficulty.Easy){
+>>>>>>> Stashed changes
             sampleSize = 50; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
         }
         if(difficulty==Difficulty.Hard){

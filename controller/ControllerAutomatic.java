@@ -61,9 +61,9 @@ public class ControllerAutomatic {
             System.out.println(q.getArticulatedQuestion());
             int nbrAlternative = 1;
             for (Player p : q.getAlternatives()) {
-                // TEST System.out.println(nbrAlternative + "---" + p.getName() + "---" + p.getAge() + "---" + p.getHeight() + "---" + p.getWeakFoot()
-                //        + "---" + p.getKitNumber());
-                System.out.println(nbrAlternative + ". " + p.getName());
+                 System.out.println(nbrAlternative + "---" + p.getName() + "---" + p.getAge() + "---" + p.getHeight() + "---" + p.getWeakFoot()
+                        + "---" + p.getKitNumber());
+                //System.out.println(nbrAlternative + ". " + p.getName());
                 nbrAlternative++;
             }
             answer = scanner.nextInt() - 1;

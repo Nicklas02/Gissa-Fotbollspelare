@@ -29,8 +29,17 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic randomQuestion() {
+<<<<<<< Updated upstream
         int localRandom = random.nextInt(4);
 
+=======
+        int localRandom;
+        if(difficulty==Difficulty.Easy){
+            localRandom = random.nextInt(2);
+        } else {
+            localRandom = random.nextInt(4);
+        }
+>>>>>>> Stashed changes
 
         if (localRandom == 0) {
             return ageQuestion();
@@ -45,6 +54,25 @@ public class GenerateQuestionSet {
             return kitNum10();
         }
         if(localRandom==4){
+            //Matyin
+        }
+        if(localRandom==5){
+            //Matyin
+        }
+        if(localRandom==6){
+            //Matyin
+        }
+        if(localRandom==7){
+            //Adam
+        }
+        if(localRandom==8){
+            //Adam
+        }
+        if(localRandom==9){
+            //Adam
+        }
+        if(localRandom==10){
+            //Adam
         }
         System.out.println("Error, no question was generated, random was: " + localRandom);
         return null;

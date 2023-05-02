@@ -128,6 +128,14 @@ public class Player {
         return kitNumber;
     }
 
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void setWage(String wage) {
+        this.wage = wage;
+    }
+
     @Override
     public String toString() {
         return "Player: " + "id=" + id + ", name='" + name + ", age=" + age;

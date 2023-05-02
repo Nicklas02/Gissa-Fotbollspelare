@@ -1,7 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class GenerateQuestionSet {
      //Förbindelse till sample objektet. 1:1 förbindelse
@@ -34,7 +33,7 @@ public class GenerateQuestionSet {
     private QuestionAutomatic randomQuestion() {
         int localRandom = random.nextInt(11);
 
-        localRandom = 4; //test
+        localRandom = 10; //test
 
         if (localRandom == 0) {
             return ageQuestion();
@@ -104,8 +103,33 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic Wage() {
-        
-        return null;
+        int[] wage = new int[sample.length];
+        for (int i=0; i< wage.length; i++){
+            wage[i] = Integer.parseInt(sample[i].getWage().substring(1,sample[i].getWage().length()-1));
+        }
+        Collections.sort(wage);
+        for (String str : wage){
+            System.out.println(str);
+        }
+
+        System.out.println("-------------------");
+        /*
+        Collections.sort(wage);
+        Player[] temporary = sample;
+
+        Comparator<Player> wageComparator = new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return Integer.compare(p1.getWage(), p2.getWage());
+            }
+        };*/
+
+        Player correctAnswer = sample[random.nextInt(HIGH_RATED_PLAYER)];
+        corrAnswers.add(correctAnswer);
+        Player[] alternatives = randomAlternativesLowestQuartile();
+        alternatives[random.nextInt(4)] = correctAnswer;
+        return new QuestionAutomatic(alternatives, corrAnswers, "Vilken spelare har tjänar mest med" +
+                "en månadslön på " + correctAnswer.getWage() + "?");
     }
 
     private QuestionAutomatic Value() {

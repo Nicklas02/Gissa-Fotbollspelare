@@ -34,10 +34,10 @@ public class ControllerAutomatic {
         }
         int choice = scanner.nextInt();
         gameType = GameType.valueOf(enumValues[choice]);
-        System.out.println("Select difficulty: 1 for easy or 2 for hard");
+        System.out.println("Select difficulty: 1 for normal or 2 for hard");
         choice = scanner.nextInt();
         if (choice==1){
-            difficulty = Difficulty.Easy;
+            difficulty = Difficulty.Normal;
         } else {
             difficulty = Difficulty.Hard;
         }

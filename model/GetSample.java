@@ -15,8 +15,8 @@ public class GetSample {
     private GameType gameType;
 
     public GetSample(GameType gameType, Difficulty difficulty) {
-        if(difficulty==Difficulty.Easy){
-            sampleSize = 18; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
+        if(difficulty==Difficulty.Normal){
+            sampleSize = 50; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
         }
         if(difficulty==Difficulty.Hard){
             sampleSize=150;

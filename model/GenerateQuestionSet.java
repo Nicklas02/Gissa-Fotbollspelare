@@ -28,13 +28,8 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic randomQuestion() {
-        int localRandom;
-        if(difficulty==Difficulty.Easy){
-            localRandom = random.nextInt(2);
-        } else {
-            localRandom = random.nextInt(4);
-        }
-        localRandom=4;
+        int localRandom = random.nextInt(4);
+
 
         if (localRandom == 0) {
             return ageQuestion();
@@ -63,6 +58,7 @@ public class GenerateQuestionSet {
         for (int i = 0; i < nbrOfAlt; i++) {
             int pos = random.nextInt(sample.length);
             alternatives[i] = sample[pos];
+
         }
         return alternatives;
     }
@@ -84,6 +80,7 @@ public class GenerateQuestionSet {
                 corrAnswers.add(p);
             }
         }
+
         String localQuestion = "Vilken spelare är äldst?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }

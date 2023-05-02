@@ -31,7 +31,6 @@ public class GenerateQuestionSet {
     private QuestionAutomatic randomQuestion() {
         int localRandom = random.nextInt(4);
 
-        int localRandom;
         if(difficulty==Difficulty.Normal){
             localRandom = random.nextInt(2);
         } else {

@@ -24,14 +24,20 @@ public class Player {
     private String releaseClause;
     private int kitNumber;
 
-    public Player(int id, String name, int age, String nationality, int height, int weakFoot, int kitNumber, int overall, String wage) {
-        this.id = id;
+    public Player(String name, int age, String nationality,
+                  int height, int weakFoot, int kitNumber, String value, String wage,
+                  int overall, int skill_moves, String club) {
         this.name = name;
         this.age = age;
         this.nationality = nationality;
         this.height = height;
         this.weakFoot = weakFoot;
         this.kitNumber = kitNumber;
+        this.value=value;
+        this.wage=wage;
+        this.overall=overall;
+        this.skillMoves=skill_moves;
+        this.club=club;
     }
 
     public int getId() {
@@ -50,20 +56,76 @@ public class Player {
         return nationality;
     }
 
-    public int getHeight() {
-        return height;
+    public int getOverall() {
+        return overall;
+    }
+
+    public int getPotential() {
+        return potential;
+    }
+
+    public String getClub() {
+        return club;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public String getWage() {
+        return wage;
+    }
+
+    public String getPreferredFoot() {
+        return preferredFoot;
+    }
+
+    public int getInternationalRep() {
+        return internationalRep;
     }
 
     public int getWeakFoot() {
         return weakFoot;
     }
 
-    public int getKitNumber() {
-        return kitNumber;
+    public int getSkillMoves() {
+        return skillMoves;
     }
 
-    public int getOverall() {
-        return overall;
+    public String getWorkRate() {
+        return workRate;
+    }
+
+    public String getBodyType() {
+        return bodyType;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public String getJoinedClub() {
+        return joinedClub;
+    }
+
+    public String getValidContractUntil() {
+        return validContractUntil;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public String getReleaseClause() {
+        return releaseClause;
+    }
+
+    public int getKitNumber() {
+        return kitNumber;
     }
 
     @Override

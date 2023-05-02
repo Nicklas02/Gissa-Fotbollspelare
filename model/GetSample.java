@@ -17,7 +17,7 @@ public class GetSample {
     public GetSample(GameType gameType, Difficulty difficulty) {
         if(difficulty==Difficulty.Normal){
 
-            sampleSize = 50; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
+            sampleSize = 60; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
         }
         if(difficulty==Difficulty.Hard){
             sampleSize=150;
@@ -122,9 +122,17 @@ public class GetSample {
         try {
             count=0;
             while (rs.next()) {
-                player = new Player(rs.getInt("id"), rs.getString("name"), rs.getInt("age")
-                        , rs.getString("nationality"), rs.getInt("height"), rs.getInt("weak_foot")
-                        , rs.getInt("kit_number"), rs.getInt("overall"), rs.getString("wage"));
+                player = new Player(
+                        rs.getString("name"),
+                        rs.getInt("age"),
+                        rs.getString("nationality"),
+                        rs.getInt("height"), rs.getInt("weak_foot"),
+                        rs.getInt("kit_number"),
+                        rs.getString("value"),
+                        rs.getString("wage"),
+                        rs.getInt("overall"),
+                        rs.getInt("skill_moves"),
+                        rs.getString("club"));
                 playerSample[count] = player;
                 count++;
                 if (count >= sampleSize) {

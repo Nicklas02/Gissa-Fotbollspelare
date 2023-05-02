@@ -107,29 +107,33 @@ public class GenerateQuestionSet {
         for (int i=0; i< wage.length; i++){
             wage[i] = Integer.parseInt(sample[i].getWage().substring(1,sample[i].getWage().length()-1));
         }
-        Collections.sort(wage);
-        for (String str : wage){
-            System.out.println(str);
+        Arrays.sort(wage);
+        for (int i =0; i< wage.length;i++){
+            System.out.println(wage[i]);
+        }
+        int high = wage[wage.length-1];
+
+        int[] low = new int[NBR_OF_ALT];
+        for (int i=0; i<NBR_OF_ALT; i++){
+            low[i] = wage[random.nextInt(15)+45];
         }
 
-        System.out.println("-------------------");
+
         /*
-        Collections.sort(wage);
-        Player[] temporary = sample;
-
-        Comparator<Player> wageComparator = new Comparator<Player>() {
-            @Override
-            public int compare(Player p1, Player p2) {
-                return Integer.compare(p1.getWage(), p2.getWage());
+        Player[] alternatives = randomAlternatives();
+        Player correctAnswer = sample[0];
+        for (Player p : sample){
+            int currWage = Integer.parseInt(p.getWage().substring(1,p.getWage().length()-1));
+            if(currWage==wage[countL] && count<NBR_OF_ALT){
+                countL++;
+                alternatives[count++]=p;
             }
-        };*/
-
-        Player correctAnswer = sample[random.nextInt(HIGH_RATED_PLAYER)];
+        }
         corrAnswers.add(correctAnswer);
-        Player[] alternatives = randomAlternativesLowestQuartile();
-        alternatives[random.nextInt(4)] = correctAnswer;
+
         return new QuestionAutomatic(alternatives, corrAnswers, "Vilken spelare har tjänar mest med" +
-                "en månadslön på " + correctAnswer.getWage() + "?");
+                "en månadslön på " + correctAnswer.getWage() + "?");*/
+        return null;
     }
 
     private QuestionAutomatic Value() {

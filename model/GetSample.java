@@ -19,7 +19,7 @@ public class GetSample {
             sampleSize = 18; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
         }
         if(difficulty==Difficulty.Hard){
-            sampleSize=250;
+            sampleSize=150;
         }
         this.gameType=gameType;
         conn = getDatabaseConnection();

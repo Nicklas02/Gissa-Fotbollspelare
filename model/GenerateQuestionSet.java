@@ -34,6 +34,7 @@ public class GenerateQuestionSet {
         } else {
             localRandom = random.nextInt(4);
         }
+        localRandom=4;
 
         if (localRandom == 0) {
             return ageQuestion();
@@ -47,9 +48,12 @@ public class GenerateQuestionSet {
         if (localRandom == 3) {
             return kitNum10();
         }
+        if(localRandom==4){
+        }
         System.out.println("Error, no question was generated, random was: " + localRandom);
         return null;
     }
+
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {

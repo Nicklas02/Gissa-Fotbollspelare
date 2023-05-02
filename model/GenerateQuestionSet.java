@@ -24,6 +24,7 @@ public class GenerateQuestionSet {
         QuestionAutomatic[] questionSet = new QuestionAutomatic[NUMBER_OF_QUESTIONS];
         for (int i = 0; i < questionSet.length; i++) {
             questionSet[i] = randomQuestion();
+            corrAnswers = new ArrayList<>();
         }
         return questionSet;
     }
@@ -47,7 +48,7 @@ public class GenerateQuestionSet {
             return weakFootQuestion();
         }
         if (localRandom == 3) {
-            return kitNum10();
+            return kitNum();
         }
         if(localRandom==4){
             return Overall();
@@ -75,18 +76,15 @@ public class GenerateQuestionSet {
         return null;
     }
 
-<<<<<<< HEAD
     private QuestionAutomatic Overall() {
         int randomBeast = random.nextInt(10); //a random player bound 10 means a very good player
-        corrAnswers.clear();
         Player correctAnswer = sample[randomBeast];
         corrAnswers.add(correctAnswer);
         Player[] alternatives  = randomAlternatives();
         alternatives[random.nextInt(alternatives.length)] = correctAnswer;
         return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
-=======
->>>>>>> 0c76e4edbc8860b82c7feda18df7812446d451f0
+
 
 
 
@@ -113,7 +111,6 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        corrAnswers.clear();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
             if (p.getAge() == correctAnswer.getAge()) {
@@ -134,7 +131,6 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        corrAnswers.clear();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
             if (p.getHeight() == correctAnswer.getHeight()) {
@@ -164,7 +160,6 @@ public class GenerateQuestionSet {
                 correctAnswer = p;
             }
         }
-        corrAnswers.clear();
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
             if (p.getWeakFoot() == correctAnswer.getWeakFoot()) {
@@ -177,32 +172,10 @@ public class GenerateQuestionSet {
     }
 
 
-    private QuestionAutomatic kitNum10() {
+    private QuestionAutomatic kitNum() {
         Player[] alternatives = randomAlternatives();
-       /* boolean kitNum10 = false;
-        while (!kitNum10) {
-            alternatives = randomAlternatives();
-            for (Player alternative : alternatives) {
-                if (alternative.getKitNumber() == 10) {
-                    kitNum10 = true;
-                    break;
-                }
-            }
-        }
-
-        */
-        corrAnswers.clear();
         int correctAnswer = random.nextInt(4);
         corrAnswers.add(alternatives[correctAnswer]);
-
-        /*corrAnswers.clear();
-        for (Player p : alternatives) {
-            if (p.getKitNumber() == 10) {
-                corrAnswers.add(p);
-            }
-        }
-
-         */
         String localQuestion = "Vilken spelare har tröjnummer " + alternatives[correctAnswer].getKitNumber() + "?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }

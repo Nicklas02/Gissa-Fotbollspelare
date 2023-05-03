@@ -40,7 +40,7 @@ public class GenerateQuestionSet {
         int localRandom = random.nextInt(10);
 
         //Test specific value
-        //localRandom = 8;
+        localRandom = 8;
 
         if (localRandom == 0) {
             return ageQuestion();
@@ -165,25 +165,26 @@ public class GenerateQuestionSet {
     }
     
     private QuestionAutomatic Overall() {
-        Player correctAnswer = upperQuartilePlayer();
         Player[] alternatives = bottomQuartilePlayers();
+        Player correctAnswer = upperQuartilePlayer();
         corrAnswers.add(correctAnswer);
+        alternatives[random.nextInt(NBR_OF_ALT)] = correctAnswer;
         return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
 
     private Player[] bottomQuartilePlayers() {
-        int lowestQuartile = sample.length/4;
+        int lowestQuartile = sample.length/4*3;
+        int highestQuartile = sample.length/4;
         Player[] players = new Player[NBR_OF_ALT];
         for (int i=0; i< players.length;i++){
-            players[i] = sample[random.nextInt(lowestQuartile)];
+            players[i] = sample[random.nextInt(highestQuartile)+lowestQuartile];
         }
         return players;
     }
 
     private Player upperQuartilePlayer() {
-        int lowestQuartile = sample.length/4;
-        int highestQuartile = sample.length/4*3;
-        return sample[random.nextInt(lowestQuartile) + highestQuartile];
+        int highestQuartile = sample.length/4;
+        return sample[random.nextInt(highestQuartile)];
     }
 
 

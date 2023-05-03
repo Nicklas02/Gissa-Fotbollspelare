@@ -26,7 +26,7 @@ public class Player {
 
     public Player(String name, int age, String nationality,
                   int height, int weakFoot, int kitNumber, String value, String wage,
-                  int overall, int skill_moves, String club) {
+                  int overall, int skill_moves, String club, String position) {
         this.name = name;
         this.age = age;
         this.nationality = nationality;
@@ -38,6 +38,7 @@ public class Player {
         this.overall=overall;
         this.skillMoves=skill_moves;
         this.club=club;
+        this.position = position;
     }
 
     public int getId() {

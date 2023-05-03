@@ -75,21 +75,82 @@ public class GenerateQuestionSet {
 
 
     private QuestionAutomatic SkillMoves() {
-        return null;
+        Player[] alternatives = null;
+        boolean skiller = false;
+        while (!skiller) {
+            alternatives = randomAlternatives();
+            for (Player alternative : alternatives) {
+                if (alternative.getSkillMoves() >= 4) {
+                    skiller = true;
+                    break;
+                }
+            }
+        }
+        int firstAlternative = 0;
+        Player correctAnswer = alternatives[firstAlternative];
+        for (Player p : alternatives) {
+            if (p.getSkillMoves() > correctAnswer.getSkillMoves()) {
+                correctAnswer = p;
+            }
+        }
+        corrAnswers.add(correctAnswer);
+        for (Player p : alternatives) {
+            if (p.getSkillMoves() == correctAnswer.getSkillMoves()) {
+                corrAnswers.add(p);
+            }
+        }
+        String localQuestion = "Vilken spelare är mest teknisk?";
+        return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
 
 
     private QuestionAutomatic Position() {
-        return null;
+        Player[] alternatives = randomAlternatives();
+        int alternative = random.nextInt(4);
+        Player correctAnswer = alternatives[alternative];
+
+        corrAnswers.add(correctAnswer);
+        for (Player p : alternatives) {
+            if (p.getNationality().equals(correctAnswer.getNationality())) {
+                corrAnswers.add(p);
+            }
+        }
+
+        String localQuestion = "Vilken spelare har positionen " + corrAnswers.get(0).getNationality() +"?";
+        return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
     private QuestionAutomatic Club() {
-        return null;
+        Player[] alternatives = randomAlternatives();
+        int alternative = random.nextInt(4);
+        Player correctAnswer = alternatives[alternative];
+
+        corrAnswers.add(correctAnswer);
+        for (Player p : alternatives) {
+            if (p.getNationality().equals(correctAnswer.getNationality())) {
+                corrAnswers.add(p);
+            }
+        }
+
+        String localQuestion = "Vilken spelare spelar i " + corrAnswers.get(0).getClub() +"?";
+        return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
     private QuestionAutomatic Nationality() {
-        return null;
+        Player[] alternatives = randomAlternatives();
+        int alternative = random.nextInt(4);
+        Player correctAnswer = alternatives[alternative];
+
+        corrAnswers.add(correctAnswer);
+        for (Player p : alternatives) {
+            if (p.getNationality().equals(correctAnswer.getNationality())) {
+                corrAnswers.add(p);
+            }
+        }
+
+        String localQuestion = "Vilken spelare kommer från " + corrAnswers.get(0).getNationality() +"?";
+        return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
     private QuestionAutomatic Overall() {

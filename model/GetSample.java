@@ -132,7 +132,8 @@ public class GetSample {
                         rs.getString("wage"),
                         rs.getInt("overall"),
                         rs.getInt("skill_moves"),
-                        rs.getString("club"));
+                        rs.getString("club"),
+                        rs.getString("position"));
                 playerSample[count] = player;
                 count++;
                 if (count >= sampleSize) {

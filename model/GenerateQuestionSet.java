@@ -180,32 +180,35 @@ public class GenerateQuestionSet {
             wage[i] = Integer.parseInt(sample[i].getWage().substring(1,sample[i].getWage().length()-1));
         }
         Arrays.sort(wage);
-        for (int i =0; i< wage.length;i++){
-            System.out.println(wage[i]);
+        int[] lows = new int[NBR_OF_ALT];
+        int high;
+        int lowestQuartile = sample.length/4;
+        int highestQuartile = sample.length/4*3;
+        for (int i=0; i< lows.length;i++){
+            lows[i] = wage[random.nextInt(lowestQuartile)];
         }
-        int high = wage[wage.length-1];
-
-        int[] low = new int[NBR_OF_ALT];
-        for (int i=0; i<NBR_OF_ALT; i++){
-            low[i] = wage[random.nextInt(15)+45];
-        }
-
-
-        /*
-        Player[] alternatives = randomAlternatives();
-        Player correctAnswer = sample[0];
-        for (Player p : sample){
-            int currWage = Integer.parseInt(p.getWage().substring(1,p.getWage().length()-1));
-            if(currWage==wage[countL] && count<NBR_OF_ALT){
-                countL++;
-                alternatives[count++]=p;
+        high = wage[random.nextInt(lowestQuartile)+highestQuartile];
+        //TEST System.out.println(high + ".-."+ lows[0]+"-"+ lows[1]+"-"+ lows[2]+ "-"+ lows[3]);
+        Player[] alternatives = new Player[NBR_OF_ALT];
+        Player correctAnswer = null;
+        int count=0;
+        int currWage;
+        for(Player p : sample){
+            currWage = Integer.parseInt(p.getWage().substring(1,p.getWage().length()-1));
+            for (int i=0; i<lows.length; i++){
+                if(currWage==lows[i] && count<NBR_OF_ALT){
+                    alternatives[count] = p;
+                    count++;
+                }
+                if(currWage==high){
+                    correctAnswer=p;
+                }
             }
         }
+        alternatives[random.nextInt(NBR_OF_ALT)] = correctAnswer;
         corrAnswers.add(correctAnswer);
-
         return new QuestionAutomatic(alternatives, corrAnswers, "Vilken spelare har tjänar mest med" +
-                "en månadslön på " + correctAnswer.getWage() + "?");*/
-        return null;
+                "en månadslön på " + correctAnswer.getWage() + "?");
     }
 
     private QuestionAutomatic Value() {

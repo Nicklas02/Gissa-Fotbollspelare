@@ -40,7 +40,7 @@ public class GenerateQuestionSet {
         int localRandom = random.nextInt(10);
 
         //Test specific value
-        localRandom = 8;
+        //localRandom = 8;
 
         if (localRandom == 0) {
             return ageQuestion();

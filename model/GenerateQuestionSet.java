@@ -171,8 +171,8 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
 
-    private int formattingValueOrWage(Player player, boolean value){
-        if(value){
+    private int formattingValueOrWage(Player player, boolean isValueQuestion){
+        if(isValueQuestion){
             if(player.getValue().contains(".")){
                 String[] parts = player.getValue().split("\\.");
                 String currValue = parts[0];
@@ -186,44 +186,42 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic ValueOrWage() {
-        boolean isValue = random.nextBoolean();
+        boolean isValueQuestion = random.nextBoolean();
         int[] wageOrValue = new int[sample.length];
         for (int i=0; i< wageOrValue.length; i++){
-            wageOrValue[i] = formattingValueOrWage(sample[i], isValue);
+            wageOrValue[i] = formattingValueOrWage(sample[i], isValueQuestion);
             //Test formatting the entire column of either wage or value
             //System.out.println("Formatted wage/value: " + wageOrValue[i] + " Non-formatted wage: " + sample[i].getWage() + " Non-formatted value: " + sample[i].getValue());
         }
         Arrays.sort(wageOrValue);
-        int[] lows = new int[NBR_OF_ALT];
-        int high;
         int lowestQuartile = sample.length/4;
         int highestQuartile = sample.length/4*3;
-        for (int i=0; i< lows.length;i++){
-            lows[i] = wageOrValue[random.nextInt(lowestQuartile)];
+        int[] lowValuesOrWages = new int[NBR_OF_ALT];
+        for (int i=0; i< lowValuesOrWages.length;i++){
+            lowValuesOrWages[i] = wageOrValue[random.nextInt(lowestQuartile)];
         }
-        high = wageOrValue[random.nextInt(lowestQuartile)+highestQuartile];
-        //Test randomizing one high value (top quartile) and four low values (bottom quartile)
-        //System.out.println(high + "-"+ lows[0]+"-"+ lows[1]+"-"+ lows[2]+ "-"+ lows[3]);
+        int highValueOrWage = wageOrValue[random.nextInt(lowestQuartile) + highestQuartile];
+        //Test randomizing one highValueOrWage value (top quartile) and four low values (bottom quartile)
+        //System.out.println(highValueOrWage + "-"+ lowValuesOrWages[0]+"-"+ lowValuesOrWages[1]+"-"+ lowValuesOrWages[2]+ "-"+ lowValuesOrWages[3]);
         Player[] alternatives = new Player[NBR_OF_ALT];
         Player correctAnswer = null;
         int count=0;
-        int currWageOrValue;
         for(Player p : sample){
-            currWageOrValue = formattingValueOrWage(p, isValue);
-            for (int i=0; i<lows.length; i++){
-                if(currWageOrValue==lows[i] && count<NBR_OF_ALT){
+            int currWageOrValue = formattingValueOrWage(p, isValueQuestion);
+            for (int low : lowValuesOrWages) {
+                if (currWageOrValue == low && count < NBR_OF_ALT) {
                     alternatives[count] = p;
                     count++;
                 }
-                if(currWageOrValue==high){
-                    correctAnswer=p;
+                if (currWageOrValue == highValueOrWage) {
+                    correctAnswer = p;
                 }
             }
         }
         alternatives[random.nextInt(NBR_OF_ALT)] = correctAnswer;
         corrAnswers.add(correctAnswer);
         String question;
-        if(isValue){
+        if(isValueQuestion){
             question = "Vilken spelare har högst marknadsvärde med ett uppskattat värde på "
                     + correctAnswer.getValue() + "?";
         } else {

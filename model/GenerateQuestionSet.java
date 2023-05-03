@@ -171,60 +171,66 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
 
-    private void formattingValueOrWage(){
-
+    private int formattingValueOrWage(Player player, boolean value){
+        if(value){
+            if(player.getValue().contains(".")){
+                String[] parts = player.getValue().split("\\.");
+                String currValue = parts[0];
+                return Integer.parseInt(currValue.substring(1));
+            } else{
+                return Integer.parseInt(player.getValue().substring(1, player.getValue().length() - 1));
+            }
+        } else {
+            return Integer.parseInt(player.getWage().substring(1, player.getWage().length() - 1));
+        }
     }
 
     private QuestionAutomatic ValueOrWage() {
-        boolean value=true;
-        int[] wageorvalue = new int[sample.length];
-        for (int i=0; i< wageorvalue.length; i++){
-            if(value){
-                if(sample[i].getValue().contains(".")){
-                    String[] parts = sample[i].getValue().split("\\.");
-                    String currValue = parts[0];
-                    wageorvalue[i] = Integer.parseInt(currValue.substring(1));
-                } else{
-                    wageorvalue[i] = Integer.parseInt(sample[i].getValue().substring(1, sample[i].getValue().length() - 1));
-                }
-            } else {
-                wageorvalue[i] = Integer.parseInt(sample[i].getWage().substring(1, sample[i].getWage().length() - 1));
-            }
-            //TEST FORMATTING
-             System.out.println("Formatted wage/value: " + wageorvalue[i] + " Non-formatted wage: " + sample[i].getWage() + " Non-formatted value: " + sample[i].getValue());
+        boolean isValue = random.nextBoolean();
+        int[] wageOrValue = new int[sample.length];
+        for (int i=0; i< wageOrValue.length; i++){
+            wageOrValue[i] = formattingValueOrWage(sample[i], isValue);
+            //Test formatting the entire column of either wage or value
+            //System.out.println("Formatted wage/value: " + wageOrValue[i] + " Non-formatted wage: " + sample[i].getWage() + " Non-formatted value: " + sample[i].getValue());
         }
-        Arrays.sort(wageorvalue);
+        Arrays.sort(wageOrValue);
         int[] lows = new int[NBR_OF_ALT];
         int high;
         int lowestQuartile = sample.length/4;
         int highestQuartile = sample.length/4*3;
         for (int i=0; i< lows.length;i++){
-            lows[i] = wageorvalue[random.nextInt(lowestQuartile)];
+            lows[i] = wageOrValue[random.nextInt(lowestQuartile)];
         }
-        high = wageorvalue[random.nextInt(lowestQuartile)+highestQuartile];
+        high = wageOrValue[random.nextInt(lowestQuartile)+highestQuartile];
         //Test randomizing one high value (top quartile) and four low values (bottom quartile)
         //System.out.println(high + "-"+ lows[0]+"-"+ lows[1]+"-"+ lows[2]+ "-"+ lows[3]);
-
         Player[] alternatives = new Player[NBR_OF_ALT];
         Player correctAnswer = null;
         int count=0;
-        int currWage;
+        int currWageOrValue;
         for(Player p : sample){
-            currWage = Integer.parseInt(p.getWage().substring(1,p.getWage().length()-1));
+            currWageOrValue = formattingValueOrWage(p, isValue);
             for (int i=0; i<lows.length; i++){
-                if(currWage==lows[i] && count<NBR_OF_ALT){
+                if(currWageOrValue==lows[i] && count<NBR_OF_ALT){
                     alternatives[count] = p;
                     count++;
                 }
-                if(currWage==high){
+                if(currWageOrValue==high){
                     correctAnswer=p;
                 }
             }
         }
         alternatives[random.nextInt(NBR_OF_ALT)] = correctAnswer;
         corrAnswers.add(correctAnswer);
-        return new QuestionAutomatic(alternatives, corrAnswers, "Vilken spelare har tjänar mest med" +
-                "en månadslön på " + correctAnswer.getWage() + "?");
+        String question;
+        if(isValue){
+            question = "Vilken spelare har högst marknadsvärde med ett uppskattat värde på "
+                    + correctAnswer.getValue() + "?";
+        } else {
+            question="Vilken spelare har tjänar mest med" +
+                    "en månadslön på " + correctAnswer.getWage() + "?";
+        }
+        return new QuestionAutomatic(alternatives, corrAnswers, question);
     }
 
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)

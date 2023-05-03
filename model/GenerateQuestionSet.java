@@ -51,19 +51,19 @@ public class GenerateQuestionSet {
             return Overall();
         }
         if(localRandom==5){
-            return Nationality(); //Adam
+            return Nationality();
         }
         if(localRandom==6){
-            return Club(); //Adan
+            return Club();
         }
         if(localRandom==7){
-            return Position(); //ADam
+            return Position();
         }
         if(localRandom==8){
             return Value(); //Bytte ut denna mot Weight för weight känns inte helt vettigt att ha med på en utställning
         }
         if(localRandom==9){
-            return SkillMoves(); //ADam
+            return SkillMoves(); 
         }
         if(localRandom==10){
             return Wage();

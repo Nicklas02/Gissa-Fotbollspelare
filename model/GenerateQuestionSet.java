@@ -10,7 +10,6 @@ public class GenerateQuestionSet {
     private static final int NORMAL_SAMPLE = 80;
     private static final int HARD_SAMPLE = 180;
     private static final int NBR_OF_ALT = 4;
-    private static final int HIGH_RATED_PLAYER = 15;
     private final GameType gameType;
     private final Difficulty difficulty;
     ArrayList<Player> corrAnswers = new ArrayList<>();
@@ -164,16 +163,31 @@ public class GenerateQuestionSet {
         String localQuestion = "Vilken spelare kommer från " + corrAnswers.get(0).getNationality() +"?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
-
+    
     private QuestionAutomatic Overall() {
-        Player correctAnswer = sample[random.nextInt(HIGH_RATED_PLAYER)];
+        Player correctAnswer = upperQuartilePlayer();
+        Player[] alternatives = bottomQuartilePlayers();
         corrAnswers.add(correctAnswer);
-
-        Player[] alternatives = randomAlternativesLowestQuartile();
-        alternatives[random.nextInt(4)] = correctAnswer;
-
         return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
+
+    private Player[] bottomQuartilePlayers() {
+        int lowestQuartile = sample.length/4;
+        Player[] players = new Player[NBR_OF_ALT];
+        for (int i=0; i< players.length;i++){
+            players[i] = sample[random.nextInt(lowestQuartile)];
+        }
+        return players;
+    }
+
+    private Player upperQuartilePlayer() {
+        int lowestQuartile = sample.length/4;
+        int highestQuartile = sample.length/4*3;
+        return sample[random.nextInt(lowestQuartile) + highestQuartile];
+    }
+
+
+
 
     private int formattingValueOrWage(Player player, boolean isValueQuestion){
         if(isValueQuestion){

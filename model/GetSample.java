@@ -140,7 +140,7 @@ public class GetSample {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //testPrintSample(playerSample);
+        testPrintSample(playerSample);
         return playerSample;
     }
 

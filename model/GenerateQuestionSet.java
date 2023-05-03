@@ -60,13 +60,10 @@ public class GenerateQuestionSet {
             return Position();
         }
         if(localRandom==8){
-            return Value(); //Bytte ut denna mot Weight för weight känns inte helt vettigt att ha med på en utställning
+            return ValueOrWage(); //Bytte ut denna mot Weight för weight känns inte helt vettigt att ha med på en utställning
         }
         if(localRandom==9){
             return SkillMoves(); 
-        }
-        if(localRandom==10){
-            return Wage();
         }
         System.out.println("Error, no question was generated, random was: " + localRandom);
         return null;
@@ -174,7 +171,7 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
 
-    private QuestionAutomatic Wage() {
+    private QuestionAutomatic ValueOrWage() {
         int[] wage = new int[sample.length];
         for (int i=0; i< wage.length; i++){
             wage[i] = Integer.parseInt(sample[i].getWage().substring(1,sample[i].getWage().length()-1));
@@ -210,13 +207,7 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, "Vilken spelare har tjänar mest med" +
                 "en månadslön på " + correctAnswer.getWage() + "?");
     }
-
-    private QuestionAutomatic Value() {
-        return null;
-    }
-
-
-
+    
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {
         //svarsalternativ

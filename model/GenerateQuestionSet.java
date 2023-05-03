@@ -108,16 +108,27 @@ public class GenerateQuestionSet {
     private QuestionAutomatic Position() {
         Player[] alternatives = randomAlternatives();
         int alternative = random.nextInt(4);
-        Player correctAnswer = alternatives[alternative];
+        boolean sub = true;
 
+        while(sub) {
+            sub = false;
+            for (Player p : alternatives) {
+                if (p.getPosition().equals("SUB") || p.getPosition().equals("RES")) {
+                    alternatives = randomAlternatives();
+                    sub = true;
+                }
+            }
+        }
+
+        Player correctAnswer = alternatives[alternative];
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
-            if (p.getNationality().equals(correctAnswer.getNationality())) {
+            if (p.getPosition().equals(correctAnswer.getPosition())) {
                 corrAnswers.add(p);
             }
         }
 
-        String localQuestion = "Vilken spelare har positionen " + corrAnswers.get(0).getNationality() +"?";
+        String localQuestion = "Vilken spelare har positionen " + corrAnswers.get(0).getPosition() +"?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
@@ -128,7 +139,7 @@ public class GenerateQuestionSet {
 
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
-            if (p.getNationality().equals(correctAnswer.getNationality())) {
+            if (p.getClub().equals(correctAnswer.getClub())) {
                 corrAnswers.add(p);
             }
         }

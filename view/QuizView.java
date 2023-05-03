@@ -8,106 +8,120 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import model.Question;
-import model.Quiz;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-public class QuizView {
+public class QuizView extends JPanel{
 
     private ImageIcon imageIcon;
-    private JLabel background;
+    private JLabel background,  titleLabel;
+    private JTextArea playerNameJTextField;
+
     private Controller controller;
     private JFrame frame;
     private JLabel questionLabel;
     private JLabel questionNumber;
     JLabel rightOrWrong;
+    private String playerName;
+
 
     private JRadioButton[] optionButtons;
     private ButtonGroup optionGroup;
     private JButton nextButton;
     private JButton prevButton;
-    private Font font = new Font("Arial", Font.PLAIN, 16);
+    private Font font = new Font("Arial", Font.BOLD, 20);
+    private Font font2 = new Font("Arial", Font.PLAIN, 15);
+    private int width;
+    private int height;
+    private LocalDate currentDate;
+    private DateTimeFormatter formatter;
 
-    public QuizView(Controller controller) {
+    public QuizView(Controller controller, int width, int height) {
         this.controller = controller;
-        frame = new JFrame("Football Quiz");
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 600);//700*300
-        frame.setLayout(null);
-        imageIcon = new ImageIcon("files/soccer.jpg");
-        Image image = imageIcon.getImage();
+        this.width = width;
+        this.height = height;
+        this.setLayout(null);
+        imageIcon = new ImageIcon("images/background.jpg");
+        background = new JLabel(imageIcon);
+        background.setBounds(0, 0, width, height);
 
-        Image scaled = image.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(scaled);
-        background = new JLabel();
-        background.setBounds(0, 0, 800, 600);
-        frame.add(background);
+        playerNameJTextField = new JTextArea();
+        playerNameJTextField.setFont(font);
+        playerNameJTextField.setEditable(false);
+        playerNameJTextField.setLineWrap(true);
+        playerNameJTextField.setWrapStyleWord(true);
+        playerNameJTextField.setBackground(Color.BLACK);
+        playerNameJTextField.setForeground(Color.WHITE);
+        playerNameJTextField.setBounds(0, 0, 200, 50);
+        this.add(playerNameJTextField);
+
+        titleLabel = new JLabel("Gissa Fotbollsspelare");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setBounds(width / 2, 30, width / 2, 30);
+        this.add(titleLabel);
         questionNumber = new JLabel();
-        questionNumber.setBounds(490, 5, 90, 30);
+        questionNumber.setBounds(width - 120, 110, 100, 40);
         questionNumber.setFont(font);
         //colour for fonts
-        questionNumber.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        questionNumber.setForeground(Color.blue);
-        background.add(questionNumber);
+        questionNumber.setForeground(Color.WHITE);
+        this.add(questionNumber);
 
         rightOrWrong = new JLabel();
-        rightOrWrong.setBounds(50, 250, 300, 300);
+        rightOrWrong.setBounds(50, height - 150, 300, 100);
         rightOrWrong.setForeground(Color.black);
-        background.add(rightOrWrong);
+        rightOrWrong.setFont(font);
+        this.add(rightOrWrong);
 
         questionLabel = new JLabel();
-        questionLabel.setBounds(50, 60, 600, 30);
+        questionLabel.setBounds(50, 140, width, 50);
         questionLabel.setFont(font);
         //colour fonts
-        questionLabel.setBorder(BorderFactory.createLineBorder(Color.BLUE, 2));
-        questionLabel.setSize(450,20);
-        questionLabel.setForeground(Color.black);
-        background.add(questionLabel);
+        questionLabel.setForeground(Color.WHITE);
+        this.add(questionLabel);
 
         optionButtons = new JRadioButton[4];
         optionGroup = new ButtonGroup();
         optionButtons[0] = new JRadioButton();
-        optionButtons[0].setBounds(50, 100, 300, 30);
-        optionButtons[0].setFont(font);
+        optionButtons[0].setBounds(10, 200, 270, 30);
+        optionButtons[0].setFont(font2);
         optionGroup.add(optionButtons[0]);
-        background.add(optionButtons[0]);
-
+        this.add(optionButtons[0]);
 
         optionButtons[1] = new JRadioButton();
-        optionButtons[1].setBounds(400, 100, 300, 30);
-        optionButtons[1].setFont(font);
+        optionButtons[1].setBounds(310, 200, 270, 30);
+        optionButtons[1].setFont(font2);
         optionGroup.add(optionButtons[1]);
-        background.add(optionButtons[1]);
+        this.add(optionButtons[1]);
 
         optionButtons[2] = new JRadioButton();
-        optionButtons[2].setBounds(50, 150, 300, 30);
-        optionButtons[2].setFont(font);
+        optionButtons[2].setBounds(10, 300, 270, 30);
+        optionButtons[2].setFont(font2);
         optionGroup.add(optionButtons[2]);
-        background.add(optionButtons[2]);
+        this.add(optionButtons[2]);
 
         optionButtons[3] = new JRadioButton();
-        optionButtons[3].setBounds(400, 150, 300, 30);
-        optionButtons[3].setFont(font);
+        optionButtons[3].setBounds(310, 300, 270, 30);
+        optionButtons[3].setFont(font2);
         optionGroup.add(optionButtons[3]);
-        background.add(optionButtons[3]);
+        this.add(optionButtons[3]);
         nextButton = new JButton("Next");
-        nextButton.setBounds(350, 220, 100, 30);
-        nextButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-
-        nextButton.setFont(font);
+        nextButton.setBounds(350, 400, 100, 30);
+        nextButton.setFont(font2);
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.nextQuestion();
             }
         });
-        background.add(nextButton);
+        this.add(nextButton);
 
         prevButton = new JButton("Previous");
-        prevButton.setBounds(50, 220, 100, 30);
-        prevButton.setFont(font);
+        prevButton.setBounds(50, 400, 100, 30);
+        prevButton.setFont(font2);
         prevButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -115,9 +129,9 @@ public class QuizView {
             }
         });
         disablePrevButton();
-        background.add(prevButton);
+        this.add(prevButton);
+        this.add(background);
     }
-
     public String getUserAnswer() {
         JRadioButton userChoice = null;
         for (int i = 0; i < optionButtons.length; i++) {
@@ -132,8 +146,15 @@ public class QuizView {
         return "";
     }
 
-    public void showRightOrWrong(String s) {rightOrWrong.setText(s);}
-
+    public void showRightOrWrong(String s) {
+        if(s.equals("You answered correct!")){
+            rightOrWrong.setForeground(Color.WHITE);
+        }
+        else{
+            rightOrWrong.setForeground(Color.RED);
+        }
+        rightOrWrong.setText(s);
+    }
     public void display() {
         frame.setVisible(true);
     }
@@ -184,6 +205,17 @@ public class QuizView {
 
     public void showError(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        currentDate = LocalDate.now();
+        formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        playerNameJTextField.setText(playerName + "\n"+currentDate.format(formatter));
+        this.playerName = playerName;
     }
 }
 

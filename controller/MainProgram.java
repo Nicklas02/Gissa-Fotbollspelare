@@ -16,7 +16,7 @@ public class MainProgram {
      */
     public static void main(String[] args) {
         // create object of controller
-        new Frame();
+        new Controller("files/questions.txt","files/HighScoreList.txt");
 
     }
 

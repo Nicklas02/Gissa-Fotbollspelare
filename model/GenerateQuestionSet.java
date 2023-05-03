@@ -319,9 +319,15 @@ public class GenerateQuestionSet {
 
     private QuestionAutomatic kitNum() {
         Player[] alternatives = randomAlternatives();
-        int correctAnswer = random.nextInt(4);
-        corrAnswers.add(alternatives[correctAnswer]);
-        String localQuestion = "Vilken spelare har tröjnummer " + alternatives[correctAnswer].getKitNumber() + "?";
+        int alternative = random.nextInt(4);
+        Player correctAnswer = alternatives[alternative];
+        corrAnswers.add(correctAnswer);
+        for (Player p : alternatives) {
+            if (p.getKitNumber() == correctAnswer.getKitNumber()) {
+                corrAnswers.add(p);
+            }
+        }
+        String localQuestion = "Vilken spelare har tröjnummer " + corrAnswers.get(0).getKitNumber() + "?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 

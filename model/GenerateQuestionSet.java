@@ -185,10 +185,10 @@ public class GenerateQuestionSet {
                 } else{
                     wageorvalue[i] = Integer.parseInt(sample[i].getValue().substring(1, sample[i].getValue().length() - 1));
                 }
-                System.out.println("Formatted value: " + wageorvalue[i] + " Non-formatted value: " + sample[i].getValue());
             } else {
                 wageorvalue[i] = Integer.parseInt(sample[i].getWage().substring(1, sample[i].getWage().length() - 1));
             }
+            System.out.println("Formatted wage/value: " + wageorvalue[i] + " Non-formatted wage: " + sample[i].getWage() + " Non-formatted value: " + sample[i].getValue());
         }
         Arrays.sort(wageorvalue);
         int[] lows = new int[NBR_OF_ALT];

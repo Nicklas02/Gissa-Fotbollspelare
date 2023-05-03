@@ -31,6 +31,7 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
+
     }
 
     public void addStartPanel(String[] highScoreList){

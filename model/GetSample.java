@@ -14,14 +14,8 @@ public class GetSample {
     private int sampleSize;
     private GameType gameType;
 
-    public GetSample(GameType gameType, Difficulty difficulty) {
-        if(difficulty==Difficulty.Normal){
-
-            sampleSize = 60; //fungerar ej när för låg Fortsätta HÄR nästa vecka *** //fungerar dock med 30
-        }
-        if(difficulty==Difficulty.Hard){
-            sampleSize=150;
-        }
+    public GetSample(GameType gameType, int sampleSize) {
+        this.sampleSize=sampleSize;
         this.gameType=gameType;
         conn = getDatabaseConnection();
     }

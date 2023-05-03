@@ -7,12 +7,14 @@ public class GenerateQuestionSet {
     private Player[] sample;
     private final Random random = new Random(); //Används för slumpmässiga frågor liksom för slumpmässiga svarsalternativ
     private static final int NUMBER_OF_QUESTIONS = 10; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
+    private static final int NORMAL_SAMPLE = 80;
+    private static final int HARD_SAMPLE = 180;
     private static final int NBR_OF_ALT = 4;
     private static final int HIGH_RATED_PLAYER = 15;
-    private static final int DIFFERENCE_IN_RATING = 5; //Difference between a famous and non famous player
     private final GameType gameType;
     private final Difficulty difficulty;
     ArrayList<Player> corrAnswers = new ArrayList<>();
+
 
     public GenerateQuestionSet(GameType gameType, Difficulty difficulty) {
         this.gameType = gameType;
@@ -20,7 +22,12 @@ public class GenerateQuestionSet {
     }
 
     public QuestionAutomatic[] buildNewQuestionSet() {
-        GetSample getSample = new GetSample(gameType, difficulty);
+        GetSample getSample;
+        if(difficulty==Difficulty.Normal){
+            getSample = new GetSample(gameType, NORMAL_SAMPLE);
+        } else {
+            getSample = new GetSample(gameType, HARD_SAMPLE);
+        }
         sample = getSample.getSample();
         QuestionAutomatic[] questionSet = new QuestionAutomatic[NUMBER_OF_QUESTIONS];
         for (int i = 0; i < questionSet.length; i++) {
@@ -31,9 +38,10 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic randomQuestion() {
-        int localRandom = random.nextInt(11);
+        int localRandom = random.nextInt(10);
 
-        localRandom = 8; //test
+        //Test specific value
+        //localRandom = 8;
 
         if (localRandom == 0) {
             return ageQuestion();
@@ -69,8 +77,6 @@ public class GenerateQuestionSet {
         return null;
     }
 
-
-
     private QuestionAutomatic SkillMoves() {
         Player[] alternatives = null;
         boolean skiller = false;
@@ -99,8 +105,6 @@ public class GenerateQuestionSet {
         String localQuestion = "Vilken spelare är mest teknisk?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
-
-
 
     private QuestionAutomatic Position() {
         Player[] alternatives = randomAlternatives();

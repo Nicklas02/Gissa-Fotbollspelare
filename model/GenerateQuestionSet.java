@@ -207,7 +207,7 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, "Vilken spelare har tjänar mest med" +
                 "en månadslön på " + correctAnswer.getWage() + "?");
     }
-    
+
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {
         //svarsalternativ
@@ -230,7 +230,6 @@ public class GenerateQuestionSet {
         }
         return alternatives;
     }
-
 
     private Player randomElement(){
         return sample[randomElementNbr()];
@@ -331,7 +330,6 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
 
     }
-
 
     private QuestionAutomatic kitNum() {
         Player[] alternatives = randomAlternatives();

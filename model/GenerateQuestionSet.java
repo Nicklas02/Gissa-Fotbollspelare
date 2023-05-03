@@ -171,7 +171,7 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
 
-    private void formattingValue(){
+    private void formattingValueOrWage(){
 
     }
 

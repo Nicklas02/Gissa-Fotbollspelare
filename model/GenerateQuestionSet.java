@@ -251,10 +251,22 @@ public class GenerateQuestionSet {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
         Player correctAnswer = alternatives[firstAlternative];
-        for (Player p : alternatives) {
-            if (p.getAge() > correctAnswer.getAge()) {
-                correctAnswer = p;
+        String localQuestion;
+        boolean oldest = random.nextBoolean();
+        if(oldest) {
+            for (Player p : alternatives) {
+                if (p.getAge() > correctAnswer.getAge()) {
+                    correctAnswer = p;
+                }
             }
+            localQuestion = "Vilken spelare är äldst?";
+        } else {
+            for (Player p : alternatives) {
+                if (p.getAge() < correctAnswer.getAge()) {
+                    correctAnswer = p;
+                }
+            }
+            localQuestion = "Vilken spelare är yngst?";
         }
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
@@ -263,7 +275,6 @@ public class GenerateQuestionSet {
             }
         }
 
-        String localQuestion = "Vilken spelare är äldst?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
@@ -271,10 +282,22 @@ public class GenerateQuestionSet {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
         Player correctAnswer = alternatives[firstAlternative];
-        for (Player p : alternatives) {
-            if (p.getHeight() > correctAnswer.getHeight()) {
-                correctAnswer = p;
+        String localQuestion;
+        boolean tallest = random.nextBoolean();
+        if(tallest) {
+            for (Player p : alternatives) {
+                if (p.getHeight() > correctAnswer.getHeight()) {
+                    correctAnswer = p;
+                }
             }
+            localQuestion = "Vilken spelare är längst?";
+        } else {
+            for (Player p : alternatives) {
+                if (p.getHeight() < correctAnswer.getHeight()) {
+                    correctAnswer = p;
+                }
+            }
+            localQuestion = "Vilken spelare är kortast?";
         }
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {
@@ -282,7 +305,6 @@ public class GenerateQuestionSet {
                 corrAnswers.add(p);
             }
         }
-        String localQuestion = "Vilken spelare är längst?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 

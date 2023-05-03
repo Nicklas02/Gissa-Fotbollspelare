@@ -10,9 +10,9 @@ import java.util.Properties;
  * Slutligen skickas listan med urvalet av spelare vidare till en annan klass.
  */
 public class GetSample {
-    private Connection conn = null;
-    private int sampleSize;
-    private GameType gameType;
+    private final Connection conn;
+    private final int sampleSize;
+    private final GameType gameType;
 
     public GetSample(GameType gameType, int sampleSize) {
         this.sampleSize=sampleSize;

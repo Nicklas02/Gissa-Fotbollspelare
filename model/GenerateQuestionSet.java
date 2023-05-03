@@ -224,11 +224,11 @@ public class GenerateQuestionSet {
         }
         alternatives[random.nextInt(NBR_OF_ALT)] = correctAnswer;
         corrAnswers.add(correctAnswer);
-        String question;
-        if(isValueQuestion){
+        String question="Default Question";
+        if(isValueQuestion && correctAnswer!=null){
             question = "Vilken spelare har högst marknadsvärde med ett uppskattat värde på "
                     + correctAnswer.getValue() + "?";
-        } else {
+        } if(!isValueQuestion && correctAnswer!=null) {
             question="Vilken spelare har tjänar mest med" +
                     "en månadslön på " + correctAnswer.getWage() + "?";
         }

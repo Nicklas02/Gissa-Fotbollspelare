@@ -172,20 +172,35 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic ValueOrWage() {
-        int[] wage = new int[sample.length];
-        for (int i=0; i< wage.length; i++){
-            wage[i] = Integer.parseInt(sample[i].getWage().substring(1,sample[i].getWage().length()-1));
+        boolean value=true;
+
+        int[] wageorvalue = new int[sample.length];
+        for (int i=0; i< wageorvalue.length; i++){
+            if(value){
+                if(sample[i].getValue().contains(".")){
+                    System.out.println("Theres a dot");
+                    String[] parts = sample[i].getValue().split("\\.");
+                    String currValue = parts[0];
+                    wageorvalue[i] = Integer.parseInt(currValue.substring(1));
+                } else{
+                    wageorvalue[i] = Integer.parseInt(sample[i].getValue().substring(1, sample[i].getValue().length() - 1));
+                }
+                System.out.println("Formatted value: " + wageorvalue[i] + " Non-formatted value: " + sample[i].getValue());
+            } else {
+                wageorvalue[i] = Integer.parseInt(sample[i].getWage().substring(1, sample[i].getWage().length() - 1));
+            }
         }
-        Arrays.sort(wage);
+        Arrays.sort(wageorvalue);
         int[] lows = new int[NBR_OF_ALT];
         int high;
         int lowestQuartile = sample.length/4;
         int highestQuartile = sample.length/4*3;
         for (int i=0; i< lows.length;i++){
-            lows[i] = wage[random.nextInt(lowestQuartile)];
+            lows[i] = wageorvalue[random.nextInt(lowestQuartile)];
         }
-        high = wage[random.nextInt(lowestQuartile)+highestQuartile];
-        //TEST System.out.println(high + ".-."+ lows[0]+"-"+ lows[1]+"-"+ lows[2]+ "-"+ lows[3]);
+        high = wageorvalue[random.nextInt(lowestQuartile)+highestQuartile];
+        System.out.println(high + ".-."+ lows[0]+"-"+ lows[1]+"-"+ lows[2]+ "-"+ lows[3]);
+
         Player[] alternatives = new Player[NBR_OF_ALT];
         Player correctAnswer = null;
         int count=0;

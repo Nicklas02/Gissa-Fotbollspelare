@@ -33,7 +33,7 @@ public class GenerateQuestionSet {
     private QuestionAutomatic randomQuestion() {
         int localRandom = random.nextInt(11);
 
-        localRandom = 10; //test
+        localRandom = 8; //test
 
         if (localRandom == 0) {
             return ageQuestion();

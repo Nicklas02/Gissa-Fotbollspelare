@@ -171,14 +171,16 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
     }
 
+    private void formattingValue(){
+
+    }
+
     private QuestionAutomatic ValueOrWage() {
         boolean value=true;
-
         int[] wageorvalue = new int[sample.length];
         for (int i=0; i< wageorvalue.length; i++){
             if(value){
                 if(sample[i].getValue().contains(".")){
-                    System.out.println("Theres a dot");
                     String[] parts = sample[i].getValue().split("\\.");
                     String currValue = parts[0];
                     wageorvalue[i] = Integer.parseInt(currValue.substring(1));
@@ -188,7 +190,8 @@ public class GenerateQuestionSet {
             } else {
                 wageorvalue[i] = Integer.parseInt(sample[i].getWage().substring(1, sample[i].getWage().length() - 1));
             }
-            System.out.println("Formatted wage/value: " + wageorvalue[i] + " Non-formatted wage: " + sample[i].getWage() + " Non-formatted value: " + sample[i].getValue());
+            //TEST FORMATTING
+             System.out.println("Formatted wage/value: " + wageorvalue[i] + " Non-formatted wage: " + sample[i].getWage() + " Non-formatted value: " + sample[i].getValue());
         }
         Arrays.sort(wageorvalue);
         int[] lows = new int[NBR_OF_ALT];
@@ -199,7 +202,8 @@ public class GenerateQuestionSet {
             lows[i] = wageorvalue[random.nextInt(lowestQuartile)];
         }
         high = wageorvalue[random.nextInt(lowestQuartile)+highestQuartile];
-        System.out.println(high + ".-."+ lows[0]+"-"+ lows[1]+"-"+ lows[2]+ "-"+ lows[3]);
+        //Test randomizing one high value (top quartile) and four low values (bottom quartile)
+        //System.out.println(high + "-"+ lows[0]+"-"+ lows[1]+"-"+ lows[2]+ "-"+ lows[3]);
 
         Player[] alternatives = new Player[NBR_OF_ALT];
         Player correctAnswer = null;

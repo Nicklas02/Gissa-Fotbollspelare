@@ -2,39 +2,61 @@ package controller;
 
 import model.HighScore;
 import view.QuizView;
+import model.Question;
 import model.Quiz;
-
+import java.awt.Font;
 import javax.swing.*;
+import model.HighScore;
+import view.Frame;
+
+
 
 /**
  * controller class that control our project.
  *
  * @author Group 29
  */
-public class Controller {
+public class Controller {/*
 
     private Quiz quiz;
     private QuizView quizView;
+    private Frame frame;
     private int score;
     private int lastScore;
-    private HighScore highScoreList;
-    private static final int TOP_TEN = 10;
-    //the HUNDRED_PERCENT constant is used in the nextQuestion() method while calculating the percentage.
-    private static final int HUNDRED_PERCENT = 100;
+    private HighScore list;
+    private String[] highScoreList;
+    private Font font = new Font("Arial", Font.BOLD, 24);
 
-    /**
-     * Parameter constrictor that used to create object of Controller.
-     *
-     * @param fileName file name that contains questions.
-     */
-    public Controller(String fileName) {
-        quiz = new Quiz(fileName);
-        this.quizView = new QuizView(this);
-        highScoreList = new HighScore();
-        this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
+
+
+
+
+    public Controller(String questionsFileName,String topScoresFileName) {
+        quiz = new Quiz(questionsFileName);
+        list = new HighScore(topScoresFileName);
+        // call getList here to get list of 10 top scores
+        highScoreList = getList();
+        // create object of Fram to display start menu
+        //this.frame = new Frame(this,font,600,600);
+        //frame.addStartPanel(highScoreList);
+        //this.quizView = new QuizView(this,600,600);
+//        this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
         this.score = 0;
-        this.quizView.display();
+//        this.quizView.display();
     }
+
+
+    public void displayQuestions(){
+        if(frame.getPlayerName().isBlank()){
+            JOptionPane.showMessageDialog(frame, "Error: you must enter your name", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        this.quizView.setPlayerName(frame.getPlayerName());
+        frame.addQuestionsPanel(quizView);
+        this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
+
+    }
+
 
     public void prevQuestion() {
         if (this.quiz.hasPrevQuestion()) {
@@ -60,7 +82,7 @@ public class Controller {
             this.quizView.setNextButtonTextToFinish();
         }
         if (this.quiz.getCurrentQuestion().isCorrect(this.quizView.getUserAnswer())) {
-            lastScore = 1;
+            lastScore = 1;////presentag
             this.quizView.showRightOrWrong("You answered correct!");
         } else {
             lastScore = 0;
@@ -68,7 +90,9 @@ public class Controller {
         }
         this.score += lastScore;
         if (!(this.quiz.hasNextQuestion())) {
-            this.quizView.showGameOverMessage("game over", this.score * HUNDRED_PERCENT / this.quiz.getTotalNumberQuestions());
+            int percent = 100;
+//presentag
+            this.quizView.showGameOverMessage("game over", this.score * percent / this.quiz.getTotalNumberQuestions());
             onLeaderboard();
             return;
         }
@@ -79,42 +103,39 @@ public class Controller {
 
     }
 
-    /**
-     * Checks if the score is better than the last person on the leaderboard
-     * and if it is it asks for your name and puts it in the leaderboard and the sorts it.
-     */
+   /*
     public void onLeaderboard() {
-        getHighScoreList();
-        int[] highScores = highScoreList.getScore();
-        String[] highScoreNames = highScoreList.getName();
+        getList();
+        int[] listScore = list.getScore();
+        String[] listName = list.getName();
 
-        if (score > highScores[TOP_TEN - 1]) {
-            String name = JOptionPane.showInputDialog(null, "You are in the Top 10! \n" + "Enter name");
-            highScores[TOP_TEN - 1] = score;
-            highScoreNames[TOP_TEN - 1] = name;
+        if (score > listScore[9]) {
+            String name = JOptionPane.showInputDialog(null, "You are in the Top10! \n" + "Enter name");
+            listScore[9] = score;
+            listName[9] = name;
         }
-        for (int i = 0; i < highScores.length; i++) {
-            for (int j = i + 1; j < highScores.length; j++) {
-                int tempScore;
-                String tempName;
-                if (highScores[i] < highScores[j]) {
-                    tempScore = highScores[i];
-                    highScores[i] = highScores[j];
-                    highScores[j] = tempScore;
-                    tempName = highScoreNames[i];
-                    highScoreNames[i] = highScoreNames[j];
-                    highScoreNames[j] = tempName;
+        for (int i = 0; i < listScore.length; i++) {
+            for (int j = i + 1; j < listScore.length; j++) {
+                int tmp;
+                String temp;
+                if (listScore[i] < listScore[j]) {
+                    tmp = listScore[i];
+                    listScore[i] = listScore[j];
+                    listScore[j] = tmp;
+                    temp = listName[i];
+                    listName[i] = listName[j];
+                    listName[j] = temp;
                 }
             }
         }
-        highScoreList.writeToList(highScoreNames, highScores);
+        list.writeToList(listName, listScore);
     }
+    *//*
 
 
-    /**
-     * @return the highscorelist to the mainframe.
-     */
-    public String[] getHighScoreList() {
-        return highScoreList.readList();
+    public String[] getList() {
+        return list.readList();
     }
+    */
 }
+

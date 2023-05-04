@@ -1,8 +1,16 @@
 package controller;
 
+import model.GenerateQuestionSet;
+import model.GetSample;
+import model.Player;
+import model.QuestionAutomatic;
+
+import java.util.Scanner;
+
 /**
  * Main class in our project.
  * @author Group 29
+ *
  */
 public class MainProgram {
 
@@ -12,6 +20,11 @@ public class MainProgram {
      */
     public static void main(String[] args) {
         // create object of controller
-        Controller controller = new Controller("files/questions.txt");
+        //Controller controller = new Controller("files/questions.txt");
+
+        //ControllerAutomatic controllerAutomatic = new ControllerAutomatic();
+        Controller2 controller2 = new Controller2();
     }
+
+
 }

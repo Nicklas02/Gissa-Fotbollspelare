@@ -14,6 +14,11 @@ public class HighScore {
     private int[] score = new int[10];
     private String[] highScoreList = new String[10];
     private int place = 1;
+    private String filePath;
+
+    public HighScore(String filePath){
+        this.filePath = filePath;
+    }
 
     /**
      * Inputs a new person to the highScoreList.
@@ -22,7 +27,7 @@ public class HighScore {
      */
     public void writeToList(String[] name, int[] moves) {
         try {
-            FileWriter myWriter = new FileWriter("files/HighScoreList.txt");
+            FileWriter myWriter = new FileWriter(this.filePath);
             for(int i = 0; i < name.length; i++) {
                 myWriter.write(name[i] + "\n" + moves[i] + "\n");
             }
@@ -40,7 +45,7 @@ public class HighScore {
     public String[] readList() {
         int i = 0;
         try {
-            File myFile = new File("files/HighScoreList.txt");
+            File myFile = new File(this.filePath);
             Scanner myReader = new Scanner(myFile);
             while (myReader.hasNextLine()) {
                 name[i] = myReader.nextLine();

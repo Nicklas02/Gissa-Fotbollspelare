@@ -7,117 +7,174 @@ import controller.Controller;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+import controller.Controller2;
+import model.Player;
 import model.Question;
-import model.Quiz;
+import model.QuestionAutomatic;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-public class QuizView {
+public class QuizView extends JPanel{
+
+    private int currentQuestionNum = 1;
+    private final int totalQuestionNum = 10;
+    private QuestionAutomatic[] question;
 
     private ImageIcon imageIcon;
-    private JLabel background;
-    private Controller controller;
+    private JLabel background,  titleLabel;
+    private JTextArea playerNameJTextField;
+
+    private Controller2 controller;
     private JFrame frame;
     private JLabel questionLabel;
     private JLabel questionNumber;
     JLabel rightOrWrong;
+    private String playerName;
+
 
     private JRadioButton[] optionButtons;
     private ButtonGroup optionGroup;
     private JButton nextButton;
     private JButton prevButton;
-    private Font font = new Font("Arial", Font.PLAIN, 16);
+    private Font font = new Font("Arial", Font.BOLD, 20);
+    private Font font2 = new Font("Arial", Font.PLAIN, 15);
+    private int width = 800;
+    private int height = 800;
+    private LocalDate currentDate;
+    private DateTimeFormatter formatter;
+    private String[] questions;
+    private String[][] alt;
+    private String[] answers;
+    private int score = 0;
 
-    public QuizView(Controller controller) {
+
+    public void FillQuestions(String[] questions, String[][] alt, String[] answers) {
+        this.questions = questions;
+        this.alt = alt;
+        this.answers = answers;
+    }
+
+    public QuizView(Controller2 controller) {
         this.controller = controller;
-        frame = new JFrame("Football Quiz");
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 600);//700*300
-        frame.setLayout(null);
-        imageIcon = new ImageIcon("files/soccer.jpg");
-        Image image = imageIcon.getImage();
+        //question = controller.getQuestionsList();
 
-        Image scaled = image.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
+        this.setLayout(null);
+        imageIcon = new ImageIcon("images/background.jpg");
+        Image image = imageIcon.getImage();
+        Image scaled = image.getScaledInstance(800, 800,Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaled);
-        background = new JLabel();
-        background.setBounds(0, 0, 800, 600);
-        frame.add(background);
+
+        background = new JLabel(imageIcon);
+        background.setBounds(0, 0, width, height);
+
+
+        playerNameJTextField = new JTextArea();
+        playerNameJTextField.setFont(font);
+        playerNameJTextField.setEditable(false);
+        playerNameJTextField.setLineWrap(true);
+        playerNameJTextField.setWrapStyleWord(true);
+        playerNameJTextField.setBackground(Color.BLACK);
+        playerNameJTextField.setForeground(Color.WHITE);
+        playerNameJTextField.setBounds(0, 0, 200, 50);
+        this.add(playerNameJTextField);
+
+        titleLabel = new JLabel("Gissa Fotbollsspelare");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
+        titleLabel.setForeground(Color.WHITE);
+        titleLabel.setBounds(150, 60, 500, 40);
+        this.add(titleLabel);
         questionNumber = new JLabel();
-        questionNumber.setBounds(500, 50, 100, 40);
+        questionNumber.setBounds(width - 120, 110, 100, 40);
         questionNumber.setFont(font);
         //colour for fonts
-        questionNumber.setForeground(Color.blue);
-        background.add(questionNumber);
+        questionNumber.setForeground(Color.WHITE);
+        this.add(questionNumber);
 
         rightOrWrong = new JLabel();
-        rightOrWrong.setBounds(50, 250, 300, 300);
+        rightOrWrong.setBounds(50, height - 150, 300, 100);
         rightOrWrong.setForeground(Color.black);
-        background.add(rightOrWrong);
+        rightOrWrong.setFont(font);
+        this.add(rightOrWrong);
 
         questionLabel = new JLabel();
-        questionLabel.setBounds(50, 50, 600, 30);
+        questionLabel.setBounds(50, 140, width, 50);
         questionLabel.setFont(font);
         //colour fonts
-        questionLabel.setForeground(Color.black);
-        background.add(questionLabel);
+        questionLabel.setForeground(Color.WHITE);
+        this.add(questionLabel);
 
         optionButtons = new JRadioButton[4];
         optionGroup = new ButtonGroup();
         optionButtons[0] = new JRadioButton();
-        optionButtons[0].setBounds(50, 100, 300, 30);
-        optionButtons[0].setFont(font);
+        optionButtons[0].setBounds(10, 200, 270, 30);
+        optionButtons[0].setFont(font2);
+        optionButtons[0].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[0]);
-        background.add(optionButtons[0]);
+        this.add(optionButtons[0]);
 
         optionButtons[1] = new JRadioButton();
-        optionButtons[1].setBounds(400, 100, 300, 30);
-        optionButtons[1].setFont(font);
+        optionButtons[1].setBounds(310, 200, 270, 30);
+        optionButtons[1].setFont(font2);
+        optionButtons[1].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[1]);
-        background.add(optionButtons[1]);
+        this.add(optionButtons[1]);
 
         optionButtons[2] = new JRadioButton();
-        optionButtons[2].setBounds(50, 150, 300, 30);
-        optionButtons[2].setFont(font);
+        optionButtons[2].setBounds(10, 300, 270, 30);
+        optionButtons[2].setFont(font2);
+        optionButtons[2].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[2]);
-        background.add(optionButtons[2]);
+        this.add(optionButtons[2]);
 
         optionButtons[3] = new JRadioButton();
-        optionButtons[3].setBounds(400, 150, 300, 30);
-        optionButtons[3].setFont(font);
+        optionButtons[3].setBounds(310, 300, 270, 30);
+        optionButtons[3].setFont(font2);
+        optionButtons[3].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[3]);
-        background.add(optionButtons[3]);
+        this.add(optionButtons[3]);
         nextButton = new JButton("Next");
-        nextButton.setBounds(350, 220, 100, 30);
-        nextButton.setFont(font);
+        nextButton.setBounds(350, 400, 100, 30);
+        nextButton.setFont(font2);
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.nextQuestion();
+                if(getUserAnswer().equals("")){
+                    showError("Must select one option first!");
+                    return;
+                }
+                showRightOrWrong();
+                gameOver();
+                currentQuestionNum++;
+                updateQuestion();
+                clearSelection();
             }
         });
-        background.add(nextButton);
+        this.add(nextButton);
 
+        /*
         prevButton = new JButton("Previous");
-        prevButton.setBounds(50, 220, 100, 30);
-        prevButton.setFont(font);
+        prevButton.setBounds(50, 400, 100, 30);
+        prevButton.setFont(font2);
         prevButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.prevQuestion();
+                currentQuestionNum--;
+                updateQuestion();
             }
         });
         disablePrevButton();
-        background.add(prevButton);
-    }
+        this.add(prevButton);*/
+        this.add(background);
 
+    }
     public String getUserAnswer() {
         JRadioButton userChoice = null;
         for (int i = 0; i < optionButtons.length; i++) {
             if (optionButtons[i].isSelected()) {
                 userChoice = optionButtons[i];
-                break;
             }
         }
         if (userChoice != null) {
@@ -126,18 +183,37 @@ public class QuizView {
         return "";
     }
 
-    public void showRightOrWrong(String s) {rightOrWrong.setText(s);}
-
+    public void showRightOrWrong() {
+        if(answers[currentQuestionNum-1].contains(getUserAnswer())){
+            String s ="You answered correct!";
+            rightOrWrong.setText(s);
+            rightOrWrong.setForeground(Color.GREEN);
+            score++;
+        }
+        else{
+            rightOrWrong.setText("Wrong");
+            rightOrWrong.setForeground(Color.RED);
+        }
+    }
     public void display() {
         frame.setVisible(true);
     }
 
-    public void updateQuestion(Question question, int currentQuestionNum, int totalQuestionNum) {
+    public void updateQuestion() {
         questionNumber.setText("Quiz: " + currentQuestionNum + "/" + totalQuestionNum);
-        questionLabel.setText(question.getQuestion());
-        String[] options = question.getOptions();
+        questionLabel.setText(questions[currentQuestionNum-1]);
+        String[] options = alt[currentQuestionNum-1];
         for (int i = 0; i < 4; i++) {
-            optionButtons[i].setText(options[i]);
+            String[] parts = options[i].split("null");
+            optionButtons[i].setText(parts[1]);
+        }
+    }
+
+    public void gameOver(){
+        if (currentQuestionNum == totalQuestionNum){
+            showGameOverMessage();
+            controller.sendScoreToDatabase(playerName, score);
+            System.exit(0);
         }
     }
 
@@ -169,15 +245,32 @@ public class QuizView {
         this.nextButton.setText("Next");
     }
 
-    //presentag
-    public void showGameOverMessage(String message, int scorePresentage) {
+    public void showGameOverMessage() {
         disablePrevButton();
         disableNextButton();
-        JOptionPane.showMessageDialog(frame, "Game Over! Your score is: " + scorePresentage + "%", "Football Quiz", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, "Game Over! Your score is: " + score + "/" + totalQuestionNum , "Football Quiz", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void showError(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        currentDate = LocalDate.now();
+        formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        playerNameJTextField.setText(playerName + "\n"+currentDate.format(formatter));
+        this.playerName = playerName;
+    }
+
+
+    public void displayQuestions(Frame frame) {
+        setPlayerName(frame.getPlayerName());
+        frame.addQuestionsPanel(this);
+        updateQuestion();
     }
 }
 

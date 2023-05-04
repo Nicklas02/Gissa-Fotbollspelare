@@ -2,14 +2,10 @@ package view;
 
 //package com.example.footballquiz;
 
-import controller.Controller;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import controller.Controller2;
-import model.Player;
-import model.Question;
 import model.QuestionAutomatic;
 
 import javax.swing.*;

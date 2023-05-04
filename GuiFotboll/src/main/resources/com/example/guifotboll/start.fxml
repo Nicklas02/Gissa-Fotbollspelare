@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="525.0" prefWidth="600.0" style="-fx-background-color: blue; -fx-background-radius: 32px; -fx-border-radius: 32px;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.guifotboll.StartController">
+    <children>
+        <Label layoutX="109.0" layoutY="41.0" text="Welcome to the Football Quiz!" textFill="WHITE">
+            <font>
+                <Font name="Avenir Next Bold" size="29.0" />
+            </font>
+        </Label>
+        <Button fx:id="playquizbtn" layoutX="300.0" layoutY="263.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="186.0" style="-fx-background-color: white;" text="Start" textFill="#3f3fd0">
+            <font>
+                <Font name="Avenir Next Bold" size="22.0" />
+            </font>
+        </Button>
+        <ListView layoutY="94.0" prefHeight="276.0" prefWidth="218.0" style="-fx-background-color: darkblue; -fx-background-radius: 32px;" />
+        <Label layoutX="77.0" layoutY="94.0" text="Highscore" textFill="WHITE">
+            <font>
+                <Font name="Avenir Next Bold" size="13.0" />
+            </font>
+        </Label>
+        <Accordion />
+        <ChoiceBox layoutX="143.0" layoutY="429.0" prefWidth="150.0" />
+        <ChoiceBox layoutX="336.0" layoutY="429.0" prefWidth="150.0" />
+    </children>
+</AnchorPane>

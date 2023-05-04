@@ -12,6 +12,8 @@ import model.Quiz;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import javax.swing.Timer;
+
 
 public class QuizView {
 
@@ -28,13 +30,18 @@ public class QuizView {
     private JButton nextButton;
     private JButton prevButton;
     private Font font = new Font("Arial", Font.PLAIN, 16);
+    private int timerValue = 10;
+    private Timer countdownTimer;
+    //private Color rightColor = new Color(34, 130, 43); // green
+    //private Color wrongColor = new Color(2204, 20, 60); // red
+
 
     public QuizView(Controller controller) {
         this.controller = controller;
         frame = new JFrame("Football Quiz");
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 600);//700*300
+        frame.setSize(800, 600);//700*300
         frame.setLayout(null);
         imageIcon = new ImageIcon("files/soccer.jpg");
         Image image = imageIcon.getImage();
@@ -55,6 +62,7 @@ public class QuizView {
         rightOrWrong.setBounds(50, 250, 300, 300);
         rightOrWrong.setForeground(Color.black);
         background.add(rightOrWrong);
+
 
         questionLabel = new JLabel();
         questionLabel.setBounds(50, 50, 600, 30);
@@ -179,5 +187,7 @@ public class QuizView {
     public void showError(String message) {
         JOptionPane.showMessageDialog(frame, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
+
+
 }
 

@@ -13,6 +13,7 @@ public class Controller2 {
     private Frame frame;
     private GameType gameType = GameType.PremierLeague;
     private Difficulty difficulty = Difficulty.Normal;
+    private QuizView quizView;
 
     public Controller2() {
         this.highScoreList = new HighScoreFromDatabase();
@@ -23,9 +24,10 @@ public class Controller2 {
     //skicka till GUI
     private void startGame() {
         String[] highscorelist = highScoreList.readList();
-        frame = new Frame(this);
-        frame.addStartPanel(highscorelist);
         fetchQuestions();
+
+        frame = new Frame(this, quizView);
+        frame.addStartPanel(highscorelist);
         //frame.metodföratttaEMotfrågor(Formatterad lista strings[]  och strings[] hoghscore)
 
     }
@@ -50,7 +52,7 @@ public class Controller2 {
                 alt[i][j] += temp2[j].getName();
             }
         }
-        QuizView quizView = new QuizView(this);
+        quizView = new QuizView(this);
         quizView.FillQuestions(questions, alt, answers);
 
         //senare hämta manuella

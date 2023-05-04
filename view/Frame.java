@@ -22,9 +22,9 @@ public class Frame extends JFrame {
     private JTextArea scoresJTextArea;
     private QuizView quizView;
 
-    public Frame(Controller2 controller) {
+    public Frame(Controller2 controller, QuizView quizView) {
         this.controller = controller;
-
+        this.quizView = quizView;
         this.setTitle("Gissa Fotbollsspelare");
         this.setSize(width, height);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +72,7 @@ public class Frame extends JFrame {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                quizView = new QuizView(controller);
+                quizView.displayQuestions(Frame.this);
             }
         });
 

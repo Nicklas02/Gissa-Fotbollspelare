@@ -45,10 +45,16 @@ public class QuizView extends JPanel{
     private int height = 600;
     private LocalDate currentDate;
     private DateTimeFormatter formatter;
+    private String[] questions;
+    private String[][] alt;
+    private String[] answers;
 
 
     public void FillQuestions(String[] questions, String[][] alt, String[] answers) {
-        for (int i=0; i< 10;i++){
+        this.questions = questions;
+        this.alt = alt;
+        this.answers = answers;
+        /*for (int i=0; i< 10;i++){
             System.out.println(questions[i]);
             for (int j=0; j< 4;j++) {
                 String[] parts = alt[i][j].split("null");
@@ -56,6 +62,8 @@ public class QuizView extends JPanel{
             }
             System.out.println( " Answers " + answers[i]);
         }
+
+         */
     }
 
     public QuizView(Controller2 controller) {
@@ -133,8 +141,8 @@ public class QuizView extends JPanel{
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                showRightOrWrong();
                 currentQuestionNum++;
-                //controller.verifyAnswer();
                 updateQuestion();
             }
         });
@@ -154,6 +162,7 @@ public class QuizView extends JPanel{
         disablePrevButton();
         this.add(prevButton);
         this.add(background);
+
     }
     public String getUserAnswer() {
         JRadioButton userChoice = null;
@@ -168,11 +177,11 @@ public class QuizView extends JPanel{
         return "";
     }
 
-    public void showRightOrWrong(Boolean correct) {
-        if(correct){
+    public void showRightOrWrong() {
+        if(answers[currentQuestionNum-1].contains(getUserAnswer())){
             String s ="You answered correct!";
             rightOrWrong.setText(s);
-            rightOrWrong.setForeground(Color.WHITE);
+            rightOrWrong.setForeground(Color.GREEN);
         }
         else{
             rightOrWrong.setText("Wrong");
@@ -185,10 +194,11 @@ public class QuizView extends JPanel{
 
     public void updateQuestion() {
         questionNumber.setText("Quiz: " + currentQuestionNum + "/" + totalQuestionNum);
-        questionLabel.setText(question[currentQuestionNum].getArticulatedQuestion());
-        Player[] options = question[currentQuestionNum].getAlternatives();
+        questionLabel.setText(questions[currentQuestionNum-1]);
+        String[] options = alt[currentQuestionNum-1];
         for (int i = 0; i < 4; i++) {
-            optionButtons[i].setText(options[i].getName());
+            String[] parts = options[i].split("null");
+            optionButtons[i].setText(parts[1]);
         }
     }
 
@@ -244,6 +254,12 @@ public class QuizView extends JPanel{
 
     public QuestionAutomatic getQurrentAnswer(){
         return question[currentQuestionNum];
+    }
+
+    public void displayQuestions(Frame frame) {
+        setPlayerName(frame.getPlayerName());
+        frame.addQuestionsPanel(this);
+        updateQuestion();
     }
 }
 

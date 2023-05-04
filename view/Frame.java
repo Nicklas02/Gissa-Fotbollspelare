@@ -16,8 +16,8 @@ public class Frame extends JFrame {
     private JTextField playerNameJTextField;
     private Controller2 controller;
     private JPanel startPanel;
-    private int width = 600;
-    private int height = 600;
+    private int width = 800;
+    private int height = 800;
     private Font font = new Font("Arial", Font.BOLD, 24);
     private JTextArea scoresJTextArea;
     private QuizView quizView;

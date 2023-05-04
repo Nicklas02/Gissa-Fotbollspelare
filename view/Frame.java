@@ -76,7 +76,7 @@ public class Frame extends JFrame {
             }
         });
 
-        showlist = new JButton("  show list  ");
+        showlist = new JButton("  Show list  ");
         showlist.setFont(font);
         showlist.setBackground(Color.LIGHT_GRAY);
         showlist.setForeground(Color.WHITE);
@@ -107,6 +107,7 @@ public class Frame extends JFrame {
         scrollPane = new JScrollPane(scoresJTextArea);
         scrollPane.setVisible(false);
         scrollPane.setBounds(10,  height/2-50, 200,  height/2+30);
+
         startPanel.add(playerNameLabel);
         startPanel.add(playerNameJTextField);
         startPanel.add(start);

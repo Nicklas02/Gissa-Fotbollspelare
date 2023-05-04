@@ -4,8 +4,12 @@ import model.HighScore;
 import view.QuizView;
 import model.Question;
 import model.Quiz;
-
+import java.awt.Font;
 import javax.swing.*;
+import model.HighScore;
+import view.Frame;
+
+
 
 /**
  * controller class that control our project.
@@ -16,24 +20,47 @@ public class Controller {
 
     private Quiz quiz;
     private QuizView quizView;
+    private Frame frame;
     private int score;
     private int lastScore;
     private HighScore list;
+    private String[] highScoreList;
+    private Font font = new Font("Arial", Font.BOLD, 24);
+
+
 
 
     /**
      * Parameter constrictor that used to create object of Controller.
-     *
-     * @param fileName file name that contains questions.
+     * @param questionsFileName file name that contains questions.
+     * @param topScoresFileName file name that contains top scores.
      */
-    public Controller(String fileName) {
-        quiz = new Quiz(fileName);
-        this.quizView = new QuizView(this);
-        list = new HighScore();
-        this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
+    public Controller(String questionsFileName,String topScoresFileName) {
+        quiz = new Quiz(questionsFileName);
+        list = new HighScore(topScoresFileName);
+        // call getList here to get list of 10 top scores
+        highScoreList = getList();
+        // create object of Fram to display start menu
+        this.frame = new Frame(this,font,600,600);
+        frame.addStartPanel(highScoreList);
+        this.quizView = new QuizView(this,600,600);
+//        this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
         this.score = 0;
-        this.quizView.display();
+//        this.quizView.display();
     }
+
+
+    public void displayQuestions(){
+        if(frame.getPlayerName().isBlank()){
+            JOptionPane.showMessageDialog(frame, "Error: you must enter your name", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        this.quizView.setPlayerName(frame.getPlayerName());
+        frame.addQuestionsPanel(quizView);
+        this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
+
+    }
+
 
     public void prevQuestion() {
         if (this.quiz.hasPrevQuestion()) {

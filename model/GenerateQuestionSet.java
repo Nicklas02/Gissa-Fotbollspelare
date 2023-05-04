@@ -241,7 +241,7 @@ public class GenerateQuestionSet {
         corrAnswers.add(correctAnswer);
         String question="Default Question";
         if(isValueQuestion && correctAnswer!=null){
-            question = "Vilken spelare har högst marknadsvärde med ett uppskattat värde på "
+            question = "Vilken spelare har högst marknadsvärde på "
                     + correctAnswer.getValue() + "?";
         } if(!isValueQuestion && correctAnswer!=null) {
             question="Vilken spelare har tjänar mest med" +

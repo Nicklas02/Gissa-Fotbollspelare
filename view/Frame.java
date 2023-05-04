@@ -38,8 +38,12 @@ public class Frame extends JFrame {
         startPanel = new JPanel();
         startPanel.setLayout(null);
         // Lägg till en bild i panelen
-        ImageIcon icon = new ImageIcon("images/start.jpg");
-        JLabel backgroundLabel = new JLabel(icon);
+        ImageIcon imageIcon = new ImageIcon("images/start.jpg");
+        Image image = imageIcon.getImage();
+        Image scaled = image.getScaledInstance(800, 800,Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(scaled);
+
+        JLabel backgroundLabel = new JLabel(imageIcon);
         backgroundLabel.setBounds(0, 0, width, height);
 
         playerNameLabel = new JLabel("Player Name: ");

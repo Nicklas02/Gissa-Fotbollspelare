@@ -55,16 +55,6 @@ public class QuizView extends JPanel{
         this.questions = questions;
         this.alt = alt;
         this.answers = answers;
-        /*for (int i=0; i< 10;i++){
-            System.out.println(questions[i]);
-            for (int j=0; j< 4;j++) {
-                String[] parts = alt[i][j].split("null");
-                System.out.println("---" + parts[1]);
-            }
-            System.out.println( " Answers " + answers[i]);
-        }
-
-         */
     }
 
     public QuizView(Controller2 controller) {
@@ -73,8 +63,13 @@ public class QuizView extends JPanel{
 
         this.setLayout(null);
         imageIcon = new ImageIcon("images/background.jpg");
+        Image image = imageIcon.getImage();
+        Image scaled = image.getScaledInstance(800, 800,Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(scaled);
+
         background = new JLabel(imageIcon);
         background.setBounds(0, 0, width, height);
+
 
         playerNameJTextField = new JTextArea();
         playerNameJTextField.setFont(font);
@@ -116,24 +111,28 @@ public class QuizView extends JPanel{
         optionButtons[0] = new JRadioButton();
         optionButtons[0].setBounds(10, 200, 270, 30);
         optionButtons[0].setFont(font2);
+        optionButtons[0].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[0]);
         this.add(optionButtons[0]);
 
         optionButtons[1] = new JRadioButton();
         optionButtons[1].setBounds(310, 200, 270, 30);
         optionButtons[1].setFont(font2);
+        optionButtons[1].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[1]);
         this.add(optionButtons[1]);
 
         optionButtons[2] = new JRadioButton();
         optionButtons[2].setBounds(10, 300, 270, 30);
         optionButtons[2].setFont(font2);
+        optionButtons[2].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[2]);
         this.add(optionButtons[2]);
 
         optionButtons[3] = new JRadioButton();
         optionButtons[3].setBounds(310, 300, 270, 30);
         optionButtons[3].setFont(font2);
+        optionButtons[3].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[3]);
         this.add(optionButtons[3]);
         nextButton = new JButton("Next");
@@ -142,6 +141,10 @@ public class QuizView extends JPanel{
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(getUserAnswer().equals("")){
+                    showError("Must select one option first!");
+                    return;
+                }
                 showRightOrWrong();
                 gameOver();
                 currentQuestionNum++;
@@ -151,6 +154,7 @@ public class QuizView extends JPanel{
         });
         this.add(nextButton);
 
+        /*
         prevButton = new JButton("Previous");
         prevButton.setBounds(50, 400, 100, 30);
         prevButton.setFont(font2);
@@ -158,12 +162,11 @@ public class QuizView extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 currentQuestionNum--;
-                //controller.verifyAnswer();
                 updateQuestion();
             }
         });
         disablePrevButton();
-        this.add(prevButton);
+        this.add(prevButton);*/
         this.add(background);
 
     }

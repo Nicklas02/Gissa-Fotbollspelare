@@ -73,6 +73,7 @@ public class ControllerAutomatic {
             } else {
                 System.out.println("Better luck next time!");
             }
+            String answers="partey null varane";
         }
         System.out.println("Please enter your name: ");
         name = scanner.next();

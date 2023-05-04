@@ -58,5 +58,7 @@ public class Controller2 {
         //senare hämta manuella
     }
 
-
+    public void sendScoreToDatabase(String playerName, int score) {
+        highScoreList.newScoreToDatabase(playerName, score);
+    }
 }

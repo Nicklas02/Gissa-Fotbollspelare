@@ -48,6 +48,7 @@ public class QuizView extends JPanel{
     private String[] questions;
     private String[][] alt;
     private String[] answers;
+    private int score = 0;
 
 
     public void FillQuestions(String[] questions, String[][] alt, String[] answers) {
@@ -142,8 +143,10 @@ public class QuizView extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 showRightOrWrong();
+                gameOver();
                 currentQuestionNum++;
                 updateQuestion();
+                clearSelection();
             }
         });
         this.add(nextButton);
@@ -182,6 +185,7 @@ public class QuizView extends JPanel{
             String s ="You answered correct!";
             rightOrWrong.setText(s);
             rightOrWrong.setForeground(Color.GREEN);
+            score++;
         }
         else{
             rightOrWrong.setText("Wrong");
@@ -199,6 +203,14 @@ public class QuizView extends JPanel{
         for (int i = 0; i < 4; i++) {
             String[] parts = options[i].split("null");
             optionButtons[i].setText(parts[1]);
+        }
+    }
+
+    public void gameOver(){
+        if (currentQuestionNum == totalQuestionNum){
+            showGameOverMessage();
+            controller.sendScoreToDatabase(playerName, score);
+            System.exit(0);
         }
     }
 
@@ -230,11 +242,10 @@ public class QuizView extends JPanel{
         this.nextButton.setText("Next");
     }
 
-    //presentag
-    public void showGameOverMessage(String message, int scorePresentage) {
+    public void showGameOverMessage() {
         disablePrevButton();
         disableNextButton();
-        JOptionPane.showMessageDialog(frame, "Game Over! Your score is: " + scorePresentage + "%", "Football Quiz", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, "Game Over! Your score is: " + score + "/" + totalQuestionNum , "Football Quiz", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void showError(String message) {
@@ -252,9 +263,6 @@ public class QuizView extends JPanel{
         this.playerName = playerName;
     }
 
-    public QuestionAutomatic getQurrentAnswer(){
-        return question[currentQuestionNum];
-    }
 
     public void displayQuestions(Frame frame) {
         setPlayerName(frame.getPlayerName());

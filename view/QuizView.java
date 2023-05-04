@@ -7,7 +7,10 @@ import controller.Controller;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+import controller.Controller2;
+import model.Player;
 import model.Question;
+import model.QuestionAutomatic;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -16,11 +19,15 @@ import java.time.format.DateTimeFormatter;
 
 public class QuizView extends JPanel{
 
+    private int currentQuestionNum = 1;
+    private final int totalQuestionNum = 10;
+    private QuestionAutomatic[] question;
+
     private ImageIcon imageIcon;
     private JLabel background,  titleLabel;
     private JTextArea playerNameJTextField;
 
-    private Controller controller;
+    private Controller2 controller;
     private JFrame frame;
     private JLabel questionLabel;
     private JLabel questionNumber;
@@ -34,15 +41,27 @@ public class QuizView extends JPanel{
     private JButton prevButton;
     private Font font = new Font("Arial", Font.BOLD, 20);
     private Font font2 = new Font("Arial", Font.PLAIN, 15);
-    private int width;
-    private int height;
+    private int width = 600;
+    private int height = 600;
     private LocalDate currentDate;
     private DateTimeFormatter formatter;
 
-    public QuizView(Controller controller, int width, int height) {
+
+    public void FillQuestions(String[] questions, String[][] alt, String[] answers) {
+        for (int i=0; i< 10;i++){
+            System.out.println(questions[i]);
+            for (int j=0; j< 4;j++) {
+                String[] parts = alt[i][j].split("null");
+                System.out.println("---" + parts[1]);
+            }
+            System.out.println( " Answers " + answers[i]);
+        }
+    }
+
+    public QuizView(Controller2 controller) {
         this.controller = controller;
-        this.width = width;
-        this.height = height;
+        //question = controller.getQuestionsList();
+
         this.setLayout(null);
         imageIcon = new ImageIcon("images/background.jpg");
         background = new JLabel(imageIcon);
@@ -114,7 +133,9 @@ public class QuizView extends JPanel{
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.nextQuestion();
+                currentQuestionNum++;
+                //controller.verifyAnswer();
+                updateQuestion();
             }
         });
         this.add(nextButton);
@@ -125,7 +146,9 @@ public class QuizView extends JPanel{
         prevButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.prevQuestion();
+                currentQuestionNum--;
+                //controller.verifyAnswer();
+                updateQuestion();
             }
         });
         disablePrevButton();
@@ -137,7 +160,6 @@ public class QuizView extends JPanel{
         for (int i = 0; i < optionButtons.length; i++) {
             if (optionButtons[i].isSelected()) {
                 userChoice = optionButtons[i];
-                break;
             }
         }
         if (userChoice != null) {
@@ -146,25 +168,27 @@ public class QuizView extends JPanel{
         return "";
     }
 
-    public void showRightOrWrong(String s) {
-        if(s.equals("You answered correct!")){
+    public void showRightOrWrong(Boolean correct) {
+        if(correct){
+            String s ="You answered correct!";
+            rightOrWrong.setText(s);
             rightOrWrong.setForeground(Color.WHITE);
         }
         else{
+            rightOrWrong.setText("Wrong");
             rightOrWrong.setForeground(Color.RED);
         }
-        rightOrWrong.setText(s);
     }
     public void display() {
         frame.setVisible(true);
     }
 
-    public void updateQuestion(Question question, int currentQuestionNum, int totalQuestionNum) {
+    public void updateQuestion() {
         questionNumber.setText("Quiz: " + currentQuestionNum + "/" + totalQuestionNum);
-        questionLabel.setText(question.getQuestion());
-        String[] options = question.getOptions();
+        questionLabel.setText(question[currentQuestionNum].getArticulatedQuestion());
+        Player[] options = question[currentQuestionNum].getAlternatives();
         for (int i = 0; i < 4; i++) {
-            optionButtons[i].setText(options[i]);
+            optionButtons[i].setText(options[i].getName());
         }
     }
 
@@ -216,6 +240,10 @@ public class QuizView extends JPanel{
         formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         playerNameJTextField.setText(playerName + "\n"+currentDate.format(formatter));
         this.playerName = playerName;
+    }
+
+    public QuestionAutomatic getQurrentAnswer(){
+        return question[currentQuestionNum];
     }
 }
 

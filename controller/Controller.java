@@ -16,7 +16,7 @@ import view.Frame;
  *
  * @author Group 29
  */
-public class Controller {
+public class Controller {/*
 
     private Quiz quiz;
     private QuizView quizView;
@@ -30,20 +30,16 @@ public class Controller {
 
 
 
-    /**
-     * Parameter constrictor that used to create object of Controller.
-     * @param questionsFileName file name that contains questions.
-     * @param topScoresFileName file name that contains top scores.
-     */
+
     public Controller(String questionsFileName,String topScoresFileName) {
         quiz = new Quiz(questionsFileName);
         list = new HighScore(topScoresFileName);
         // call getList here to get list of 10 top scores
         highScoreList = getList();
         // create object of Fram to display start menu
-        this.frame = new Frame(this,font,600,600);
-        frame.addStartPanel(highScoreList);
-        this.quizView = new QuizView(this,600,600);
+        //this.frame = new Frame(this,font,600,600);
+        //frame.addStartPanel(highScoreList);
+        //this.quizView = new QuizView(this,600,600);
 //        this.quizView.updateQuestion(quiz.getCurrentQuestion(), quiz.getCurrentQuestionNum(), quiz.getTotalNumberQuestions());
         this.score = 0;
 //        this.quizView.display();
@@ -107,10 +103,7 @@ public class Controller {
 
     }
 
-    /**
-     * Checks if the score is better than the last person on the leaderboard
-     * and if it is it asks for your name and puts it in the leaderboard and the sorts it.
-     */
+   /*
     public void onLeaderboard() {
         getList();
         int[] listScore = list.getScore();
@@ -137,11 +130,12 @@ public class Controller {
         }
         list.writeToList(listName, listScore);
     }
+    *//*
 
-    /**
-     * @return the highscorelist to the mainframe.
-     */
+
     public String[] getList() {
         return list.readList();
     }
+    */
 }
+

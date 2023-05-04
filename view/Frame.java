@@ -1,5 +1,6 @@
 package view;
 import controller.Controller;
+import controller.Controller2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,18 +14,17 @@ public class Frame extends JFrame {
     private boolean show = false;
     private JLabel label, playerNameLabel;
     private JTextField playerNameJTextField;
-    private Controller controller;
+    private Controller2 controller;
     private JPanel startPanel;
-    private int width;
-    private int height;
-    private Font font;
+    private int width = 600;
+    private int height = 600;
+    private Font font = new Font("Arial", Font.BOLD, 24);
     private JTextArea scoresJTextArea;
+    private QuizView quizView;
 
-    public Frame(Controller controller, Font font, int width, int height) {
+    public Frame(Controller2 controller) {
         this.controller = controller;
-        this.font = font;
-        this.width = width;
-        this.height = height;
+
         this.setTitle("Gissa Fotbollsspelare");
         this.setSize(width, height);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +72,7 @@ public class Frame extends JFrame {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.displayQuestions();
+                quizView = new QuizView(controller);
             }
         });
 
@@ -129,4 +129,6 @@ public class Frame extends JFrame {
     public String getPlayerName(){
         return playerNameJTextField.getText().trim();
     }
+
+
 }

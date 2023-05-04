@@ -1,24 +1,47 @@
-package controller;
+//package controller;
 
 import model.*;
-import java.util.Scanner;
+import view.Frame;
+import view.QuizView;
 
+import javax.swing.*;
+import java.awt.*;
+import java.util.Scanner;
+/*
 /**
  * Målet med klassen är att sköta det logiska flödet i anrop till model-klasserna för att få fram frågor.
  */
-public class ControllerAutomatic {
+/*public class ControllerAutomatic {
     private QuestionAutomatic[] questionsList;
-    private HighScoreFromDatabase highScoreList;
-    private GameType gameType;
-    private Difficulty difficulty;
+  /*  private HighScoreFromDatabase highScoreList;
+    private GameType gameType = GameType.PremierLeague;
+    private Difficulty difficulty = Difficulty.Normal;
     private final Scanner scanner = new Scanner(System.in);
+    private Frame frame;
+    private QuizView quizView;
+    private Font font = new Font("Arial", Font.BOLD, 24);
+    private int score = 0;
 
-
+/*
     public ControllerAutomatic() {
         displayLeaderboard();
+        fetchQuestions();
+        this.frame = new Frame(this,font,600,600);
+        frame.addStartPanel(highScoreList.readList());
+        this.quizView = new QuizView(this,600,600);
         selectGameType();
         fetchQuestions();
         startQuiz(); //Detta är ett temporärt konsolbaserat GUI
+    }
+
+    public void displayQuestions(){
+        if(frame.getPlayerName().isBlank()){
+            JOptionPane.showMessageDialog(frame, "Error: you must enter your name", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        this.quizView.setPlayerName(frame.getPlayerName());
+        frame.addQuestionsPanel(quizView);
+        this.quizView.updateQuestion();
     }
 
     private void selectGameType() {
@@ -51,8 +74,15 @@ public class ControllerAutomatic {
         } else {
             System.out.println("Failure caused by game setup parameters");
         }
-    }
 
+    }
+    
+    //hämta frågeset(EPL och normal)
+    //hämta highscorelitsa
+    //skapa gui klass
+    //skicka över string[] och svar int[] och high score
+            
+    
     private void startQuiz() {
         int answer;
         int score = 0;
@@ -61,9 +91,9 @@ public class ControllerAutomatic {
             System.out.println(q.getArticulatedQuestion());
             int nbrAlternative = 1;
             for (Player p : q.getAlternatives()) {
-                 System.out.println(nbrAlternative + "---" + p.getName() + "---" + p.getAge() + "---" + p.getHeight() + "---" + p.getWeakFoot()
-                        + "---" + p.getKitNumber() + " Ovr:" + p.getOverall() + " Wage: "+p.getWage() +" Value:" +p.getValue());
-                //System.out.println(nbrAlternative + ". " + p.getName());
+                // System.out.println(nbrAlternative + "---" + p.getName() + "---" + p.getAge() + "---" + p.getHeight() + "---" + p.getWeakFoot()
+                    //    + "---" + p.getKitNumber() + " Ovr:" + p.getOverall() + " Wage: "+p.getWage() +" Value:" +p.getValue());
+                System.out.println(nbrAlternative + ". " + p.getName());
                 nbrAlternative++;
             }
             answer = scanner.nextInt() - 1;
@@ -81,8 +111,31 @@ public class ControllerAutomatic {
         System.out.println("Your score was: " + score + "/10");
     }
 
+    public void verifyAnswer(){
+        QuestionAutomatic q = quizView.getQurrentAnswer();
+
+        String answer = quizView.getUserAnswer();
+        Player p = null;
+        for(Player player : q.getAlternatives()){
+            if(player.getName().equals(answer)){
+                p=player;
+            }
+        }
+        
+        if (q.getCorrectAnswers().contains(p)) {
+            quizView.showRightOrWrong(true);
+            score++;
+        } else {
+            quizView.showRightOrWrong(false);
+            System.out.println("Better luck next time!");
+        }
+    }
+
     private void displayLeaderboard() {
         highScoreList = new HighScoreFromDatabase();
     }
 
-}
+    public QuestionAutomatic[] getQuestionsList() {
+        return questionsList;
+    }
+}*/

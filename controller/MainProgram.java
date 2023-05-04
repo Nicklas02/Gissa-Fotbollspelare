@@ -22,7 +22,8 @@ public class MainProgram {
         // create object of controller
         //Controller controller = new Controller("files/questions.txt");
 
-        ControllerAutomatic controllerAutomatic = new ControllerAutomatic();
+        //ControllerAutomatic controllerAutomatic = new ControllerAutomatic();
+        Controller2 controller2 = new Controller2();
     }
 
 

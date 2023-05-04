@@ -246,7 +246,6 @@ public class QuizView extends JPanel{
     }
 
     public void showGameOverMessage() {
-        disablePrevButton();
         disableNextButton();
         JOptionPane.showMessageDialog(frame, "Game Over! Your score is: " + score + "/" + totalQuestionNum , "Football Quiz", JOptionPane.INFORMATION_MESSAGE);
     }

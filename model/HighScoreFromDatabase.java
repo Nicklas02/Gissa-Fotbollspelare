@@ -41,6 +41,7 @@ public class HighScoreFromDatabase {
             int affectedrows = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
+            System.out.println("Result added to database!");
         } catch (SQLException e) {
             e.printStackTrace();
         }

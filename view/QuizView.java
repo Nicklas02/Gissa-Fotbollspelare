@@ -199,7 +199,8 @@ public class QuizView extends JPanel{
     }
 
     public void showRightOrWrong() {
-        if (answers[currentQuestionNum - 1].contains(getUserAnswer())) {
+        String userAnswer = getUserAnswer();
+        if (answers[currentQuestionNum - 1].contains(userAnswer)) {
             String s = "You answered correct!";
             rightOrWrong.setText(s);
             rightOrWrong.setForeground(Color.GREEN);
@@ -208,18 +209,13 @@ public class QuizView extends JPanel{
             rightOrWrong.setText("Wrong");
             rightOrWrong.setForeground(Color.RED);
         }
-        if(getUserAnswer() == null || getUserAnswer().isEmpty()){
+        if (userAnswer == null || userAnswer.isEmpty()) {
             rightOrWrong.setText("You didn't select an answer");
             rightOrWrong.setForeground(Color.RED);
             score--;
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-                e.printStackTrace();
-            }
-
         }
     }
+
 
 
     public void display() {

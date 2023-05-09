@@ -1,27 +1,17 @@
 package model;
 
 public class Player {
-    private int id;
     private String name;
     private int age;
     private String nationality;
     private int overall;
-    private int potential;
     private String club;
     private String value;
     private String wage;
-    private String preferredFoot;
-    private int internationalRep;
     private int weakFoot;
     private int skillMoves;
-    private String workRate;
-    private String bodyType;
     private String position;
-    private String joinedClub;
-    private String validContractUntil;
     private int height;
-    private String weight;
-    private String releaseClause;
     private int kitNumber;
 
     public Player(String name, int age, String nationality,
@@ -41,104 +31,99 @@ public class Player {
         this.position = position;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAge() {
         return age;
     }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public String getNationality() {
         return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 
     public int getOverall() {
         return overall;
     }
 
-    public int getPotential() {
-        return potential;
+    public void setOverall(int overall) {
+        this.overall = overall;
     }
 
     public String getClub() {
         return club;
     }
 
+    public void setClub(String club) {
+        this.club = club;
+    }
+
     public String getValue() {
         return value;
-    }
-
-    public String getWage() {
-        return wage;
-    }
-
-    public String getPreferredFoot() {
-        return preferredFoot;
-    }
-
-    public int getInternationalRep() {
-        return internationalRep;
-    }
-
-    public int getWeakFoot() {
-        return weakFoot;
-    }
-
-    public int getSkillMoves() {
-        return skillMoves;
-    }
-
-    public String getWorkRate() {
-        return workRate;
-    }
-
-    public String getBodyType() {
-        return bodyType;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public String getJoinedClub() {
-        return joinedClub;
-    }
-
-    public String getValidContractUntil() {
-        return validContractUntil;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public String getWeight() {
-        return weight;
-    }
-
-    public String getReleaseClause() {
-        return releaseClause;
-    }
-
-    public int getKitNumber() {
-        return kitNumber;
     }
 
     public void setValue(String value) {
         this.value = value;
     }
 
+    public String getWage() {
+        return wage;
+    }
+
     public void setWage(String wage) {
         this.wage = wage;
     }
 
-    @Override
-    public String toString() {
-        return "Player: " + "id=" + id + ", name='" + name + ", age=" + age;
+    public int getWeakFoot() {
+        return weakFoot;
+    }
+
+    public void setWeakFoot(int weakFoot) {
+        this.weakFoot = weakFoot;
+    }
+
+    public int getSkillMoves() {
+        return skillMoves;
+    }
+
+    public void setSkillMoves(int skillMoves) {
+        this.skillMoves = skillMoves;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getKitNumber() {
+        return kitNumber;
+    }
+
+    public void setKitNumber(int kitNumber) {
+        this.kitNumber = kitNumber;
     }
 }

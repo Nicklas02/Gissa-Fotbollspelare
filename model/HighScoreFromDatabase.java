@@ -9,9 +9,6 @@ public class HighScoreFromDatabase {
 
     public HighScoreFromDatabase() {
         String[] s = readList();
-        for (int i = 0; i < listSize; i++) {
-            System.out.println(s[i]);
-        }
     }
 
     public Connection getDatabaseConnection() {
@@ -61,13 +58,11 @@ public class HighScoreFromDatabase {
                 highScoreList[i] = String.format(i + 1 + " " + rs.getString("name") + " " + rs.getInt("score"));
                 i++;
             }
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return highScoreList;
     }
 
-    public static void main(String[] args) {
-        HighScoreFromDatabase h = new HighScoreFromDatabase();
-    }
 }

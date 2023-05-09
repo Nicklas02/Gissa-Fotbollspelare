@@ -35,8 +35,8 @@ public class QuizView extends JPanel{
     private ButtonGroup optionGroup;
     private JButton nextButton;
     private JButton prevButton;
-    private Font font = new Font("Arial", Font.BOLD, 20);
-    private Font font2 = new Font("Arial", Font.PLAIN, 15);
+    private Font font = new Font("Ariel", Font.BOLD, 20);
+    private Font font2 = new Font("Ariel", Font.PLAIN, 15);
     private int width = 800;
     private int height = 800;
     private LocalDate currentDate;
@@ -45,6 +45,9 @@ public class QuizView extends JPanel{
     private String[][] alt;
     private String[] answers;
     private int score = 0;
+    private JLabel countdownLabel;
+    private Timer timer;
+
 
 
     public void FillQuestions(String[] questions, String[][] alt, String[] answers) {
@@ -58,7 +61,7 @@ public class QuizView extends JPanel{
         //question = controller.getQuestionsList();
 
         this.setLayout(null);
-        imageIcon = new ImageIcon("images/background.jpg");
+        imageIcon = new ImageIcon("images/bluequiz.jpg");
         Image image = imageIcon.getImage();
         Image scaled = image.getScaledInstance(800, 800,Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaled);
@@ -131,16 +134,43 @@ public class QuizView extends JPanel{
         optionButtons[3].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[3]);
         this.add(optionButtons[3]);
+
+        //Timer
+        countdownLabel = new JLabel("10");
+        countdownLabel.setBounds(750, 200, 50, 20);
+        countdownLabel.setFont(font);
+        countdownLabel.setForeground(Color.BLACK);
+        this.add(countdownLabel);
+        timer = new Timer(1000, new ActionListener() {
+            int count = 10;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                count--;
+                if (count <= 0) {
+                    showRightOrWrong();
+                    gameOver();
+                    currentQuestionNum++;
+                    updateQuestion();
+                    clearSelection();
+                    count = 10;
+                }
+                countdownLabel.setText(String.valueOf(count));
+            }
+        });
+
+
         nextButton = new JButton("Next");
         nextButton.setBounds(350, 400, 100, 30);
         nextButton.setFont(font2);
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 if(getUserAnswer().equals("")){
                     showError("Must select one option first!");
                     return;
                 }
+                timer.start();
                 showRightOrWrong();
                 gameOver();
                 currentQuestionNum++;
@@ -149,21 +179,9 @@ public class QuizView extends JPanel{
             }
         });
         this.add(nextButton);
-
-        /*
-        prevButton = new JButton("Previous");
-        prevButton.setBounds(50, 400, 100, 30);
-        prevButton.setFont(font2);
-        prevButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                currentQuestionNum--;
-                updateQuestion();
-            }
-        });
-        disablePrevButton();
-        this.add(prevButton);*/
         this.add(background);
+
+
 
     }
     public String getUserAnswer() {
@@ -180,22 +198,36 @@ public class QuizView extends JPanel{
     }
 
     public void showRightOrWrong() {
-        if(answers[currentQuestionNum-1].contains(getUserAnswer())){
-            String s ="You answered correct!";
+        if (answers[currentQuestionNum - 1].contains(getUserAnswer())) {
+            String s = "You answered correct!";
             rightOrWrong.setText(s);
             rightOrWrong.setForeground(Color.GREEN);
             score++;
-        }
-        else{
+        } else {
             rightOrWrong.setText("Wrong");
             rightOrWrong.setForeground(Color.RED);
         }
+        if(getUserAnswer() == null || getUserAnswer().isEmpty()){
+            rightOrWrong.setText("You didn't select an answer");
+            rightOrWrong.setForeground(Color.RED);
+            score--;
+        }
     }
+
+
     public void display() {
         frame.setVisible(true);
     }
 
     public void updateQuestion() {
+        // stop the current timer
+        timer.stop();
+
+        if (currentQuestionNum > totalQuestionNum) {
+            gameOver();
+            return;
+        }
+
         questionNumber.setText("Quiz: " + currentQuestionNum + "/" + totalQuestionNum);
         questionLabel.setText(questions[currentQuestionNum-1]);
         String[] options = alt[currentQuestionNum-1];
@@ -203,6 +235,26 @@ public class QuizView extends JPanel{
             String[] parts = options[i].split("null");
             optionButtons[i].setText(parts[1]);
         }
+        // clear the selection
+        clearSelection();
+
+        // start a new timer
+        timer = new Timer(1000, new ActionListener() {
+            int count = 10;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                count--;
+                if (count <= 0) {
+                    showRightOrWrong();
+                    gameOver();
+                    currentQuestionNum++;
+                    updateQuestion();
+                    count = 10;
+                }
+                countdownLabel.setText(String.valueOf(count));
+            }
+        });
+        timer.start();
     }
 
     public void gameOver(){

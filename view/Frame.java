@@ -37,7 +37,7 @@ public class Frame extends JFrame {
         startPanel = new JPanel();
         startPanel.setLayout(null);
         // Lägg till en bild i panelen
-        ImageIcon imageIcon = new ImageIcon("images/start.jpg");
+        ImageIcon imageIcon = new ImageIcon("images/bluestart.jpg");
         Image image = imageIcon.getImage();
         Image scaled = image.getScaledInstance(800, 800,Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaled);

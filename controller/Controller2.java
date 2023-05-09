@@ -8,9 +8,7 @@ import java.util.ArrayList;
 
 public class Controller2 {
 
-    private String[] questionsAndAnswer;
     private HighScoreFromDatabase highScoreList;
-    private Frame frame;
     private GameType gameType = GameType.PremierLeague;
     private Difficulty difficulty = Difficulty.Normal;
     private QuizView quizView;
@@ -26,7 +24,7 @@ public class Controller2 {
         String[] highscorelist = highScoreList.readList();
         fetchQuestions();
 
-        frame = new Frame(this, quizView);
+        Frame frame = new Frame(this, quizView);
         frame.addStartPanel(highscorelist);
         //frame.metodföratttaEMotfrågor(Formatterad lista strings[]  och strings[] hoghscore)
 
@@ -39,16 +37,17 @@ public class Controller2 {
         QuestionAutomatic[] questionsList = generateQuestionSet.buildNewQuestionSet();
         String[] questions = new String[questionsList.length];
         String[] answers = new String[questions.length];
-        String[][] alt = new String[questions.length][4];
+        int alternatives = 4;
+        String[][] alt = new String[questions.length][alternatives];
         for (int i=0; i< questionsList.length;i++){
             questions[i] = questionsList[i].getArticulatedQuestion();
-            ArrayList<Player> temp = new ArrayList<>();
+            ArrayList<Player> temp;
             temp = questionsList[i].getCorrectAnswers();
             for(Player p : temp){
                 answers[i] += p.getName();
             }
             Player[] temp2 = questionsList[i].getAlternatives();
-            for(int j=0; j< 4; j++){
+            for(int j=0; j< alternatives; j++){
                 alt[i][j] += temp2[j].getName();
             }
         }

@@ -13,7 +13,6 @@ public class Frame extends JFrame {
     private boolean show = false;
     private JLabel label, playerNameLabel;
     private JTextField playerNameJTextField;
-    private Controller2 controller;
     private JPanel startPanel;
     private int width = 800;
     private int height = 800;
@@ -22,7 +21,6 @@ public class Frame extends JFrame {
     private QuizView quizView;
 
     public Frame(Controller2 controller, QuizView quizView) {
-        this.controller = controller;
         this.quizView = quizView;
         this.setTitle("Gissa Fotbollsspelare");
         this.setSize(width, height);

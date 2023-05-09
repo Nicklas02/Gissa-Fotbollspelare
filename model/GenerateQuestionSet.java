@@ -37,7 +37,8 @@ public class GenerateQuestionSet {
     }
 
     private QuestionAutomatic randomQuestion() {
-        int localRandom = random.nextInt(10);
+        int nbrOfRdmQuestions= 10;
+        int localRandom = random.nextInt(nbrOfRdmQuestions);
 
         //Test specific value
         //localRandom = 8;
@@ -262,25 +263,6 @@ public class GenerateQuestionSet {
         return alternatives;
     }
 
-    private Player[] randomAlternativesLowestQuartile() {
-        Player[] alternatives = new Player[NBR_OF_ALT];
-        int high = sample.length;
-        int low = sample.length/4*3; //Quartile
-        for (int i = 0; i < NBR_OF_ALT; i++) {
-            int lowestQuartilePosition = random.nextInt(high-low) + low; //Players with worst overall rating
-            alternatives[i] = sample[lowestQuartilePosition];
-        }
-        return alternatives;
-    }
-
-    private Player randomElement(){
-        return sample[randomElementNbr()];
-    }
-
-    private int randomElementNbr(){
-        return random.nextInt(sample.length);
-    }
-
     //lagrar metodens data i ett questionObject så att controllerklasserna sedermera kan hämta alla QuestionsObject
     private QuestionAutomatic ageQuestion() {
         Player[] alternatives = randomAlternatives();
@@ -346,10 +328,11 @@ public class GenerateQuestionSet {
     private QuestionAutomatic weakFootQuestion() {
         Player[] alternatives = null;
         boolean badWeakFoot = false;
+        int lowWeakFoot = 2;
         while (!badWeakFoot) {
             alternatives = randomAlternatives();
             for (Player alternative : alternatives) {
-                if (alternative.getWeakFoot() <= 2) {
+                if (alternative.getWeakFoot() <= lowWeakFoot) {
                     badWeakFoot = true;
                     break;
                 }
@@ -375,7 +358,7 @@ public class GenerateQuestionSet {
 
     private QuestionAutomatic kitNum() {
         Player[] alternatives = randomAlternatives();
-        int alternative = random.nextInt(4);
+        int alternative = random.nextInt(NBR_OF_ALT);
         Player correctAnswer = alternatives[alternative];
         corrAnswers.add(correctAnswer);
         for (Player p : alternatives) {

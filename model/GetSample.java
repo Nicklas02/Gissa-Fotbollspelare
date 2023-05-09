@@ -144,29 +144,4 @@ public class GetSample {
         return playerSample;
     }
 
-    private void testPrintSample(Player[] playerSample) {
-        for (Player p : playerSample){
-            System.out.println(p.getName());
-        }
-    }
-
-/*
-    public void ChangeGameType() {
-        if (gameType == GameType.PremierLeague) {
-
-        } else if (gameType == GameType.LaLiga) {
-
-        } else if (gameType == GameType.SerieA) {
-
-        } else if (gameType == GameType.Bundesliga) {
-
-        } else if (gameType == GameType.Ligue1) {
-
-        } else {
-        }
-
-    }*/
-
-    //Testmetod
-
 }

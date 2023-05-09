@@ -17,23 +17,14 @@ public class QuestionAutomatic {
         return alternatives;
     }
 
-    public void setAlternatives(Player[] alternatives) {
-        this.alternatives = alternatives;
-    }
 
     public ArrayList<Player> getCorrectAnswers() {
         return correctAnswers;
     }
 
-    public void setCorrectAnswers(ArrayList<Player> correctAnswers) {
-        this.correctAnswers = correctAnswers;
-    }
 
     public String getArticulatedQuestion() {
         return articulatedQuestion;
     }
 
-    public void setArticulatedQuestion(String articulatedQuestion) {
-        this.articulatedQuestion = articulatedQuestion;
-    }
 }

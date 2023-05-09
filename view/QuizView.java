@@ -1,4 +1,6 @@
 package view;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 //package com.example.footballquiz;
 
@@ -210,6 +212,12 @@ public class QuizView extends JPanel{
             rightOrWrong.setText("You didn't select an answer");
             rightOrWrong.setForeground(Color.RED);
             score--;
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+                e.printStackTrace();
+            }
+
         }
     }
 

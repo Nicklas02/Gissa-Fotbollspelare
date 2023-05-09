@@ -17,7 +17,6 @@ public class QuizView extends JPanel{
 
     private int currentQuestionNum = 1;
     private final int totalQuestionNum = 10;
-    private QuestionAutomatic[] question;
 
     private ImageIcon imageIcon;
     private JLabel background,  titleLabel;
@@ -269,29 +268,13 @@ public class QuizView extends JPanel{
         optionGroup.clearSelection();
     }
 
-    public void enablePrevButton() {
-        this.prevButton.setEnabled(true);
-    }
 
-    public void disablePrevButton() {
-        this.prevButton.setEnabled(false);
-    }
-
-    public void enableNextButton() {
-        this.nextButton.setEnabled(true);
-    }
 
     public void disableNextButton() {
         this.nextButton.setEnabled(false);
     }
 
-    public void setNextButtonTextToFinish() {
-        this.nextButton.setText("Finish");
-    }
 
-    public void setNextButtonTextToNext() {
-        this.nextButton.setText("Next");
-    }
 
     public void showGameOverMessage() {
         disableNextButton();

@@ -32,7 +32,7 @@ public class QuizView extends JPanel{
     private JLabel countdownLabel;
     private Timer timer;
 
-    
+
     public void FillQuestions(String[] questions, String[][] alt, String[] answers) {
         this.questions = questions;
         this.alt = alt;

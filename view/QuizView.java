@@ -38,6 +38,8 @@ public class QuizView extends JPanel{
     private int height;
     private LocalDate currentDate;
     private DateTimeFormatter formatter;
+    private Timer timer;
+
 
     public QuizView(Controller controller, int width, int height) {
         this.controller = controller;
@@ -111,6 +113,10 @@ public class QuizView extends JPanel{
         nextButton = new JButton("Next");
         nextButton.setBounds(350, 400, 100, 30);
         nextButton.setFont(font2);
+
+
+
+
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

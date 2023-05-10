@@ -1,19 +1,19 @@
 package controller;
 
 import model.*;
-import view.Frame;
+import view.StartPanel;
 import view.QuizView;
 
 import java.util.ArrayList;
 
-public class Controller2 {
+public class Controller {
 
     private HighScoreFromDatabase highScoreList;
     private GameType gameType = GameType.PremierLeague;
     private Difficulty difficulty = Difficulty.Normal;
     private QuizView quizView;
 
-    public Controller2() {
+    public Controller() {
         this.highScoreList = new HighScoreFromDatabase();
         //String [] questionsandanswer=  hänmta questions
         startGame();
@@ -24,8 +24,8 @@ public class Controller2 {
         String[] highscorelist = highScoreList.readList();
         fetchQuestions();
 
-        Frame frame = new Frame(this, quizView);
-        frame.addStartPanel(highscorelist);
+        StartPanel startPanel = new StartPanel(this, quizView);
+        startPanel.addStartPanel(highscorelist);
         //frame.metodföratttaEMotfrågor(Formatterad lista strings[]  och strings[] hoghscore)
 
     }

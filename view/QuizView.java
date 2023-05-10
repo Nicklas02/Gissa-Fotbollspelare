@@ -5,8 +5,7 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-import controller.Controller2;
-import model.QuestionAutomatic;
+import controller.Controller;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -14,32 +13,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class QuizView extends JPanel{
-
     private int currentQuestionNum = 1;
     private final int totalQuestionNum = 10;
-
-    private ImageIcon imageIcon;
-    private JLabel background,  titleLabel;
     private JTextArea playerNameJTextField;
-
-    private Controller2 controller;
+    private Controller controller;
     private JFrame frame;
     private JLabel questionLabel;
     private JLabel questionNumber;
     JLabel rightOrWrong;
     private String playerName;
-
-
     private JRadioButton[] optionButtons;
     private ButtonGroup optionGroup;
     private JButton nextButton;
-    private JButton prevButton;
-    private Font font = new Font("Ariel", Font.BOLD, 20);
-    private Font font2 = new Font("Ariel", Font.PLAIN, 15);
-    private int width = 800;
-    private int height = 800;
-    private LocalDate currentDate;
-    private DateTimeFormatter formatter;
     private String[] questions;
     private String[][] alt;
     private String[] answers;
@@ -47,29 +32,31 @@ public class QuizView extends JPanel{
     private JLabel countdownLabel;
     private Timer timer;
 
-
-
+    
     public void FillQuestions(String[] questions, String[][] alt, String[] answers) {
         this.questions = questions;
         this.alt = alt;
         this.answers = answers;
     }
 
-    public QuizView(Controller2 controller) {
+    public QuizView(Controller controller) {
         this.controller = controller;
         //question = controller.getQuestionsList();
 
         this.setLayout(null);
-        imageIcon = new ImageIcon("images/bluequiz.jpg");
+        ImageIcon imageIcon = new ImageIcon("images/bluequiz.jpg");
         Image image = imageIcon.getImage();
         Image scaled = image.getScaledInstance(800, 800,Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaled);
 
-        background = new JLabel(imageIcon);
+        JLabel background = new JLabel(imageIcon);
+        int width = 800;
+        int height = 800;
         background.setBounds(0, 0, width, height);
 
 
         playerNameJTextField = new JTextArea();
+        Font font = new Font("Ariel", Font.BOLD, 20);
         playerNameJTextField.setFont(font);
         playerNameJTextField.setEditable(false);
         playerNameJTextField.setLineWrap(true);
@@ -79,7 +66,7 @@ public class QuizView extends JPanel{
         playerNameJTextField.setBounds(0, 0, 200, 50);
         this.add(playerNameJTextField);
 
-        titleLabel = new JLabel("Gissa Fotbollsspelare");
+        JLabel titleLabel = new JLabel("Gissa Fotbollsspelare");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setBounds(150, 60, 500, 40);
@@ -108,6 +95,7 @@ public class QuizView extends JPanel{
         optionGroup = new ButtonGroup();
         optionButtons[0] = new JRadioButton();
         optionButtons[0].setBounds(10, 200, 270, 30);
+        Font font2 = new Font("Ariel", Font.PLAIN, 15);
         optionButtons[0].setFont(font2);
         optionButtons[0].setForeground(Color.WHITE);
         optionGroup.add(optionButtons[0]);
@@ -290,16 +278,16 @@ public class QuizView extends JPanel{
     }
 
     public void setPlayerName(String playerName) {
-        currentDate = LocalDate.now();
-        formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        playerNameJTextField.setText(playerName + "\n"+currentDate.format(formatter));
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        playerNameJTextField.setText(playerName + "\n"+ currentDate.format(formatter));
         this.playerName = playerName;
     }
 
 
-    public void displayQuestions(Frame frame) {
-        setPlayerName(frame.getPlayerName());
-        frame.addQuestionsPanel(this);
+    public void displayQuestions(StartPanel startPanel) {
+        setPlayerName(startPanel.getPlayerName());
+        startPanel.addQuestionsPanel(this);
         updateQuestion();
     }
 }

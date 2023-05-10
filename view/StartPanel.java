@@ -1,12 +1,12 @@
 package view;
-import controller.Controller2;
+import controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Frame extends JFrame {
+public class StartPanel extends JFrame {
 
     private JButton start, showlist;
     private JScrollPane scrollPane;
@@ -20,7 +20,7 @@ public class Frame extends JFrame {
     private JTextArea scoresJTextArea;
     private QuizView quizView;
 
-    public Frame(Controller2 controller, QuizView quizView) {
+    public StartPanel(Controller controller, QuizView quizView) {
         this.quizView = quizView;
         this.setTitle("Gissa Fotbollsspelare");
         this.setSize(width, height);
@@ -73,7 +73,7 @@ public class Frame extends JFrame {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                quizView.displayQuestions(Frame.this);
+                quizView.displayQuestions(StartPanel.this);
             }
         });
 

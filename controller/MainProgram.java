@@ -1,12 +1,5 @@
 package controller;
 
-import model.GenerateQuestionSet;
-import model.GetSample;
-import model.Player;
-import model.QuestionAutomatic;
-
-import java.util.Scanner;
-
 /**
  * Main class in our project.
  * @author Group 29
@@ -23,7 +16,7 @@ public class MainProgram {
         //Controller controller = new Controller("files/questions.txt");
 
         //ControllerAutomatic controllerAutomatic = new ControllerAutomatic();
-        Controller2 controller2 = new Controller2();
+        Controller controller = new Controller();
     }
 
 

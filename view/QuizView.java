@@ -66,7 +66,6 @@ public class QuizView extends JPanel{
         Image image = imageIcon.getImage();
         Image scaled = image.getScaledInstance(800, 800,Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaled);
-
         background = new JLabel(imageIcon);
         background.setBounds(0, 0, width, height);
 
@@ -94,8 +93,8 @@ public class QuizView extends JPanel{
         this.add(questionNumber);
 
         rightOrWrong = new JLabel();
-        rightOrWrong.setBounds(50, height - 150, 300, 100);
-        rightOrWrong.setForeground(Color.black);
+        rightOrWrong.setBounds(50, 500, 300, 100);
+        rightOrWrong.setForeground(Color.RED);
         rightOrWrong.setFont(font);
         this.add(rightOrWrong);
 
@@ -214,6 +213,7 @@ public class QuizView extends JPanel{
             rightOrWrong.setForeground(Color.RED);
             score--;
         }
+        repaint();
     }
 
 

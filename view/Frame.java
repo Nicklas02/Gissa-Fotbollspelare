@@ -1,5 +1,7 @@
 package view;
 import controller.Controller2;
+import model.Difficulty;
+import model.GameType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,10 +20,15 @@ public class Frame extends JFrame {
     private int height = 800;
     private Font font = new Font("Arial", Font.BOLD, 24);
     private JTextArea scoresJTextArea;
-    private QuizView quizView;
+    private JRadioButton[] difficultyOptions;
 
-    public Frame(Controller2 controller, QuizView quizView) {
-        this.quizView = quizView;
+    private ButtonGroup difficultyOptionsGroup;
+    private JRadioButton[] gameTypeOptions;
+    private ButtonGroup gameTypeOptionsGroup;
+    private Controller2 controller;
+
+    public Frame(Controller2 controller) {
+        this.controller = controller;
         this.setTitle("Gissa Fotbollsspelare");
         this.setSize(width, height);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,17 +43,26 @@ public class Frame extends JFrame {
         createTextField();
         createButtons();
         createTextArea (highScoreList);
+        createRadioButtons();
         startPanel.add(playerNameLabel);
         startPanel.add(playerNameJTextField);
         startPanel.add(start);
         startPanel.add(label);
         startPanel.add(scrollPane);
         startPanel.add(showlist);
+        for(JRadioButton option : difficultyOptions){
+            startPanel.add(option);
+        }
+        for(JRadioButton option : gameTypeOptions){
+            startPanel.add(option);
+        }
         startPanel.add(backgroundLabel);
         startPanel.setBounds(0, 0, width, height);
         this.add(startPanel);
         this.setVisible(true);
     }
+
+
     private void createLabels(){
         // Lägg till en bild i panelen
         ImageIcon imageIcon = new ImageIcon("images/bluestart.jpg");
@@ -102,7 +118,7 @@ public class Frame extends JFrame {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                quizView.displayQuestions(Frame.this);
+                controller.displayQuestions();
             }
         });
         showlist = new JButton("  show list  ");
@@ -125,6 +141,86 @@ public class Frame extends JFrame {
         questionPanel.setBounds(0, 0, width, height);
         this.add(questionPanel);
         repaint();
+    }
+
+    private void createRadioButtons(){
+        difficultyOptions = new JRadioButton[2];
+        difficultyOptionsGroup = new ButtonGroup();
+        difficultyOptions[0] = new JRadioButton("Normal");
+        difficultyOptions[0].setBounds(220, height/2+120, 150, 30);
+        difficultyOptions[0].setFont(font);
+        difficultyOptions[0].setSelected(true);
+        difficultyOptions[0].setBackground(Color.LIGHT_GRAY);
+        difficultyOptions[0].setForeground(Color.WHITE);
+        difficultyOptionsGroup.add(difficultyOptions[0]);
+
+        difficultyOptions[1] = new JRadioButton("Hard");
+        difficultyOptions[1].setBounds(440, height/2+120, 100, 30);
+        difficultyOptions[1].setFont(font);
+        difficultyOptions[1].setBackground(Color.LIGHT_GRAY);
+        difficultyOptions[1].setForeground(Color.WHITE);
+        difficultyOptionsGroup.add(difficultyOptions[1]);
+        /////////////////////////////////////////////////
+        gameTypeOptions = new JRadioButton[5];
+        gameTypeOptionsGroup = new ButtonGroup();
+        gameTypeOptions[0] = new JRadioButton("PremierLeague");
+        gameTypeOptions[0].setBounds(220, height/2+200, 200, 30);
+        gameTypeOptions[0].setFont(font);
+        gameTypeOptions[0].setSelected(true);
+        gameTypeOptions[0].setBackground(Color.LIGHT_GRAY);
+        gameTypeOptions[0].setForeground(Color.WHITE);
+        gameTypeOptionsGroup.add(gameTypeOptions[0]);
+
+        gameTypeOptions[1] = new JRadioButton("LaLiga");
+        gameTypeOptions[1].setBounds(440, height/2+200, 120, 30);
+        gameTypeOptions[1].setFont(font);
+        gameTypeOptions[1].setBackground(Color.LIGHT_GRAY);
+        gameTypeOptions[1].setForeground(Color.WHITE);
+        gameTypeOptionsGroup.add(gameTypeOptions[1]);
+
+        gameTypeOptions[2] = new JRadioButton("Bundesliga");
+        gameTypeOptions[2].setBounds(600, height/2+200, 170, 30);
+        gameTypeOptions[2].setFont(font);
+        gameTypeOptions[2].setBackground(Color.LIGHT_GRAY);
+        gameTypeOptions[2].setForeground(Color.WHITE);
+        gameTypeOptionsGroup.add(gameTypeOptions[2]);
+
+        gameTypeOptions[3] = new JRadioButton("Ligue1");
+        gameTypeOptions[3].setBounds(220, height/2+250, 120, 30);
+        gameTypeOptions[3].setFont(font);
+        gameTypeOptions[3].setBackground(Color.LIGHT_GRAY);
+        gameTypeOptions[3].setForeground(Color.WHITE);
+        gameTypeOptionsGroup.add(gameTypeOptions[3]);
+
+        gameTypeOptions[4] = new JRadioButton("SerieA");
+        gameTypeOptions[4].setBounds(440, height/2+250, 120, 30);
+        gameTypeOptions[4].setFont(font);
+        gameTypeOptions[4].setBackground(Color.LIGHT_GRAY);
+        gameTypeOptions[4].setForeground(Color.WHITE);
+        gameTypeOptionsGroup.add(gameTypeOptions[4]);
+    }
+    public GameType getGameType(){
+        if(gameTypeOptions[0].isSelected()){
+            return GameType.PremierLeague;
+        }
+        else if(gameTypeOptions[1].isSelected()){
+            return GameType.LaLiga;
+        }
+        else if(gameTypeOptions[2].isSelected()){
+            return GameType.Bundesliga;
+        }
+        else if(gameTypeOptions[3].isSelected()){
+            return GameType.Ligue1;
+        }
+        return GameType.SerieA;
+    }
+
+
+    public Difficulty getDifficulty(){
+        if(difficultyOptions[0].isSelected()){
+            return Difficulty.Normal;
+        }
+        return Difficulty.Hard;
     }
 
     public String getPlayerName(){

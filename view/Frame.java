@@ -28,9 +28,7 @@ public class Frame extends JFrame {
         this.setResizable(false);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
-
     }
-
     public void addStartPanel(String[] highScoreList){
         startPanel = new JPanel();
         startPanel.setLayout(null);
@@ -119,7 +117,6 @@ public class Frame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 show = !show;
                 scrollPane.setVisible(show);
-
             }
         });
     }

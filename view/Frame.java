@@ -74,7 +74,7 @@ public class Frame extends JFrame {
         playerNameLabel = new JLabel("Player Name: ");
         playerNameLabel.setFont(font);
         playerNameLabel.setForeground(Color.WHITE);
-        playerNameLabel.setBounds(50, height/2-100, 200, 50);
+        playerNameLabel.setBounds(50, height/2-80, 200, 50);
         // Skapa en label och en knapp
         label = new JLabel("Välkommen till Gissa Fotbollsspelare!");
         label.setFont(font);
@@ -104,7 +104,7 @@ public class Frame extends JFrame {
 //        scoresJTextArea.setBounds(10,  height/2, 200,  height/2);
         scrollPane = new JScrollPane(scoresJTextArea);
         scrollPane.setVisible(false);
-        scrollPane.setBounds(10,  height/2-50, 200,  height/2+30);
+        scrollPane.setBounds(10,  height/2-70, 200,  height/2+30);
     }
     private void createButtons(){
         //this.getContentPane().setBackground(Color.RED);

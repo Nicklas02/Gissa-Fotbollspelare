@@ -186,14 +186,14 @@ public class Frame extends JFrame {
         gameTypeOptionsGroup.add(gameTypeOptions[2]);
 
         gameTypeOptions[3] = new JRadioButton("Ligue1");
-        gameTypeOptions[3].setBounds(220, height/2+250, 120, 30);
+        gameTypeOptions[3].setBounds(650, height/2+70, 120, 30);
         gameTypeOptions[3].setFont(font);
         gameTypeOptions[3].setBackground(Color.LIGHT_GRAY);
         gameTypeOptions[3].setForeground(Color.WHITE);
         gameTypeOptionsGroup.add(gameTypeOptions[3]);
 
         gameTypeOptions[4] = new JRadioButton("SerieA");
-        gameTypeOptions[4].setBounds(440, height/2+250, 120, 30);
+        gameTypeOptions[4].setBounds(650, height/2+120, 120, 30);
         gameTypeOptions[4].setFont(font);
         gameTypeOptions[4].setBackground(Color.LIGHT_GRAY);
         gameTypeOptions[4].setForeground(Color.WHITE);

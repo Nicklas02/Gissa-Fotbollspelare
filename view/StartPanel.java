@@ -143,7 +143,7 @@ public class StartPanel extends JFrame {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                quizView.displayQuestions(Frame.this);
+                quizView.displayQuestions(StartPanel.this);
             }
         });
         showlist = new JButton("  show list  ");

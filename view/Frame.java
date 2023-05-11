@@ -74,7 +74,7 @@ public class Frame extends JFrame {
         playerNameLabel = new JLabel("Player Name: ");
         playerNameLabel.setFont(font);
         playerNameLabel.setForeground(Color.WHITE);
-        playerNameLabel.setBounds(50, height/2-80, 200, 50);
+        playerNameLabel.setBounds(50, height/2-125, 200, 50);
         // Skapa en label och en knapp
         label = new JLabel("Välkommen till Gissa Fotbollsspelare!");
         label.setFont(font);
@@ -87,7 +87,7 @@ public class Frame extends JFrame {
         playerNameJTextField.setBackground(Color.LIGHT_GRAY);
         playerNameJTextField.setForeground(Color.WHITE);
         playerNameJTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        playerNameJTextField.setBounds(220, height/2-90, 230, 30);
+        playerNameJTextField.setBounds(220, height/2-115, 230, 30);
     }
     private void createTextArea(String[] highScoreList){
         String scores = "";
@@ -114,7 +114,7 @@ public class Frame extends JFrame {
         start.setForeground(Color.WHITE);
         start.setFocusPainted(false);
         start.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        start.setBounds(220, height/2-20, 180, 40);
+        start.setBounds(520, height/2-120, 180, 40);
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -127,7 +127,7 @@ public class Frame extends JFrame {
         showlist.setForeground(Color.WHITE);
         showlist.setFocusPainted(false);
         showlist.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        showlist.setBounds(220, height/2+40, 180, 40);
+        showlist.setBounds(220, height/2-70, 180, 40);
         showlist.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -147,7 +147,7 @@ public class Frame extends JFrame {
         difficultyOptions = new JRadioButton[2];
         difficultyOptionsGroup = new ButtonGroup();
         difficultyOptions[0] = new JRadioButton("Normal");
-        difficultyOptions[0].setBounds(220, height/2+120, 150, 30);
+        difficultyOptions[0].setBounds(220, height/2+1, 150, 30);
         difficultyOptions[0].setFont(font);
         difficultyOptions[0].setSelected(true);
         difficultyOptions[0].setBackground(Color.LIGHT_GRAY);
@@ -155,7 +155,7 @@ public class Frame extends JFrame {
         difficultyOptionsGroup.add(difficultyOptions[0]);
 
         difficultyOptions[1] = new JRadioButton("Hard");
-        difficultyOptions[1].setBounds(440, height/2+120, 100, 30);
+        difficultyOptions[1].setBounds(220, height/2+50, 100, 30);
         difficultyOptions[1].setFont(font);
         difficultyOptions[1].setBackground(Color.LIGHT_GRAY);
         difficultyOptions[1].setForeground(Color.WHITE);
@@ -164,7 +164,7 @@ public class Frame extends JFrame {
         gameTypeOptions = new JRadioButton[5];
         gameTypeOptionsGroup = new ButtonGroup();
         gameTypeOptions[0] = new JRadioButton("PremierLeague");
-        gameTypeOptions[0].setBounds(220, height/2+200, 200, 30);
+        gameTypeOptions[0].setBounds(420, height/2+1, 200, 30);
         gameTypeOptions[0].setFont(font);
         gameTypeOptions[0].setSelected(true);
         gameTypeOptions[0].setBackground(Color.LIGHT_GRAY);
@@ -172,28 +172,28 @@ public class Frame extends JFrame {
         gameTypeOptionsGroup.add(gameTypeOptions[0]);
 
         gameTypeOptions[1] = new JRadioButton("LaLiga");
-        gameTypeOptions[1].setBounds(440, height/2+200, 120, 30);
+        gameTypeOptions[1].setBounds(420, height/2+170, 120, 30);
         gameTypeOptions[1].setFont(font);
         gameTypeOptions[1].setBackground(Color.LIGHT_GRAY);
         gameTypeOptions[1].setForeground(Color.WHITE);
         gameTypeOptionsGroup.add(gameTypeOptions[1]);
 
         gameTypeOptions[2] = new JRadioButton("Bundesliga");
-        gameTypeOptions[2].setBounds(600, height/2+200, 170, 30);
+        gameTypeOptions[2].setBounds(420, height/2+50, 170, 30);
         gameTypeOptions[2].setFont(font);
         gameTypeOptions[2].setBackground(Color.LIGHT_GRAY);
         gameTypeOptions[2].setForeground(Color.WHITE);
         gameTypeOptionsGroup.add(gameTypeOptions[2]);
 
         gameTypeOptions[3] = new JRadioButton("Ligue1");
-        gameTypeOptions[3].setBounds(650, height/2+70, 120, 30);
+        gameTypeOptions[3].setBounds(420, height/2+90, 120, 30);
         gameTypeOptions[3].setFont(font);
         gameTypeOptions[3].setBackground(Color.LIGHT_GRAY);
         gameTypeOptions[3].setForeground(Color.WHITE);
         gameTypeOptionsGroup.add(gameTypeOptions[3]);
 
         gameTypeOptions[4] = new JRadioButton("SerieA");
-        gameTypeOptions[4].setBounds(650, height/2+120, 120, 30);
+        gameTypeOptions[4].setBounds(420, height/2+130, 120, 30);
         gameTypeOptions[4].setFont(font);
         gameTypeOptions[4].setBackground(Color.LIGHT_GRAY);
         gameTypeOptions[4].setForeground(Color.WHITE);

@@ -68,8 +68,6 @@ public class QuizView extends JPanel{
         imageIcon = new ImageIcon(scaled);
         background = new JLabel(imageIcon);
         background.setBounds(0, 0, width, height);
-
-
         playerNameJTextField = new JTextArea();
         playerNameJTextField.setFont(font);
         playerNameJTextField.setEditable(false);

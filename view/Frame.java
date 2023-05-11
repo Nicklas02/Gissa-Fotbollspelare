@@ -79,7 +79,7 @@ public class Frame extends JFrame {
         label = new JLabel("Välkommen till Gissa Fotbollsspelare!");
         label.setFont(font);
         label.setForeground(Color.WHITE);
-        label.setBounds(100, 50, width-100, 50);
+        label.setBounds(170, 50, width-100, 50);
     }
     private void createTextField(){
         playerNameJTextField = new JTextField("");
@@ -114,7 +114,7 @@ public class Frame extends JFrame {
         start.setForeground(Color.WHITE);
         start.setFocusPainted(false);
         start.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        start.setBounds(520, height/2-120, 180, 40);
+        start.setBounds(220, height/2-1, 180, 40);
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -147,7 +147,7 @@ public class Frame extends JFrame {
         difficultyOptions = new JRadioButton[2];
         difficultyOptionsGroup = new ButtonGroup();
         difficultyOptions[0] = new JRadioButton("Normal");
-        difficultyOptions[0].setBounds(220, height/2+1, 150, 30);
+        difficultyOptions[0].setBounds(640, height/2+1, 120, 30);
         difficultyOptions[0].setFont(font);
         difficultyOptions[0].setSelected(true);
         difficultyOptions[0].setBackground(Color.LIGHT_GRAY);
@@ -155,7 +155,7 @@ public class Frame extends JFrame {
         difficultyOptionsGroup.add(difficultyOptions[0]);
 
         difficultyOptions[1] = new JRadioButton("Hard");
-        difficultyOptions[1].setBounds(220, height/2+50, 100, 30);
+        difficultyOptions[1].setBounds(640, height/2+50, 100, 30);
         difficultyOptions[1].setFont(font);
         difficultyOptions[1].setBackground(Color.LIGHT_GRAY);
         difficultyOptions[1].setForeground(Color.WHITE);

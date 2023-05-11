@@ -62,7 +62,7 @@ public class QuizView extends JPanel{
         //question = controller.getQuestionsList();
 
         this.setLayout(null);
-        imageIcon = new ImageIcon("images/bluequiz.jpg");
+        imageIcon = new ImageIcon("images/background.jpg");
         Image image = imageIcon.getImage();
         Image scaled = image.getScaledInstance(800, 800,Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaled);
@@ -110,28 +110,28 @@ public class QuizView extends JPanel{
         optionButtons[0] = new JRadioButton();
         optionButtons[0].setBounds(10, 200, 270, 30);
         optionButtons[0].setFont(font2);
-        optionButtons[0].setForeground(Color.WHITE);
+        optionButtons[0].setForeground(Color.BLACK);
         optionGroup.add(optionButtons[0]);
         this.add(optionButtons[0]);
 
         optionButtons[1] = new JRadioButton();
         optionButtons[1].setBounds(310, 200, 270, 30);
         optionButtons[1].setFont(font2);
-        optionButtons[1].setForeground(Color.WHITE);
+        optionButtons[1].setForeground(Color.BLACK);
         optionGroup.add(optionButtons[1]);
         this.add(optionButtons[1]);
 
         optionButtons[2] = new JRadioButton();
         optionButtons[2].setBounds(10, 300, 270, 30);
         optionButtons[2].setFont(font2);
-        optionButtons[2].setForeground(Color.WHITE);
+        optionButtons[2].setForeground(Color.BLACK);
         optionGroup.add(optionButtons[2]);
         this.add(optionButtons[2]);
 
         optionButtons[3] = new JRadioButton();
         optionButtons[3].setBounds(310, 300, 270, 30);
         optionButtons[3].setFont(font2);
-        optionButtons[3].setForeground(Color.WHITE);
+        optionButtons[3].setForeground(Color.BLACK);
         optionGroup.add(optionButtons[3]);
         this.add(optionButtons[3]);
 

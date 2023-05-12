@@ -74,7 +74,7 @@ public class QuizView extends JPanel{
         titleLabel.setBounds(150, 60, 500, 40);
         this.add(titleLabel);
         questionNumber = new JLabel();
-        questionNumber.setBounds(width - 120, 110, 100, 40);
+        questionNumber.setBounds(width - 150, 110, 500, 40);
         questionNumber.setFont(font);
         //colour for fonts
         questionNumber.setForeground(Color.WHITE);
@@ -128,7 +128,7 @@ public class QuizView extends JPanel{
         countdownLabel = new JLabel("10");
         countdownLabel.setBounds(750, 200, 50, 20);
         countdownLabel.setFont(font);
-        countdownLabel.setForeground(Color.BLACK);
+        countdownLabel.setForeground(Color.WHITE);
         this.add(countdownLabel);
         timer = new Timer(1000, new ActionListener() {
             int count = 10;

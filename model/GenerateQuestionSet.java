@@ -13,6 +13,7 @@ public class GenerateQuestionSet {
     private final GameType gameType;
     private final Difficulty difficulty;
     ArrayList<Player> corrAnswers = new ArrayList<>();
+    private int prevQuestion = 100;
 
 
     public GenerateQuestionSet(GameType gameType, Difficulty difficulty) {
@@ -42,7 +43,11 @@ public class GenerateQuestionSet {
 
         //Test specific value
         //localRandom = 8;
+        while(localRandom == getPrevQuestion()) {
+            localRandom = random.nextInt(nbrOfRdmQuestions);
+        }
 
+        setPrevQuestion(localRandom);
         if (localRandom == 0) {
             return ageQuestion();
         }
@@ -381,4 +386,11 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    public int getPrevQuestion() {
+        return prevQuestion;
+    }
+
+    public void setPrevQuestion(int prevQuestion) {
+        this.prevQuestion = prevQuestion;
+    }
 }

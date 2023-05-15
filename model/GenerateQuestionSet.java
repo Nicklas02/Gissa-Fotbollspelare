@@ -71,7 +71,7 @@ public class GenerateQuestionSet {
             return ValueOrWage(); //Bytte ut denna mot Weight för weight känns inte helt vettigt att ha med på en utställning
         }
         if(localRandom==9){
-            return SkillMoves(); 
+            return SkillMoves();
         }
         System.out.println("Error, no question was generated, random was: " + localRandom);
         return null;
@@ -164,7 +164,7 @@ public class GenerateQuestionSet {
         String localQuestion = "Vilken spelare kommer från " + corrAnswers.get(0).getNationality() +"?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
-    
+
     private QuestionAutomatic Overall() {
         Player[] alternatives = bottomQuartilePlayers();
         Player correctAnswer = upperQuartilePlayer();
@@ -254,11 +254,22 @@ public class GenerateQuestionSet {
     //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {
         //svarsalternativ
+        boolean samePlayerTwice = true;
         Player[] alternatives = new Player[NBR_OF_ALT];
-        for (int i = 0; i < NBR_OF_ALT; i++) {
-            int pos = random.nextInt(sample.length);
-            alternatives[i] = sample[pos];
-
+        while(samePlayerTwice) {
+            samePlayerTwice = false;
+            for (int i = 0; i < NBR_OF_ALT; i++) {
+                int pos = random.nextInt(sample.length);
+                alternatives[i] = sample[pos];
+            }
+            for (int i = 0; i < alternatives.length; i++) {
+                for (int j = i + 1 ; j < alternatives.length; j++) {
+                    if (alternatives[i].equals(alternatives[j])) {
+                        samePlayerTwice = true;
+                        break;
+                    }
+                }
+            }
         }
         return alternatives;
     }

@@ -270,8 +270,6 @@ public class QuizView extends JPanel{
         optionGroup.clearSelection();
     }
 
-
-
     public void disableNextButton() {
         this.nextButton.setEnabled(false);
     }

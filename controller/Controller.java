@@ -1,19 +1,21 @@
 package controller;
 
 import model.*;
-import view.StartPanel;
+import view.Frame;
 import view.QuizView;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
-public class Controller {
+public class Controller2 {
 
     private HighScoreFromDatabase highScoreList;
     private GameType gameType = GameType.PremierLeague;
     private Difficulty difficulty = Difficulty.Normal;
     private QuizView quizView;
+    private Frame frame;
 
-    public Controller() {
+    public Controller2() {
         this.highScoreList = new HighScoreFromDatabase();
         //String [] questionsandanswer=  hänmta questions
         startGame();
@@ -22,13 +24,10 @@ public class Controller {
     //skicka till GUI
     private void startGame() {
         String[] highscorelist = highScoreList.readList();
-        fetchQuestions();
-
-        StartPanel startPanel = new StartPanel(this, quizView);
-        startPanel.addStartPanel(highscorelist);
-        //frame.metodföratttaEMotfrågor(Formatterad lista strings[]  och strings[] hoghscore)
-
+        frame = new Frame(this);
+        frame.addStartPanel(highscorelist);
     }
+
 
 
     //Hämta automatisk
@@ -60,4 +59,19 @@ public class Controller {
     public void sendScoreToDatabase(String playerName, int score) {
         highScoreList.newScoreToDatabase(playerName, score);
     }
+
+    public void displayQuestions(){
+        if(frame.getPlayerName().isBlank()){
+            JOptionPane.showMessageDialog(frame, "Error: you must enter your name", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        gameType = frame.getGameType();
+        difficulty = frame.getDifficulty();
+        fetchQuestions();
+        this.quizView.setPlayerName(frame.getPlayerName());
+        frame.addQuestionsPanel(this.quizView);
+        this.quizView.updateQuestion();
+
+    }
+
 }

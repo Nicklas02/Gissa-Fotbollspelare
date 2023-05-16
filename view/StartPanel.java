@@ -1,5 +1,5 @@
 package view;
-import controller.Controller2;
+import controller.Controller;
 import model.Difficulty;
 import model.GameType;
 
@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Frame extends JFrame {
+public class StartPanel extends JFrame {
 
     private JButton start, showlist;
     private JScrollPane scrollPane;
@@ -25,9 +25,9 @@ public class Frame extends JFrame {
     private ButtonGroup difficultyOptionsGroup;
     private JRadioButton[] gameTypeOptions;
     private ButtonGroup gameTypeOptionsGroup;
-    private Controller2 controller;
+    private Controller controller;
 
-    public Frame(Controller2 controller) {
+    public StartPanel(Controller controller) {
         this.controller = controller;
         this.setTitle("Gissa Fotbollsspelare");
         this.setSize(width, height);

@@ -45,7 +45,6 @@ public class Frame extends JFrame {
         createButtons();
         createTextArea(highScoreList);
         createRadioButtons();
-     //   createGameTypePanel();
         startPanel.add(playerNameLabel);
         startPanel.add(playerNameJTextField);
         startPanel.add(start);
@@ -206,29 +205,7 @@ public class Frame extends JFrame {
         gameTypeOptions[4].setForeground(Color.WHITE);
         gameTypeOptionsGroup.add(gameTypeOptions[4]);
     }
-/*
-    private void createGameTypePanel() {
-        JPanel gameTypePanel = new JPanel();
-        gameTypePanel.setLayout(new GridLayout(5, 1));
-        gameTypeOptions = new JRadioButton[5];
-        gameTypeOptionsGroup = new ButtonGroup();
-        gameTypeOptions[0] = new JRadioButton("PremierLeague");
-        gameTypeOptions[1] = new JRadioButton("LaLiga");
-        gameTypeOptions[2] = new JRadioButton("Bundesliga");
-        gameTypeOptions[3] = new JRadioButton("Ligue1");
-        gameTypeOptions[4] = new JRadioButton("SerieA");
-        for (JRadioButton option : gameTypeOptions) {
-            option.setFont(font);
-            option.setBackground(Color.LIGHT_GRAY);
-            option.setForeground(Color.BLACK);
-            gameTypeOptionsGroup.add(option);
-            gameTypePanel.add(option);
-            gameTypePanel.setVisible(true);
-        }
-        gameTypePanel.setBounds(220, height / 2 + 80, 180, 150);
-        startPanel.add(gameTypePanel);
-    }
-*/
+
     public GameType getGameType() {
         if (gameTypeOptions[0].isSelected()) {
             return GameType.PremierLeague;

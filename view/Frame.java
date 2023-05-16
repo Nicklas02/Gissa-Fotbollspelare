@@ -90,7 +90,7 @@ public class Frame extends JFrame {
         playerNameJTextField.setBounds(330, height / 2 - 115, 230, 30);
 
         /*
-        Denna kod förbjuder användaren att skriva siffror i med sitt namn. 
+        Denna kod förbjuder användaren att skriva siffror i med sitt namn.
         playerNameJTextField.addKeyListener(new KeyAdapter() {
 
             @Override

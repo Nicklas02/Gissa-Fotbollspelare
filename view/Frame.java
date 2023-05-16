@@ -60,6 +60,7 @@ public class Frame extends JFrame {
 
     private void createLabels() {
         // Lägg till en bild i panelen
+
         ImageIcon imageIcon = new ImageIcon("images/start.jpg");
         Image image = imageIcon.getImage();
         Image scaled = image.getScaledInstance(800, 800, Image.SCALE_SMOOTH);
@@ -69,12 +70,13 @@ public class Frame extends JFrame {
         playerNameLabel = new JLabel("Player Name: ");
         playerNameLabel.setFont(font);
         playerNameLabel.setForeground(Color.WHITE);
-        playerNameLabel.setBounds(50, height / 2 - 125, 200, 50);
+        playerNameLabel.setBounds(170, height / 2 - 125, 200, 50);
         // Skapa en label och en knapp
         label = new JLabel("Välkommen till Gissa Fotbollsspelare!");
-        label.setFont(font);
         label.setForeground(Color.WHITE);
         label.setBounds(170, 50, width - 100, 50);
+        Font labelFont = new Font(Font.SANS_SERIF,Font.BOLD, 26);
+        label.setFont(labelFont);
     }
 
     private void createTextField() {
@@ -83,7 +85,7 @@ public class Frame extends JFrame {
         playerNameJTextField.setBackground(Color.LIGHT_GRAY);
         playerNameJTextField.setForeground(Color.WHITE);
         playerNameJTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        playerNameJTextField.setBounds(220, height / 2 - 115, 230, 30);
+        playerNameJTextField.setBounds(330, height / 2 - 115, 230, 30);
     }
 
     private void createTextArea(String[] highScoreList) {
@@ -112,7 +114,7 @@ public class Frame extends JFrame {
         start.setForeground(Color.WHITE);
         start.setFocusPainted(false);
         start.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        start.setBounds(220, height / 2 - 1, 180, 40);
+        start.setBounds(330, 380, 180, 40);
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,7 +127,7 @@ public class Frame extends JFrame {
         showlist.setForeground(Color.WHITE);
         showlist.setFocusPainted(false);
         showlist.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        showlist.setBounds(220, height / 2 - 70, 180, 40);
+        showlist.setBounds(330, height / 2 - 70, 180, 40);
         showlist.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -145,7 +147,7 @@ public class Frame extends JFrame {
     private void createRadioButtons() {
         String[] diffOptions = {"Normal", "Hard"};
         difficultyOptions = new JComboBox<>(diffOptions);
-        difficultyOptions.setBounds(640, height / 2 + 1, 120, 30);
+        difficultyOptions.setBounds(550, 430, 120, 30);
         difficultyOptions.setFont(font);
         difficultyOptions.setSelectedIndex(0);
         difficultyOptions.setBackground(Color.LIGHT_GRAY);
@@ -153,7 +155,7 @@ public class Frame extends JFrame {
         /////////////////////////////////////////////////
         String[] gameOptions = {"PremierLeague", "LaLiga", "Bundesliga", "Ligue1", "SerieA"};
         gameTypeOptions = new JComboBox<>(gameOptions);
-        gameTypeOptions.setBounds(420, height / 2 + 1, 200, 30);
+        gameTypeOptions.setBounds(333, 430, 200, 30);
         gameTypeOptions.setFont(font);
         gameTypeOptions.setSelectedIndex(0);
         gameTypeOptions.setBackground(Color.LIGHT_GRAY);

@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Frame extends JFrame {
 
@@ -60,7 +62,6 @@ public class Frame extends JFrame {
 
     private void createLabels() {
         // Lägg till en bild i panelen
-
         ImageIcon imageIcon = new ImageIcon("images/start.jpg");
         Image image = imageIcon.getImage();
         Image scaled = image.getScaledInstance(800, 800, Image.SCALE_SMOOTH);
@@ -77,6 +78,7 @@ public class Frame extends JFrame {
         label.setBounds(170, 50, width - 100, 50);
         Font labelFont = new Font(Font.SANS_SERIF,Font.BOLD, 26);
         label.setFont(labelFont);
+
     }
 
     private void createTextField() {
@@ -86,6 +88,21 @@ public class Frame extends JFrame {
         playerNameJTextField.setForeground(Color.WHITE);
         playerNameJTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         playerNameJTextField.setBounds(330, height / 2 - 115, 230, 30);
+
+        /*
+        Denna kod förbjuder användaren att skriva siffror i med sitt namn. 
+        playerNameJTextField.addKeyListener(new KeyAdapter() {
+
+            @Override
+        public void keyTyped(KeyEvent e) {
+            char c = e.getKeyChar();
+            if (!Character.isLetter(c)) {
+                e.consume(); // Ignorera inmatningen om det inte är en bokstav
+            }
+        }
+    });
+    */
+
     }
 
     private void createTextArea(String[] highScoreList) {

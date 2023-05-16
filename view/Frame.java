@@ -1,4 +1,5 @@
 package view;
+
 import controller.Controller2;
 import model.Difficulty;
 import model.GameType;
@@ -20,17 +21,8 @@ public class Frame extends JFrame {
     private int height = 800;
     private Font font = new Font("Arial", Font.BOLD, 24);
     private JTextArea scoresJTextArea;
-
-    private JComboBox <String> difficultyOptions;
+    private JComboBox<String> difficultyOptions;
     private JComboBox<String> gameTypeOptions;
-
-
-    /*
-     private JRadioButton[] difficultyOptions;
-    private ButtonGroup difficultyOptionsGroup;
-    private JRadioButton[] gameTypeOptions;
-    private ButtonGroup gameTypeOptionsGroup;
-     */
     private Controller2 controller;
 
     public Frame(Controller2 controller) {
@@ -51,19 +43,20 @@ public class Frame extends JFrame {
         createButtons();
         createTextArea(highScoreList);
         createRadioButtons();
+        //   createGameTypePanel();
         startPanel.add(playerNameLabel);
         startPanel.add(playerNameJTextField);
         startPanel.add(start);
         startPanel.add(label);
         startPanel.add(scrollPane);
         startPanel.add(showlist);
+        startPanel.add(difficultyOptions);
+        startPanel.add(gameTypeOptions);
         startPanel.add(backgroundLabel);
         startPanel.setBounds(0, 0, width, height);
         this.add(startPanel);
         this.setVisible(true);
     }
-
-
 
     private void createLabels() {
         // Lägg till en bild i panelen
@@ -153,22 +146,24 @@ public class Frame extends JFrame {
         String[] diffOptions = {"Normal", "Hard"};
         difficultyOptions = new JComboBox<>(diffOptions);
         difficultyOptions.setBounds(640, height / 2 + 1, 120, 30);
+        difficultyOptions.setFont(font);
         difficultyOptions.setSelectedIndex(0);
         difficultyOptions.setBackground(Color.LIGHT_GRAY);
         difficultyOptions.setForeground(Color.WHITE);
-
-        //***************************//
-        String[] gameOption = {"PremierLeague", "LaLiga", "Bundesliga", "Ligue1", "SerieA"};
+        /////////////////////////////////////////////////
+        String[] gameOptions = {"PremierLeague", "LaLiga", "Bundesliga", "Ligue1", "SerieA"};
+        gameTypeOptions = new JComboBox<>(gameOptions);
         gameTypeOptions.setBounds(420, height / 2 + 1, 200, 30);
         gameTypeOptions.setFont(font);
         gameTypeOptions.setSelectedIndex(0);
         gameTypeOptions.setBackground(Color.LIGHT_GRAY);
         gameTypeOptions.setForeground(Color.WHITE);
+
     }
 
     public GameType getGameType() {
         String selectedGameType = (String) gameTypeOptions.getSelectedItem();
-        switch (selectedGameType){
+        switch (selectedGameType) {
             case "PremierLeague":
                 return GameType.PremierLeague;
             case "LaLiga":
@@ -182,20 +177,19 @@ public class Frame extends JFrame {
             default:
                 return null;
         }
-        }
+    }
 
-
-        
     public Difficulty getDifficulty() {
         String selectedDifficulty = (String) difficultyOptions.getSelectedItem();
-        if (selectedDifficulty.equals(NORMAL)) {
+        if (selectedDifficulty.equals("Normal")) {
             return Difficulty.Normal;
         } else {
             return Difficulty.Hard;
         }
     }
-        public String getPlayerName () {
-            return playerNameJTextField.getText().trim();
-        }
+
+    public String getPlayerName() {
+        return playerNameJTextField.getText().trim();
+    }
 
 }

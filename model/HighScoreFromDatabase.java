@@ -27,14 +27,27 @@ public class HighScoreFromDatabase {
         }
     }
 
-    public void newScoreToDatabase(String name, int score) {
+    public void newScoreToDatabase(String name, int score, GameType gameType) {
         conn = getDatabaseConnection();
         try {
-            String QUERY = "insert into \"highscorelist\" (name, score)\n" +
-                    "values(?, ?)";
+            String QUERY = "insert into \"highscorelist\" (name, score, category)\n" +
+                    "values(?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(QUERY);
             pstmt.setString(1, name);
             pstmt.setInt(2, score);
+            String category = "";
+            if (gameType == GameType.PremierLeague) {
+                category = "PL";
+            } else if (gameType == GameType.LaLiga) {
+                category = "LL";
+            } else if (gameType == GameType.Ligue1) {
+                category = "L1";
+            } else if (gameType == GameType.Bundesliga) {
+                category = "BL";
+            } else if (gameType == GameType.SerieA) {
+                category = "SA";
+            }
+            pstmt.setString(3, category);
             int affectedrows = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -55,7 +68,8 @@ public class HighScoreFromDatabase {
             ResultSet rs = stmt.executeQuery(QUERY);
 
             while (rs.next() && i < listSize) {
-                highScoreList[i] = String.format(i + 1 + " " + rs.getString("name") + " " + rs.getInt("score"));
+                highScoreList[i] = String.format(i + 1 + " " + rs.getString("name") + " " +
+                        rs.getInt("score") + " " + rs.getString("category"));
                 i++;
             }
             conn.close();

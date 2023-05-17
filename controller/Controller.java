@@ -57,7 +57,7 @@ public class Controller {
     }
 
     public void sendScoreToDatabase(String playerName, int score) {
-        highScoreList.newScoreToDatabase(playerName, score);
+        highScoreList.newScoreToDatabase(playerName, score, gameType);
     }
 
     public void displayQuestions(){

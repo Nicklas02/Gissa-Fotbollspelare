@@ -149,7 +149,7 @@ public class StartPanel extends JFrame {
 
     public void createHelpButton(){
         String text = "";
-        try (BufferedReader br = new BufferedReader(new FileReader("files/Introduktionstext.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("files/HjälpText.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 System.out.println(line);

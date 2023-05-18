@@ -175,7 +175,7 @@ public class GenerateQuestionSet {
         Player correctAnswer = upperQuartilePlayer();
         corrAnswers.add(correctAnswer);
         alternatives[random.nextInt(NBR_OF_ALT)] = correctAnswer;
-        return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
+        return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren? (Enligt FIFA23)");
     }
 
     private Player[] bottomQuartilePlayers() {
@@ -250,7 +250,7 @@ public class GenerateQuestionSet {
             question = "Vilken spelare har högst marknadsvärde på "
                     + correctAnswer.getValue() + "?";
         } if(!isValueQuestion && correctAnswer!=null) {
-            question="Vilken spelare har tjänar mest med" +
+            question="Vilken spelare tjänar mest med" +
                     "en månadslön på " + correctAnswer.getWage() + "?";
         }
         return new QuestionAutomatic(alternatives, corrAnswers, question);

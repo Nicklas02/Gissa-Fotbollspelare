@@ -24,7 +24,6 @@ public class QuizView extends JPanel{
     private ImageIcon imageIcon;
     private JLabel background,  titleLabel;
     private JTextArea playerNameJTextField;
-
     private Controller2 controller;
     private JFrame frame;
     private JLabel questionLabel;
@@ -36,7 +35,6 @@ public class QuizView extends JPanel{
 
     //private ButtonGroup optionGroup;
     private JButton nextButton;
-    private JButton prevButton;
     private Font font = new Font("Ariel", Font.BOLD, 20);
     private Font font2 = new Font("Ariel", Font.PLAIN, 15);
     private int width = 800;
@@ -99,43 +97,11 @@ public class QuizView extends JPanel{
         this.add(rightOrWrong);
 
         questionLabel = new JLabel();
-        questionLabel.setBounds(225, 140, width, 50);
+        questionLabel.setBounds(200, 140, width, 50);
         questionLabel.setFont(font);
-        //colour fonts
         questionLabel.setForeground(Color.WHITE);
         this.add(questionLabel);
 
-        /*optionButtons = new JRadioButton[4];
-        optionGroup = new ButtonGroup();
-        optionButtons[0] = new JRadioButton();
-        optionButtons[0].setBounds(100, 200, 270, 30);
-        optionButtons[0].setFont(font2);
-        optionButtons[0].setForeground(Color.BLACK);
-        optionGroup.add(optionButtons[0]);
-        this.add(optionButtons[0]);
-
-        optionButtons[1] = new JRadioButton();
-        optionButtons[1].setBounds(500, 200, 270, 30);
-        optionButtons[1].setFont(font2);
-        optionButtons[1].setForeground(Color.BLACK);
-        optionGroup.add(optionButtons[1]);
-        this.add(optionButtons[1]);
-
-        optionButtons[2] = new JRadioButton();
-        optionButtons[2].setBounds(100, 300, 270, 30);
-        optionButtons[2].setFont(font2);
-        optionButtons[2].setForeground(Color.BLACK);
-        optionGroup.add(optionButtons[2]);
-        this.add(optionButtons[2]);
-
-        optionButtons[3] = new JRadioButton();
-        optionButtons[3].setBounds(500, 300, 270, 30);
-        optionButtons[3].setFont(font2);
-        optionButtons[3].setForeground(Color.BLACK);
-        optionGroup.add(optionButtons[3]);
-        this.add(optionButtons[3]);
-
-         */
         optionButtons = new JButton[4];
         //optionGroup = new ButtonGroup();
         optionButtons[0] = new JButton();
@@ -146,7 +112,7 @@ public class QuizView extends JPanel{
         this.add(optionButtons[0]);
 
         optionButtons[1] = new JButton();
-        optionButtons[1].setBounds(500, 200, 270, 30);
+        optionButtons[1].setBounds(400, 200, 270, 30);
         optionButtons[1].setFont(font2);
         optionButtons[1].setForeground(Color.BLACK);
         optionButtons[1].addActionListener(new OptionButtonListener(1));  // Add ActionListener
@@ -161,7 +127,7 @@ public class QuizView extends JPanel{
         this.add(optionButtons[2]);
 
         optionButtons[3] = new JButton();
-        optionButtons[3].setBounds(500, 300, 270, 30);
+        optionButtons[3].setBounds(400, 300, 270, 30);
         optionButtons[3].setFont(font2);
         optionButtons[3].setForeground(Color.BLACK);
         optionButtons[3].addActionListener(new OptionButtonListener(3));  // Add ActionListener
@@ -203,7 +169,7 @@ public class QuizView extends JPanel{
 
 
         nextButton = new JButton("Next");
-        nextButton.setBounds(350, 400, 100, 30);
+        nextButton.setBounds(325, 400, 100, 30);
         nextButton.setFont(font2);
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -237,22 +203,22 @@ public class QuizView extends JPanel{
         @Override
         public void actionPerformed(ActionEvent e) {
             selectedOptionIndex = optionIndex;
+            // Disable all option buttons
+            disableOptionButtons();
+        }
+    }
+    public void disableOptionButtons() {
+        for (int i = 0; i < optionButtons.length; i++) {
+            optionButtons[i].setEnabled(false);
         }
     }
 
-    public String getUserAnswer() {
-        /*JButton userChoice = null;
-        for (int i = 0; i < optionButtons.length; i++) {
-            if (optionButtons[i].isSelected()) {
-                userChoice = optionButtons[i];
-            }
-        }
-        if (userChoice != null) {
-            return userChoice.getText();
-        }
-        return "";
 
-         */
+    public void enableNextButton() {
+        nextButton.setEnabled(true);
+    }
+
+    public String getUserAnswer() {
         if (selectedOptionIndex != -1) {
             return optionButtons[selectedOptionIndex].getText();
         }
@@ -275,6 +241,9 @@ public class QuizView extends JPanel{
             rightOrWrong.setForeground(Color.RED);
             score--;
         }
+        for (int i = 0; i < optionButtons.length; i++) {
+            optionButtons[i].setBackground(null);
+        }
         repaint();
     }
 
@@ -282,6 +251,11 @@ public class QuizView extends JPanel{
 
     public void display() {
         frame.setVisible(true);
+    }
+    public void enableOptionButtons() {
+        for (int i = 0; i < optionButtons.length; i++) {
+            optionButtons[i].setEnabled(true);
+        }
     }
 
     public void updateQuestion() {
@@ -319,13 +293,12 @@ public class QuizView extends JPanel{
                     updateQuestion();
                     count = 15;
                 }
-                //countdownLabel.setText(String.valueOf(count));
                 progressBar.setValue(count);
-                //progressBar.setString(count + ""); // Update the string format
 
             }
         });
         timer.start();
+        enableOptionButtons();
     }
 
     public void gameOver(){
@@ -342,7 +315,7 @@ public class QuizView extends JPanel{
     }
 
     public void disableNextButton() {
-        this.nextButton.setEnabled(false);
+        nextButton.setEnabled(false);
     }
 
 

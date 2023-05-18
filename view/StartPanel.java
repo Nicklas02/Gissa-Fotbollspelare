@@ -7,10 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class StartPanel extends JFrame {
 
-    private JButton start, showlist;
+    private JButton start, showlist, help;
     private JScrollPane scrollPane;
     private boolean show = false;
     private JLabel label, playerNameLabel, backgroundLabel;
@@ -45,12 +48,14 @@ public class StartPanel extends JFrame {
         createButtons();
         createTextArea(highScoreList);
         createRadioButtons();
+        createHelpButton();
         startPanel.add(playerNameLabel);
         startPanel.add(playerNameJTextField);
         startPanel.add(start);
         startPanel.add(label);
         startPanel.add(scrollPane);
         startPanel.add(showlist);
+        startPanel.add(help);
         for (JRadioButton option : difficultyOptions) {
             startPanel.add(option);
         }
@@ -142,6 +147,46 @@ public class StartPanel extends JFrame {
         });
     }
 
+    public void createHelpButton(){
+        String text = "";
+        try (BufferedReader br = new BufferedReader(new FileReader("files/Introduktionstext.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                text += line + "\n";
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading questions from file: " + e.getMessage());
+            System.exit(1);
+        }
+        JFrame f = new JFrame("Gissa fotbollsspelare");
+        f.setLocationRelativeTo(null);
+        JTextArea l = new JTextArea(text);
+        l.setEditable(false);
+        f.setSize(600, 300);
+        PopupFactory pf = new PopupFactory();
+        JPanel p2 = new JPanel();
+        p2.setBackground(Color.WHITE);
+        p2.add(l);
+        Popup p = pf.getPopup(f, p2, 180, 100);
+        f.add(p2);
+
+        help = new JButton(  "  Hjälp  ");
+        help.setFont(font);
+        help.setBackground(Color.LIGHT_GRAY);
+        help.setForeground(Color.WHITE);
+        help.setFocusPainted(false);
+        help.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        help.setBounds(width-200, height-100, 180,40);
+        help.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.setVisible(true);
+                p.show();
+            }
+        });
+    }
+
     public void addQuestionsPanel(JPanel questionPanel) {
         this.remove(startPanel);
         questionPanel.setBounds(0, 0, width, height);
@@ -220,7 +265,6 @@ public class StartPanel extends JFrame {
         }
         return null;
     }
-
 
 
     public Difficulty getDifficulty(){

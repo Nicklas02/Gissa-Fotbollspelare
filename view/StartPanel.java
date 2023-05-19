@@ -1,6 +1,6 @@
 package view;
 
-import controller.Controller2;
+import controller.Controller;
 import model.Difficulty;
 import model.GameType;
 
@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Frame extends JFrame {
+public class StartPanel extends JFrame {
 
     private JButton start, showlist;
     private JScrollPane scrollPane;
@@ -25,9 +25,9 @@ public class Frame extends JFrame {
     private JTextArea scoresJTextArea;
     private JComboBox<String> difficultyOptions;
     private JComboBox<String> gameTypeOptions;
-    private Controller2 controller;
+    private Controller controller;
 
-    public Frame(Controller2 controller) {
+    public StartPanel(Controller controller) {
         this.controller = controller;
         this.setTitle("Gissa Fotbollsspelare");
         this.setSize(width, height);
@@ -68,10 +68,10 @@ public class Frame extends JFrame {
         imageIcon = new ImageIcon(scaled);
         backgroundLabel = new JLabel(imageIcon);
         backgroundLabel.setBounds(0, 0, width, height);
-        playerNameLabel = new JLabel("Player Name: ");
+        playerNameLabel = new JLabel("Användarnamn: ");
         playerNameLabel.setFont(font);
         playerNameLabel.setForeground(Color.WHITE);
-        playerNameLabel.setBounds(170, height / 2 - 125, 200, 50);
+        playerNameLabel.setBounds(145, height / 2 - 125, 200, 50);
         // Skapa en label och en knapp
         label = new JLabel("Välkommen till Gissa Fotbollsspelare!");
         label.setForeground(Color.WHITE);
@@ -84,13 +84,13 @@ public class Frame extends JFrame {
     private void createTextField() {
         playerNameJTextField = new JTextField("");
         playerNameJTextField.setFont(font);
-        playerNameJTextField.setBackground(Color.LIGHT_GRAY);
+        playerNameJTextField.setBackground(Color.DARK_GRAY);
         playerNameJTextField.setForeground(Color.WHITE);
         playerNameJTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         playerNameJTextField.setBounds(330, height / 2 - 115, 230, 30);
 
-        /*
-        Denna kod förbjuder användaren att skriva siffror i med sitt namn.
+
+        //Denna kod förbjuder användaren att skriva siffror i med sitt namn.
         playerNameJTextField.addKeyListener(new KeyAdapter() {
 
             @Override
@@ -101,8 +101,6 @@ public class Frame extends JFrame {
             }
         }
     });
-    */
-
     }
 
     private void createTextArea(String[] highScoreList) {
@@ -110,12 +108,12 @@ public class Frame extends JFrame {
         for (String s : highScoreList) {
             scores += s + "\n";
         }
-        scoresJTextArea = new JTextArea("Top 10 Scores:\n" + scores);
+        scoresJTextArea = new JTextArea("Topp 10 Resultat:\n" + scores);
         scoresJTextArea.setFont(font);
         scoresJTextArea.setEditable(false);
         scoresJTextArea.setLineWrap(true);
         scoresJTextArea.setWrapStyleWord(true);
-        scoresJTextArea.setBackground(Color.LIGHT_GRAY);
+        scoresJTextArea.setBackground(Color.DARK_GRAY);
         scoresJTextArea.setForeground(Color.WHITE);
 //        scoresJTextArea.setBounds(10,  height/2, 200,  height/2);
         scrollPane = new JScrollPane(scoresJTextArea);
@@ -138,7 +136,7 @@ public class Frame extends JFrame {
                 controller.displayQuestions();
             }
         });
-        showlist = new JButton("  show list  ");
+        showlist = new JButton("  Topplista  ");
         showlist.setFont(font);
         showlist.setBackground(Color.LIGHT_GRAY);
         showlist.setForeground(Color.WHITE);
@@ -162,21 +160,21 @@ public class Frame extends JFrame {
     }
 
     private void createRadioButtons() {
-        String[] diffOptions = {"Normal", "Hard"};
+        String[] diffOptions = {"Normal", "Svår"};
         difficultyOptions = new JComboBox<>(diffOptions);
         difficultyOptions.setBounds(550, 430, 120, 30);
-        difficultyOptions.setFont(font);
+        //difficultyOptions.setFont(font);
         difficultyOptions.setSelectedIndex(0);
-        difficultyOptions.setBackground(Color.LIGHT_GRAY);
-        difficultyOptions.setForeground(Color.WHITE);
+        //difficultyOptions.setBackground(Color.LIGHT_GRAY);
+        //difficultyOptions.setForeground(Color.WHITE);
         /////////////////////////////////////////////////
         String[] gameOptions = {"PremierLeague", "LaLiga", "Bundesliga", "Ligue1", "SerieA"};
         gameTypeOptions = new JComboBox<>(gameOptions);
         gameTypeOptions.setBounds(333, 430, 200, 30);
-        gameTypeOptions.setFont(font);
+        //gameTypeOptions.setFont(font);
         gameTypeOptions.setSelectedIndex(0);
-        gameTypeOptions.setBackground(Color.LIGHT_GRAY);
-        gameTypeOptions.setForeground(Color.WHITE);
+        //gameTypeOptions.setBackground(Color.LIGHT_GRAY);
+        //gameTypeOptions.setForeground(Color.WHITE);
 
     }
 

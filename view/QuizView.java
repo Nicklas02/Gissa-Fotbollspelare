@@ -1,18 +1,14 @@
 package view;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 //package com.example.footballquiz;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-import controller.Controller2;
-import model.QuestionAutomatic;
+import controller.Controller;
 
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicProgressBarUI;
-import java.awt.event.ActionListener;
+        import javax.swing.*;
+        import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -24,7 +20,7 @@ public class QuizView extends JPanel{
     private ImageIcon imageIcon;
     private JLabel background,  titleLabel;
     private JTextArea playerNameJTextField;
-    private Controller2 controller;
+    private Controller controller;
     private JFrame frame;
     private JLabel questionLabel;
     private JLabel questionNumber;
@@ -57,7 +53,7 @@ public class QuizView extends JPanel{
         this.answers = answers;
     }
 
-    public QuizView(Controller2 controller) {
+    public QuizView(Controller controller) {
         this.controller = controller;
         //question = controller.getQuestionsList();
 
@@ -341,9 +337,9 @@ public class QuizView extends JPanel{
     }
 
 
-    public void displayQuestions(Frame frame) {
-        setPlayerName(frame.getPlayerName());
-        frame.addQuestionsPanel(this);
+    public void displayQuestions(StartPanel startPanel) {
+        setPlayerName(startPanel.getPlayerName());
+        startPanel.addQuestionsPanel(this);
         updateQuestion();
     }
 

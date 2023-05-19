@@ -27,11 +27,11 @@ public class HighScoreFromDatabase {
         }
     }
 
-    public void newScoreToDatabase(String name, int score, GameType gameType) {
+    public void newScoreToDatabase(String name, int score, GameType gameType, Difficulty difficulty) {
         conn = getDatabaseConnection();
         try {
-            String QUERY = "insert into \"highscorelist\" (name, score, category)\n" +
-                    "values(?, ?, ?)";
+            String QUERY = "insert into \"highscorelist\" (name, score, category, difficulty)\n" +
+                    "values(?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(QUERY);
             pstmt.setString(1, name);
             pstmt.setInt(2, score);
@@ -39,15 +39,20 @@ public class HighScoreFromDatabase {
             if (gameType == GameType.PremierLeague) {
                 category = "PL";
             } else if (gameType == GameType.LaLiga) {
-                category = "LL";
+                category = "La";
             } else if (gameType == GameType.Ligue1) {
-                category = "L1";
+                category = "Li";
             } else if (gameType == GameType.Bundesliga) {
-                category = "BL";
+                category = "Bu";
             } else if (gameType == GameType.SerieA) {
                 category = "SA";
             }
+            String difficult = " ";
+            if(difficulty == Difficulty.Normal){
+                difficult = "";
+            } else {difficult = "(svår)";}
             pstmt.setString(3, category);
+            pstmt.setString(4, difficult);
             int affectedrows = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -69,7 +74,8 @@ public class HighScoreFromDatabase {
 
             while (rs.next() && i < listSize) {
                 highScoreList[i] = String.format(i + 1 + " " + rs.getString("name") + " " +
-                        rs.getInt("score") + " " + rs.getString("category"));
+                        rs.getInt("score") + " " + rs.getString("category") + " " +
+                        rs.getString("difficulty"));
                 i++;
             }
             conn.close();

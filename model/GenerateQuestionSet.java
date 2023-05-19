@@ -3,16 +3,15 @@ package model;
 import java.util.*;
 
 public class GenerateQuestionSet {
-     //Förbindelse till sample objektet. 1:1 förbindelse
     private Player[] sample;
-    private final Random random = new Random(); //Används för slumpmässiga frågor liksom för slumpmässiga svarsalternativ
-    private static final int NUMBER_OF_QUESTIONS = 10; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
+    private final Random random = new Random();
+    private static final int NUMBER_OF_QUESTIONS = 10;
     private static final int NORMAL_SAMPLE = 80;
     private static final int HARD_SAMPLE = 180;
     private static final int NBR_OF_ALT = 4;
     private final GameType gameType;
     private final Difficulty difficulty;
-    ArrayList<Player> corrAnswers = new ArrayList<>();
+    private ArrayList<Player> corrAnswers = new ArrayList<>();
     private int prevQuestion = 100;
 
 
@@ -41,8 +40,6 @@ public class GenerateQuestionSet {
         int nbrOfRdmQuestions= 10;
         int localRandom = random.nextInt(nbrOfRdmQuestions);
 
-        //Test specific value
-        //localRandom = 8;
         while(localRandom == getPrevQuestion()) {
             localRandom = random.nextInt(nbrOfRdmQuestions);
         }
@@ -73,12 +70,12 @@ public class GenerateQuestionSet {
             return Position();
         }
         if(localRandom==8){
-            return ValueOrWage(); //Bytte ut denna mot Weight för weight känns inte helt vettigt att ha med på en utställning
+            return ValueOrWage();
         }
         if(localRandom==9){
             return SkillMoves();
         }
-        System.out.println("Error, no question was generated, random was: " + localRandom);
+        System.out.println("Fel, ingen fråga genererades: " + localRandom);
         return null;
     }
 
@@ -134,7 +131,7 @@ public class GenerateQuestionSet {
             }
         }
 
-        String localQuestion = "Vilken spelare har positionen " + corrAnswers.get(0).getPosition() +"?";
+        String localQuestion = "Vilken spelare spelar på positionen " + corrAnswers.get(0).getPosition() +"?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
@@ -215,8 +212,6 @@ public class GenerateQuestionSet {
         int[] wageOrValue = new int[sample.length];
         for (int i=0; i< wageOrValue.length; i++){
             wageOrValue[i] = formattingValueOrWage(sample[i], isValueQuestion);
-            //Test formatting the entire column of either wage or value
-            //System.out.println("Formatted wage/value: " + wageOrValue[i] + " Non-formatted wage: " + sample[i].getWage() + " Non-formatted value: " + sample[i].getValue());
         }
         Arrays.sort(wageOrValue);
         int lowestQuartile = sample.length/4;
@@ -226,8 +221,6 @@ public class GenerateQuestionSet {
             lowValuesOrWages[i] = wageOrValue[random.nextInt(lowestQuartile)];
         }
         int highValueOrWage = wageOrValue[random.nextInt(lowestQuartile) + highestQuartile];
-        //Test randomizing one highValueOrWage value (top quartile) and four low values (bottom quartile)
-        //System.out.println(highValueOrWage + "-"+ lowValuesOrWages[0]+"-"+ lowValuesOrWages[1]+"-"+ lowValuesOrWages[2]+ "-"+ lowValuesOrWages[3]);
         Player[] alternatives = new Player[NBR_OF_ALT];
         Player correctAnswer = null;
         int count=0;
@@ -251,14 +244,12 @@ public class GenerateQuestionSet {
                     + correctAnswer.getValue() + "?";
         } if(!isValueQuestion && correctAnswer!=null) {
             question="Vilken spelare tjänar mest med" +
-                    "en månadslön på " + correctAnswer.getWage() + "?";
+                    " en månadslön på " + correctAnswer.getWage() + "?";
         }
         return new QuestionAutomatic(alternatives, corrAnswers, question);
     }
 
-    //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
     private Player[] randomAlternatives() {
-        //svarsalternativ
         boolean samePlayerTwice = true;
         Player[] alternatives = new Player[NBR_OF_ALT];
         while(samePlayerTwice) {
@@ -279,7 +270,6 @@ public class GenerateQuestionSet {
         return alternatives;
     }
 
-    //lagrar metodens data i ett questionObject så att controllerklasserna sedermera kan hämta alla QuestionsObject
     private QuestionAutomatic ageQuestion() {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
@@ -371,6 +361,7 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
 
     }
+
 
     private QuestionAutomatic kitNum() {
         Player[] alternatives = randomAlternatives();

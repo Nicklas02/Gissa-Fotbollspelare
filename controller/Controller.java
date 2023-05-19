@@ -10,19 +10,17 @@ import java.util.ArrayList;
 public class Controller {
 
     private HighScoreFromDatabase highScoreList;
-    private GameType gameType = GameType.PremierLeague;
-    private Difficulty difficulty = Difficulty.Normal;
+    private GameType gameType;
+    private Difficulty difficulty;
     private QuizView quizView;
     private StartPanel startPanel;
 
     public Controller() {
         this.highScoreList = new HighScoreFromDatabase();
-        //String [] questionsandanswer=  hänmta questions
         startGame();
         new MusicPlayer(this).start();
     }
 
-    //skicka till GUI
     public void startGame() {
         String[] highscorelist = highScoreList.readList();
         startPanel = new StartPanel(this);
@@ -31,7 +29,6 @@ public class Controller {
 
 
 
-    //Hämta automatisk
     private void fetchQuestions() {
         GenerateQuestionSet generateQuestionSet = new GenerateQuestionSet(gameType, difficulty);
         QuestionAutomatic[] questionsList = generateQuestionSet.buildNewQuestionSet();
@@ -53,17 +50,15 @@ public class Controller {
         }
         quizView = new QuizView(this);
         quizView.FillQuestions(questions, alt, answers);
-
-        //senare hämta manuella
     }
 
     public void sendScoreToDatabase(String playerName, int score) {
-        highScoreList.newScoreToDatabase(playerName, score, gameType);
+        highScoreList.newScoreToDatabase(playerName, score, gameType, difficulty);
     }
 
     public void displayQuestions(){
         if(startPanel.getPlayerName().isBlank()){
-            JOptionPane.showMessageDialog(startPanel, "Error: you must enter your name", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(startPanel, "Fel: Skriv in ditt namn!", "Fel", JOptionPane.ERROR_MESSAGE);
             return;
         }
         gameType = startPanel.getGameType();

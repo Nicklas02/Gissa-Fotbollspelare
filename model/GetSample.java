@@ -5,7 +5,7 @@ import java.util.Properties;
 
 
 /**
- * Ansvaret för denna klassen är endast att skapa sample/urval av spelareobjekt från databasen och lagra i en lista
+ * Syftet med denna klassen är endast att skapa sample/urval av spelareobjekt från databasen och lagra i en lista
  * Urvalet ska bero på förinställningar. T ex bara premier league eller bara "lätta" spelare
  * Slutligen skickas listan med urvalet av spelare vidare till en annan klass.
  */
@@ -43,16 +43,7 @@ public class GetSample {
         int count;
         ResultSet rs = null;
         Statement stmt = null;
-        if (this.gameType == GameType.None) {
-            try {
-                String QUERY = "select * from \"spelare2023\" " +
-                        "order by overall desc;";
-                stmt = conn.createStatement();
-                rs = stmt.executeQuery(QUERY);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else if (this.gameType == GameType.PremierLeague) {
+        if (this.gameType == GameType.PremierLeague) {
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -133,14 +124,12 @@ public class GetSample {
                 if (count >= sampleSize) {
                     break;
                 }
-                //System.out.println(player.toString());
             }
             stmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //testPrintSample(playerSample);
         return playerSample;
     }
 

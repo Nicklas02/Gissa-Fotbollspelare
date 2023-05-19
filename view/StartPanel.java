@@ -3,11 +3,8 @@ package view;
 import controller.Controller;
 import model.Difficulty;
 import model.GameType;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
@@ -49,7 +46,6 @@ public class StartPanel extends JFrame {
         createTextArea(highScoreList);
         createRadioButtons();
         createHelpButton();
-        //   createGameTypePanel();
         startPanel.add(playerNameLabel);
         startPanel.add(playerNameJTextField);
         startPanel.add(start);
@@ -93,16 +89,13 @@ public class StartPanel extends JFrame {
         playerNameJTextField.setForeground(Color.WHITE);
         playerNameJTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         playerNameJTextField.setBounds(330, height / 2 - 115, 230, 30);
-
-
-        //Denna kod förbjuder användaren att skriva siffror i med sitt namn.
         playerNameJTextField.addKeyListener(new KeyAdapter() {
 
             @Override
         public void keyTyped(KeyEvent e) {
             char c = e.getKeyChar();
             if (!Character.isLetter(c)) {
-                e.consume(); // Ignorera inmatningen om det inte är en bokstav
+                e.consume();
             }
         }
     });
@@ -120,14 +113,12 @@ public class StartPanel extends JFrame {
         scoresJTextArea.setWrapStyleWord(true);
         scoresJTextArea.setBackground(Color.DARK_GRAY);
         scoresJTextArea.setForeground(Color.WHITE);
-//        scoresJTextArea.setBounds(10,  height/2, 200,  height/2);
         scrollPane = new JScrollPane(scoresJTextArea);
         scrollPane.setVisible(false);
-        scrollPane.setBounds(10, height / 2 - 70, 200, height / 2 + 30);
+        scrollPane.setBounds(10, height / 2 - 70, 300, height / 2 - 55);
     }
 
     private void createButtons() {
-        //this.getContentPane().setBackground(Color.RED);
         start = new JButton("  Starta spelet  ");
         start.setFont(font);
         start.setBackground(Color.LIGHT_GRAY);
@@ -135,12 +126,7 @@ public class StartPanel extends JFrame {
         start.setFocusPainted(false);
         start.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         start.setBounds(330, 380, 180, 40);
-        start.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.displayQuestions();
-            }
-        });
+        start.addActionListener(e -> controller.displayQuestions());
         showlist = new JButton("  Topplista  ");
         showlist.setFont(font);
         showlist.setBackground(Color.LIGHT_GRAY);
@@ -148,12 +134,9 @@ public class StartPanel extends JFrame {
         showlist.setFocusPainted(false);
         showlist.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         showlist.setBounds(330, height / 2 - 70, 180, 40);
-        showlist.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                show = !show;
-                scrollPane.setVisible(show);
-            }
+        showlist.addActionListener(e -> {
+            show = !show;
+            scrollPane.setVisible(show);
         });
     }
 
@@ -168,18 +151,11 @@ public class StartPanel extends JFrame {
         String[] diffOptions = {"Normal", "Svår"};
         difficultyOptions = new JComboBox<>(diffOptions);
         difficultyOptions.setBounds(550, 430, 120, 30);
-        //difficultyOptions.setFont(font);
         difficultyOptions.setSelectedIndex(0);
-        //difficultyOptions.setBackground(Color.LIGHT_GRAY);
-        //difficultyOptions.setForeground(Color.WHITE);
-        /////////////////////////////////////////////////
         String[] gameOptions = {"PremierLeague", "LaLiga", "Bundesliga", "Ligue1", "SerieA"};
         gameTypeOptions = new JComboBox<>(gameOptions);
         gameTypeOptions.setBounds(333, 430, 200, 30);
-        //gameTypeOptions.setFont(font);
         gameTypeOptions.setSelectedIndex(0);
-        //gameTypeOptions.setBackground(Color.LIGHT_GRAY);
-        //gameTypeOptions.setForeground(Color.WHITE);
 
     }
 
@@ -217,7 +193,7 @@ public class StartPanel extends JFrame {
         popupFrame.setLocationRelativeTo(null);
         JTextArea helpText = new JTextArea(text);
         helpText.setEditable(false);
-        popupFrame.setSize(600, 300);
+        popupFrame.setSize(600, 425);
         PopupFactory pf = new PopupFactory();
         JPanel popupPanel = new JPanel();
         popupPanel.setBackground(Color.WHITE);
@@ -232,12 +208,9 @@ public class StartPanel extends JFrame {
         help.setFocusPainted(false);
         help.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         help.setBounds(width-200, height-100, 180,40);
-        help.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                popupFrame.setVisible(true);
-                p.show();
-            }
+        help.addActionListener(e -> {
+            popupFrame.setVisible(true);
+            p.show();
         });
     }
 

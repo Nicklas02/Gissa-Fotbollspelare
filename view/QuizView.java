@@ -301,7 +301,7 @@ public class QuizView extends JPanel{
         if (currentQuestionNum == totalQuestionNum){
             showGameOverMessage();
             controller.sendScoreToDatabase(playerName, score);
-            System.exit(0);
+            controller.startGame();
         }
     }
 

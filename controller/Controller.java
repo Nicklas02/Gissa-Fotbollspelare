@@ -23,7 +23,7 @@ public class Controller {
     }
 
     //skicka till GUI
-    private void startGame() {
+    public void startGame() {
         String[] highscorelist = highScoreList.readList();
         startPanel = new StartPanel(this);
         startPanel.addStartPanel(highscorelist);

@@ -5,7 +5,7 @@ import java.util.Properties;
 
 
 /**
- * Syftet med denna klassen är endast att skapa sample/urval av spelareobjekt från databasen och lagra i en lista
+ * Syftet med denna klassen är endast att skapa sample/urval av spelarobjekt från databasen och lagra i en lista
  * Urvalet ska bero på förinställningar. T ex bara premier league eller bara "lätta" spelare
  * Slutligen skickas listan med urvalet av spelare vidare till en annan klass.
  */
@@ -36,8 +36,16 @@ public class GetSample {
         }
     }
 
+    /**
+     * Syftet med denna metoden är att hämta ett antal spelare ur databasen för att sedan lagra dessa spelarna
+     * i Player-objekt som sedermera kan användas för att generera frågor.
+     * Databasen är sorterad efter de högst rankade spelarna först. Det innebär att ett större urval ger fler
+     * lågt rankade spelare - dvs ett svårare spel. Därav skillnaden i urvalsstorlek beroende på svårighetsgrad.
+     * Storleken på urvalen för de olika svårighetsgraderna kontrolleras från GenerateQuestionSet-klassens
+     * konstanter i fältet.
+     * @return en lista med spelarobjekt
+     */
     public Player[] getSample() {
-
         Player[] playerSample = new Player[sampleSize];
         Player player;
         int count;

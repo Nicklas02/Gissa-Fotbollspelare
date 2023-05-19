@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Syftet med klassen är att skapa ett spelarobjekt med cirka tio parametrar med tillhörande getter-metoder.
+ * Spelarobjektet utifrån databasurvalet i klassen "GetSample"
+ */
 public class Player {
     private String name;
     private int age;

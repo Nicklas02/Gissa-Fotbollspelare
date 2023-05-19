@@ -41,7 +41,7 @@ public class HighScoreFromDatabase {
             } else if (gameType == GameType.LaLiga) {
                 category = "La";
             } else if (gameType == GameType.Ligue1) {
-                category = "Li";
+                category = "L1";
             } else if (gameType == GameType.Bundesliga) {
                 category = "Bu";
             } else if (gameType == GameType.SerieA) {

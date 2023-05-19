@@ -2,6 +2,10 @@ package model;
 
 import java.util.*;
 
+/**
+ * Syftet med GenerateQuestionSet-klassen är att utifrån ett urval (sample) av spelar-objekt generera frågor.
+ * Frågorna genereras utifrån ett dussin metoder och ordningen bestäms genom en slumpmässig Random-klass.
+ */
 public class GenerateQuestionSet {
     private Player[] sample;
     private final Random random = new Random();
@@ -20,6 +24,10 @@ public class GenerateQuestionSet {
         this.difficulty = difficulty;
     }
 
+    /**
+     * Hämtar ett urval av spelare beroende på användarens självvalda spelinställningar.
+     * @return
+     */
     public QuestionAutomatic[] buildNewQuestionSet() {
         GetSample getSample;
         if(difficulty==Difficulty.Normal){
@@ -36,6 +44,10 @@ public class GenerateQuestionSet {
         return questionSet;
     }
 
+    /**
+     * Slumpar fram en metod som returnerar ett frågeobjekt.
+     * @return Denna metoden returnerar i sin tur frågeobjektet till huvudmetoden.
+     */
     private QuestionAutomatic randomQuestion() {
         int nbrOfRdmQuestions= 10;
         int localRandom = random.nextInt(nbrOfRdmQuestions);

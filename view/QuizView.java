@@ -23,7 +23,6 @@ public class QuizView extends JPanel{
     private String playerName;
     private JButton[] optionButtons;
     private int selectedOptionIndex = -1;
-
     private JButton nextButton;
     private String[] questions;
     private String[][] alt;
@@ -31,8 +30,6 @@ public class QuizView extends JPanel{
     private int score = 0;
     private Timer timer;
     private JProgressBar progressBar;
-
-
 
     public void FillQuestions(String[] questions, String[][] alt, String[] answers) {
         this.questions = questions;

@@ -18,7 +18,7 @@ public class Controller {
     public Controller() {
         this.highScoreList = new HighScoreFromDatabase();
         startGame();
-        new MusicPlayer(this).start();
+        new MusicPlayer().start();
     }
 
     public void startGame() {

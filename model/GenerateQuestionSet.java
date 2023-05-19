@@ -382,7 +382,14 @@ public class GenerateQuestionSet {
                 corrAnswers.add(p);
             }
         }
-        String localQuestion = "Vilken spelare har tröjnummer " + corrAnswers.get(0).getKitNumber() + "?";
+        String localQuestion;
+        if(random.nextBoolean()){
+            localQuestion = "Vilken spelare har tröjnummer ";
+        } else {
+            localQuestion = "Vem bär tröja nummer ";
+        }
+
+        localQuestion += corrAnswers.get(0).getKitNumber() + "?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 

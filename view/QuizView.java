@@ -1,13 +1,17 @@
 package view;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 //package com.example.footballquiz;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-import controller.Controller;
+import controller.Controller2;
+import model.QuestionAutomatic;
 
-        import javax.swing.*;
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,19 +24,17 @@ public class QuizView extends JPanel{
     private ImageIcon imageIcon;
     private JLabel background,  titleLabel;
     private JTextArea playerNameJTextField;
-
-    private Controller controller;
+    private Controller2 controller;
     private JFrame frame;
     private JLabel questionLabel;
     private JLabel questionNumber;
     JLabel rightOrWrong;
     private String playerName;
+    private JButton[] optionButtons;
+    private int selectedOptionIndex = -1;  // Keep track of the selected option
 
-
-    private JRadioButton[] optionButtons;
-    private ButtonGroup optionGroup;
+    //private ButtonGroup optionGroup;
     private JButton nextButton;
-    private JButton prevButton;
     private Font font = new Font("Ariel", Font.BOLD, 20);
     private Font font2 = new Font("Ariel", Font.PLAIN, 15);
     private int width = 800;
@@ -45,6 +47,7 @@ public class QuizView extends JPanel{
     private int score = 0;
     private JLabel countdownLabel;
     private Timer timer;
+    private JProgressBar progressBar;
 
 
 
@@ -54,12 +57,12 @@ public class QuizView extends JPanel{
         this.answers = answers;
     }
 
-    public QuizView(Controller controller) {
+    public QuizView(Controller2 controller) {
         this.controller = controller;
         //question = controller.getQuestionsList();
 
         this.setLayout(null);
-        imageIcon = new ImageIcon("images/background.jpg");
+        imageIcon = new ImageIcon("images/purplequiz.jpg");
         Image image = imageIcon.getImage();
         Image scaled = image.getScaledInstance(800, 800,Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaled);
@@ -78,10 +81,10 @@ public class QuizView extends JPanel{
         titleLabel = new JLabel("Gissa Fotbollsspelare");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(150, 60, 500, 40);
+        titleLabel.setBounds(250, 15, 500, 40);
         this.add(titleLabel);
         questionNumber = new JLabel();
-        questionNumber.setBounds(width - 120, 110, 100, 40);
+        questionNumber.setBounds(width - 130, 110, 200, 40);
         questionNumber.setFont(font);
         //colour for fonts
         questionNumber.setForeground(Color.WHITE);
@@ -94,50 +97,60 @@ public class QuizView extends JPanel{
         this.add(rightOrWrong);
 
         questionLabel = new JLabel();
-        questionLabel.setBounds(50, 140, width, 50);
+        questionLabel.setBounds(200, 140, width, 50);
         questionLabel.setFont(font);
-        //colour fonts
         questionLabel.setForeground(Color.WHITE);
         this.add(questionLabel);
 
-        optionButtons = new JRadioButton[4];
-        optionGroup = new ButtonGroup();
-        optionButtons[0] = new JRadioButton();
-        optionButtons[0].setBounds(10, 200, 270, 30);
+        optionButtons = new JButton[4];
+        //optionGroup = new ButtonGroup();
+        optionButtons[0] = new JButton();
+        optionButtons[0].setBounds(100, 200, 270, 30);
         optionButtons[0].setFont(font2);
         optionButtons[0].setForeground(Color.BLACK);
-        optionGroup.add(optionButtons[0]);
+        optionButtons[0].addActionListener(new OptionButtonListener(0));  // Add ActionListener
         this.add(optionButtons[0]);
 
-        optionButtons[1] = new JRadioButton();
-        optionButtons[1].setBounds(310, 200, 270, 30);
+        optionButtons[1] = new JButton();
+        optionButtons[1].setBounds(400, 200, 270, 30);
         optionButtons[1].setFont(font2);
         optionButtons[1].setForeground(Color.BLACK);
-        optionGroup.add(optionButtons[1]);
+        optionButtons[1].addActionListener(new OptionButtonListener(1));  // Add ActionListener
         this.add(optionButtons[1]);
 
-        optionButtons[2] = new JRadioButton();
-        optionButtons[2].setBounds(10, 300, 270, 30);
+        optionButtons[2] = new JButton();
+        optionButtons[2].setBounds(100, 300, 270, 30);
         optionButtons[2].setFont(font2);
         optionButtons[2].setForeground(Color.BLACK);
-        optionGroup.add(optionButtons[2]);
+        optionButtons[2].addActionListener(new OptionButtonListener(2));  // Add ActionListener
+
         this.add(optionButtons[2]);
 
-        optionButtons[3] = new JRadioButton();
-        optionButtons[3].setBounds(310, 300, 270, 30);
+        optionButtons[3] = new JButton();
+        optionButtons[3].setBounds(400, 300, 270, 30);
         optionButtons[3].setFont(font2);
         optionButtons[3].setForeground(Color.BLACK);
-        optionGroup.add(optionButtons[3]);
+        optionButtons[3].addActionListener(new OptionButtonListener(3));  // Add ActionListener
         this.add(optionButtons[3]);
 
+        //Progressbar
+        progressBar = new JProgressBar(0, 15);
+        progressBar.setBounds(250, 50, 300, 100);
+        progressBar.setStringPainted(false);
+
+        this.add(progressBar);
+
         //Timer
-        countdownLabel = new JLabel("10");
-        countdownLabel.setBounds(750, 200, 50, 20);
+        /*countdownLabel = new JLabel("15");
+        countdownLabel.setBounds(400, 100, 50, 20);
         countdownLabel.setFont(font);
         countdownLabel.setForeground(Color.BLACK);
         this.add(countdownLabel);
-        timer = new Timer(1000, new ActionListener() {
-            int count = 10;
+
+         */
+
+        timer = new Timer(1500, new ActionListener() {
+            int count = 15;
             @Override
             public void actionPerformed(ActionEvent e) {
                 count--;
@@ -147,15 +160,16 @@ public class QuizView extends JPanel{
                     currentQuestionNum++;
                     updateQuestion();
                     clearSelection();
-                    count = 10;
+                    count = 15;
                 }
-                countdownLabel.setText(String.valueOf(count));
+                //countdownLabel.setText(String.valueOf(count));
+                progressBar.setValue(15 - count);
             }
         });
 
 
         nextButton = new JButton("Next");
-        nextButton.setBounds(350, 400, 100, 30);
+        nextButton.setBounds(325, 400, 100, 30);
         nextButton.setFont(font2);
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -179,15 +193,34 @@ public class QuizView extends JPanel{
 
 
     }
-    public String getUserAnswer() {
-        JRadioButton userChoice = null;
-        for (int i = 0; i < optionButtons.length; i++) {
-            if (optionButtons[i].isSelected()) {
-                userChoice = optionButtons[i];
-            }
+    private class OptionButtonListener implements ActionListener {
+        private int optionIndex;
+
+        public OptionButtonListener(int optionIndex) {
+            this.optionIndex = optionIndex;
         }
-        if (userChoice != null) {
-            return userChoice.getText();
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            selectedOptionIndex = optionIndex;
+            // Disable all option buttons
+            disableOptionButtons();
+        }
+    }
+    public void disableOptionButtons() {
+        for (int i = 0; i < optionButtons.length; i++) {
+            optionButtons[i].setEnabled(false);
+        }
+    }
+
+
+    public void enableNextButton() {
+        nextButton.setEnabled(true);
+    }
+
+    public String getUserAnswer() {
+        if (selectedOptionIndex != -1) {
+            return optionButtons[selectedOptionIndex].getText();
         }
         return "";
     }
@@ -208,6 +241,9 @@ public class QuizView extends JPanel{
             rightOrWrong.setForeground(Color.RED);
             score--;
         }
+        for (int i = 0; i < optionButtons.length; i++) {
+            optionButtons[i].setBackground(null);
+        }
         repaint();
     }
 
@@ -215,6 +251,11 @@ public class QuizView extends JPanel{
 
     public void display() {
         frame.setVisible(true);
+    }
+    public void enableOptionButtons() {
+        for (int i = 0; i < optionButtons.length; i++) {
+            optionButtons[i].setEnabled(true);
+        }
     }
 
     public void updateQuestion() {
@@ -225,7 +266,6 @@ public class QuizView extends JPanel{
             gameOver();
             return;
         }
-
         questionNumber.setText("Quiz: " + currentQuestionNum + "/" + totalQuestionNum);
         questionLabel.setText(questions[currentQuestionNum-1]);
         String[] options = alt[currentQuestionNum-1];
@@ -236,9 +276,13 @@ public class QuizView extends JPanel{
         // clear the selection
         clearSelection();
 
+        progressBar.setMinimum(0);
+        progressBar.setMaximum(15);
+        progressBar.setValue(15);
+
         // start a new timer
-        timer = new Timer(1000, new ActionListener() {
-            int count = 10;
+        timer = new Timer(1500, new ActionListener() {
+            int count = 15;
             @Override
             public void actionPerformed(ActionEvent e) {
                 count--;
@@ -247,12 +291,14 @@ public class QuizView extends JPanel{
                     gameOver();
                     currentQuestionNum++;
                     updateQuestion();
-                    count = 10;
+                    count = 15;
                 }
-                countdownLabel.setText(String.valueOf(count));
+                progressBar.setValue(count);
+
             }
         });
         timer.start();
+        enableOptionButtons();
     }
 
     public void gameOver(){
@@ -264,11 +310,12 @@ public class QuizView extends JPanel{
     }
 
     public void clearSelection() {
-        optionGroup.clearSelection();
+        //optionGroup.clearSelection();
+        selectedOptionIndex = -1;
     }
 
     public void disableNextButton() {
-        this.nextButton.setEnabled(false);
+        nextButton.setEnabled(false);
     }
 
 
@@ -294,10 +341,11 @@ public class QuizView extends JPanel{
     }
 
 
-    public void displayQuestions(StartPanel startPanel) {
-        setPlayerName(startPanel.getPlayerName());
-        startPanel.addQuestionsPanel(this);
+    public void displayQuestions(Frame frame) {
+        setPlayerName(frame.getPlayerName());
+        frame.addQuestionsPanel(this);
         updateQuestion();
     }
+
 }
 

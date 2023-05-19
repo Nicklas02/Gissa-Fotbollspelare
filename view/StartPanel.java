@@ -1,5 +1,6 @@
 package view;
-import controller.Controller;
+
+import controller.Controller2;
 import model.Difficulty;
 import model.GameType;
 
@@ -7,8 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class StartPanel extends JFrame {
+public class Frame extends JFrame {
 
     private JButton start, showlist;
     private JScrollPane scrollPane;
@@ -20,14 +23,11 @@ public class StartPanel extends JFrame {
     private int height = 800;
     private Font font = new Font("Arial", Font.BOLD, 24);
     private JTextArea scoresJTextArea;
-    private JRadioButton[] difficultyOptions;
+    private JComboBox<String> difficultyOptions;
+    private JComboBox<String> gameTypeOptions;
+    private Controller2 controller;
 
-    private ButtonGroup difficultyOptionsGroup;
-    private JRadioButton[] gameTypeOptions;
-    private ButtonGroup gameTypeOptionsGroup;
-    private Controller controller;
-
-    public StartPanel(Controller controller) {
+    public Frame(Controller2 controller) {
         this.controller = controller;
         this.setTitle("Gissa Fotbollsspelare");
         this.setSize(width, height);
@@ -45,29 +45,24 @@ public class StartPanel extends JFrame {
         createButtons();
         createTextArea(highScoreList);
         createRadioButtons();
+        //   createGameTypePanel();
         startPanel.add(playerNameLabel);
         startPanel.add(playerNameJTextField);
         startPanel.add(start);
         startPanel.add(label);
         startPanel.add(scrollPane);
         startPanel.add(showlist);
-        for (JRadioButton option : difficultyOptions) {
-            startPanel.add(option);
-        }
-        for (JRadioButton option : gameTypeOptions) {
-            startPanel.add(option);
-        }
+        startPanel.add(difficultyOptions);
+        startPanel.add(gameTypeOptions);
         startPanel.add(backgroundLabel);
         startPanel.setBounds(0, 0, width, height);
         this.add(startPanel);
         this.setVisible(true);
     }
 
-
-
     private void createLabels() {
         // Lägg till en bild i panelen
-        ImageIcon imageIcon = new ImageIcon("images/start.jpg");
+        ImageIcon imageIcon = new ImageIcon("images/bluestart.jpg");
         Image image = imageIcon.getImage();
         Image scaled = image.getScaledInstance(800, 800, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(scaled);
@@ -76,12 +71,14 @@ public class StartPanel extends JFrame {
         playerNameLabel = new JLabel("Player Name: ");
         playerNameLabel.setFont(font);
         playerNameLabel.setForeground(Color.WHITE);
-        playerNameLabel.setBounds(50, height / 2 - 125, 200, 50);
+        playerNameLabel.setBounds(170, height / 2 - 125, 200, 50);
         // Skapa en label och en knapp
         label = new JLabel("Välkommen till Gissa Fotbollsspelare!");
-        label.setFont(font);
         label.setForeground(Color.WHITE);
         label.setBounds(170, 50, width - 100, 50);
+        Font labelFont = new Font(Font.SANS_SERIF,Font.BOLD, 26);
+        label.setFont(labelFont);
+
     }
 
     private void createTextField() {
@@ -90,7 +87,22 @@ public class StartPanel extends JFrame {
         playerNameJTextField.setBackground(Color.LIGHT_GRAY);
         playerNameJTextField.setForeground(Color.WHITE);
         playerNameJTextField.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        playerNameJTextField.setBounds(220, height / 2 - 115, 230, 30);
+        playerNameJTextField.setBounds(330, height / 2 - 115, 230, 30);
+
+        /*
+        Denna kod förbjuder användaren att skriva siffror i med sitt namn.
+        playerNameJTextField.addKeyListener(new KeyAdapter() {
+
+            @Override
+        public void keyTyped(KeyEvent e) {
+            char c = e.getKeyChar();
+            if (!Character.isLetter(c)) {
+                e.consume(); // Ignorera inmatningen om det inte är en bokstav
+            }
+        }
+    });
+    */
+
     }
 
     private void createTextArea(String[] highScoreList) {
@@ -119,7 +131,7 @@ public class StartPanel extends JFrame {
         start.setForeground(Color.WHITE);
         start.setFocusPainted(false);
         start.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        start.setBounds(220, height / 2 - 1, 180, 40);
+        start.setBounds(330, 380, 180, 40);
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -132,7 +144,7 @@ public class StartPanel extends JFrame {
         showlist.setForeground(Color.WHITE);
         showlist.setFocusPainted(false);
         showlist.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-        showlist.setBounds(220, height / 2 - 70, 180, 40);
+        showlist.setBounds(330, height / 2 - 70, 180, 40);
         showlist.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -150,89 +162,53 @@ public class StartPanel extends JFrame {
     }
 
     private void createRadioButtons() {
-        difficultyOptions = new JRadioButton[2];
-        difficultyOptionsGroup = new ButtonGroup();
-        difficultyOptions[0] = new JRadioButton("Normal");
-        difficultyOptions[0].setBounds(640, height / 2 + 1, 120, 30);
-        difficultyOptions[0].setFont(font);
-        difficultyOptions[0].setSelected(true);
-        difficultyOptions[0].setBackground(Color.LIGHT_GRAY);
-        difficultyOptions[0].setForeground(Color.WHITE);
-        difficultyOptionsGroup.add(difficultyOptions[0]);
-
-        difficultyOptions[1] = new JRadioButton("Hard");
-        difficultyOptions[1].setBounds(640, height / 2 + 50, 100, 30);
-        difficultyOptions[1].setFont(font);
-        difficultyOptions[1].setBackground(Color.LIGHT_GRAY);
-        difficultyOptions[1].setForeground(Color.WHITE);
-        difficultyOptionsGroup.add(difficultyOptions[1]);
+        String[] diffOptions = {"Normal", "Hard"};
+        difficultyOptions = new JComboBox<>(diffOptions);
+        difficultyOptions.setBounds(550, 430, 120, 30);
+        difficultyOptions.setFont(font);
+        difficultyOptions.setSelectedIndex(0);
+        difficultyOptions.setBackground(Color.LIGHT_GRAY);
+        difficultyOptions.setForeground(Color.WHITE);
         /////////////////////////////////////////////////
-        gameTypeOptions = new JRadioButton[5];
-        gameTypeOptionsGroup = new ButtonGroup();
-        gameTypeOptions[0] = new JRadioButton("PremierLeague");
-        gameTypeOptions[0].setBounds(420, height / 2 + 1, 200, 30);
-        gameTypeOptions[0].setFont(font);
-        gameTypeOptions[0].setSelected(true);
-        gameTypeOptions[0].setBackground(Color.LIGHT_GRAY);
-        gameTypeOptions[0].setForeground(Color.WHITE);
-        gameTypeOptionsGroup.add(gameTypeOptions[0]);
+        String[] gameOptions = {"PremierLeague", "LaLiga", "Bundesliga", "Ligue1", "SerieA"};
+        gameTypeOptions = new JComboBox<>(gameOptions);
+        gameTypeOptions.setBounds(333, 430, 200, 30);
+        gameTypeOptions.setFont(font);
+        gameTypeOptions.setSelectedIndex(0);
+        gameTypeOptions.setBackground(Color.LIGHT_GRAY);
+        gameTypeOptions.setForeground(Color.WHITE);
 
-        gameTypeOptions[1] = new JRadioButton("LaLiga");
-        gameTypeOptions[1].setBounds(420, height / 2 + 170, 120, 30);
-        gameTypeOptions[1].setFont(font);
-        gameTypeOptions[1].setBackground(Color.LIGHT_GRAY);
-        gameTypeOptions[1].setForeground(Color.WHITE);
-        gameTypeOptionsGroup.add(gameTypeOptions[1]);
-
-        gameTypeOptions[2] = new JRadioButton("Bundesliga");
-        gameTypeOptions[2].setBounds(420, height / 2 + 50, 170, 30);
-        gameTypeOptions[2].setFont(font);
-        gameTypeOptions[2].setBackground(Color.LIGHT_GRAY);
-        gameTypeOptions[2].setForeground(Color.WHITE);
-        gameTypeOptionsGroup.add(gameTypeOptions[2]);
-
-        gameTypeOptions[3] = new JRadioButton("Ligue1");
-        gameTypeOptions[3].setBounds(420, height / 2 + 90, 120, 30);
-        gameTypeOptions[3].setFont(font);
-        gameTypeOptions[3].setBackground(Color.LIGHT_GRAY);
-        gameTypeOptions[3].setForeground(Color.WHITE);
-        gameTypeOptionsGroup.add(gameTypeOptions[3]);
-
-        gameTypeOptions[4] = new JRadioButton("SerieA");
-        gameTypeOptions[4].setBounds(420, height / 2 + 130, 120, 30);
-        gameTypeOptions[4].setFont(font);
-        gameTypeOptions[4].setBackground(Color.LIGHT_GRAY);
-        gameTypeOptions[4].setForeground(Color.WHITE);
-        gameTypeOptionsGroup.add(gameTypeOptions[4]);
     }
 
     public GameType getGameType() {
-        if (gameTypeOptions[0].isSelected()) {
-            return GameType.PremierLeague;
-        } else if (gameTypeOptions[1].isSelected()) {
-            return GameType.LaLiga;
-        } else if (gameTypeOptions[2].isSelected()) {
-            return GameType.Bundesliga;
-        } else if (gameTypeOptions[3].isSelected()) {
-            return GameType.Ligue1;
-        } else if (gameTypeOptions[4].isSelected()) {
-            return GameType.SerieA;
+        String selectedGameType = (String) gameTypeOptions.getSelectedItem();
+        switch (selectedGameType) {
+            case "PremierLeague":
+                return GameType.PremierLeague;
+            case "LaLiga":
+                return GameType.LaLiga;
+            case "Bundesliga":
+                return GameType.Bundesliga;
+            case "Ligue1":
+                return GameType.Ligue1;
+            case "SerieA":
+                return GameType.SerieA;
+            default:
+                return null;
         }
-        return null;
     }
 
-
-
-    public Difficulty getDifficulty(){
-        if(difficultyOptions[0].isSelected()){
+    public Difficulty getDifficulty() {
+        String selectedDifficulty = (String) difficultyOptions.getSelectedItem();
+        if (selectedDifficulty.equals("Normal")) {
             return Difficulty.Normal;
+        } else {
+            return Difficulty.Hard;
         }
-        return Difficulty.Hard;
     }
 
-    public String getPlayerName(){
+    public String getPlayerName() {
         return playerNameJTextField.getText().trim();
     }
-
 
 }

@@ -273,6 +273,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, question);
     }
 
+    /**
+     * Tar fram fyra alternativ och kolla så att de inte är samma spelare på två platser
+     * @return en array av spelare som alternativ
+     */
     private Player[] randomAlternatives() {
         boolean samePlayerTwice = true;
         Player[] alternatives = new Player[NBR_OF_ALT];

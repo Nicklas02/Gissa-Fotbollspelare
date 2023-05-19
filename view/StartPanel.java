@@ -21,13 +21,17 @@ public class StartPanel extends JFrame {
     private Font font = new Font("Arial", Font.BOLD, 24);
     private JTextArea scoresJTextArea;
     private JRadioButton[] difficultyOptions;
+    private JPanel questionPanel;
+
 
     private ButtonGroup difficultyOptionsGroup;
     private JRadioButton[] gameTypeOptions;
     private ButtonGroup gameTypeOptionsGroup;
     private Controller controller;
+    private boolean firstTime;
 
     public StartPanel(Controller controller) {
+        firstTime = true;
         this.controller = controller;
         this.setTitle("Gissa Fotbollsspelare");
         this.setSize(width, height);
@@ -35,9 +39,13 @@ public class StartPanel extends JFrame {
         this.setResizable(false);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     public void addStartPanel(String[] highScoreList) {
+        if(!firstTime){
+            this.remove(questionPanel);
+        }
         startPanel = new JPanel();
         startPanel.setLayout(null);
         createLabels();
@@ -60,10 +68,10 @@ public class StartPanel extends JFrame {
         startPanel.add(backgroundLabel);
         startPanel.setBounds(0, 0, width, height);
         this.add(startPanel);
-        this.setVisible(true);
+        repaint();
+
+
     }
-
-
 
     private void createLabels() {
         // Lägg till en bild i panelen
@@ -143,6 +151,7 @@ public class StartPanel extends JFrame {
     }
 
     public void addQuestionsPanel(JPanel questionPanel) {
+        this.questionPanel = questionPanel;
         this.remove(startPanel);
         questionPanel.setBounds(0, 0, width, height);
         this.add(questionPanel);

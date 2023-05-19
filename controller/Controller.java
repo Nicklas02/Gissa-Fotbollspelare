@@ -5,6 +5,7 @@ import view.StartPanel;
 import view.QuizView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Controller {
@@ -15,18 +16,22 @@ public class Controller {
     private QuizView quizView;
     private StartPanel startPanel;
 
-    public Controller() {
-        this.highScoreList = new HighScoreFromDatabase();
-        //String [] questionsandanswer=  hänmta questions
+
+
+  public Controller() {
+      this.highScoreList = new HighScoreFromDatabase();
+      //String [] questionsandanswer=  //hänmta questions
+      startPanel = new StartPanel (this);
+
         startGame();
-    }
+   }
+
 
     //skicka till GUI
-    private void startGame() {
-        String[] highscorelist = highScoreList.readList();
-        startPanel = new StartPanel(this);
-        startPanel.addStartPanel(highscorelist);
-    }
+    public void startGame() {
+       String[] highscorelist = highScoreList.readList();
+      startPanel.addStartPanel(highscorelist);
+   }
 
 
 

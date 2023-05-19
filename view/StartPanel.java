@@ -151,6 +151,7 @@ public class StartPanel extends JFrame {
     }
 
     public void addQuestionsPanel(JPanel questionPanel) {
+        firstTime = false;
         this.questionPanel = questionPanel;
         this.remove(startPanel);
         questionPanel.setBounds(0, 0, width, height);

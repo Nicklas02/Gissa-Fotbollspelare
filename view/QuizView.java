@@ -162,6 +162,7 @@ public class QuizView extends JPanel{
         countdownLabel.setFont(font);
         countdownLabel.setForeground(Color.BLACK);
         this.add(countdownLabel);
+
         timer = new Timer(1000, new ActionListener() {
             int count = 10;
             @Override
@@ -297,7 +298,21 @@ public class QuizView extends JPanel{
             score--;
         }
         repaint();
-   }
+        timer = new Timer(1000, new ActionListener() {
+            int count = 10;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                count--;
+                if (count <= 0) {
+                    timer. stop();
+                }
+
+            }
+        });
+        timer . start();
+
+
+    }
 
 
 
@@ -327,6 +342,7 @@ public class QuizView extends JPanel{
         // clear the selection
         clearSelection();
         playQuestionSound();
+
 
         // start a new timer
         timer = new Timer(1000, new ActionListener() {

@@ -244,7 +244,7 @@ public class QuizView extends JPanel{
     public void playWrongAnswerSound() {
         Clip clip;
         try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("aaa.wav"));
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("mus/aaa.wav"));
             clip = AudioSystem.getClip();
             clip.open(ais);
             clip.start();

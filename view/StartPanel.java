@@ -159,17 +159,17 @@ public class StartPanel extends JFrame {
             System.err.println("Error reading questions from file: " + e.getMessage());
             System.exit(1);
         }
-        JFrame f = new JFrame("Gissa fotbollsspelare");
-        f.setLocationRelativeTo(null);
-        JTextArea l = new JTextArea(text);
-        l.setEditable(false);
-        f.setSize(600, 300);
+        JFrame popupFrame = new JFrame("Gissa fotbollsspelare");
+        popupFrame.setLocationRelativeTo(null);
+        JTextArea helpText = new JTextArea(text);
+        helpText.setEditable(false);
+        popupFrame.setSize(600, 300);
         PopupFactory pf = new PopupFactory();
-        JPanel p2 = new JPanel();
-        p2.setBackground(Color.WHITE);
-        p2.add(l);
-        Popup p = pf.getPopup(f, p2, 180, 100);
-        f.add(p2);
+        JPanel popupPanel = new JPanel();
+        popupPanel.setBackground(Color.WHITE);
+        popupPanel.add(helpText);
+        Popup p = pf.getPopup(popupFrame, popupPanel, 180, 100);
+        popupFrame.add(popupPanel);
 
         help = new JButton(  "  Hjälp  ");
         help.setFont(font);
@@ -181,7 +181,7 @@ public class StartPanel extends JFrame {
         help.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                f.setVisible(true);
+                popupFrame.setVisible(true);
                 p.show();
             }
         });

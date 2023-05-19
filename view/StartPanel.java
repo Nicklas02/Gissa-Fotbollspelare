@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class StartPanel extends JFrame {
 
@@ -194,6 +197,46 @@ public class StartPanel extends JFrame {
             default:
                 return null;
         }
+    }
+
+    public void createHelpButton(){
+        String text = "";
+        try (BufferedReader br = new BufferedReader(new FileReader("files/HjälpText.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                text += line + "\n";
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading questions from file: " + e.getMessage());
+            System.exit(1);
+        }
+        JFrame popupFrame = new JFrame("Gissa fotbollsspelare");
+        popupFrame.setLocationRelativeTo(null);
+        JTextArea helpText = new JTextArea(text);
+        helpText.setEditable(false);
+        popupFrame.setSize(600, 300);
+        PopupFactory pf = new PopupFactory();
+        JPanel popupPanel = new JPanel();
+        popupPanel.setBackground(Color.WHITE);
+        popupPanel.add(helpText);
+        Popup p = pf.getPopup(popupFrame, popupPanel, 180, 100);
+        popupFrame.add(popupPanel);
+
+        help = new JButton(  "  Hjälp  ");
+        help.setFont(font);
+        help.setBackground(Color.LIGHT_GRAY);
+        help.setForeground(Color.WHITE);
+        help.setFocusPainted(false);
+        help.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        help.setBounds(width-200, height-100, 180,40);
+        help.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                popupFrame.setVisible(true);
+                p.show();
+            }
+        });
     }
 
     public Difficulty getDifficulty() {

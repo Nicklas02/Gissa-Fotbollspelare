@@ -48,6 +48,7 @@ public class StartPanel extends JFrame {
         createButtons();
         createTextArea(highScoreList);
         createRadioButtons();
+        createHelpButton();
         //   createGameTypePanel();
         startPanel.add(playerNameLabel);
         startPanel.add(playerNameJTextField);
@@ -55,6 +56,7 @@ public class StartPanel extends JFrame {
         startPanel.add(label);
         startPanel.add(scrollPane);
         startPanel.add(showlist);
+        startPanel.add(help);
         startPanel.add(difficultyOptions);
         startPanel.add(gameTypeOptions);
         startPanel.add(backgroundLabel);

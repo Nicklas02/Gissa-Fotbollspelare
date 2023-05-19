@@ -11,6 +11,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Panelen för startvyn i spelet.
+ */
 public class StartPanel extends JFrame {
 
     private JButton start, showlist, help;
@@ -37,6 +40,10 @@ public class StartPanel extends JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     * Lägger Startpanelen i fönstret och visar den.
+     * @param highScoreList HighScorlistan visas i startpanelen.
+     */
     public void addStartPanel(String[] highScoreList) {
         startPanel = new JPanel();
         startPanel.setLayout(null);
@@ -61,6 +68,9 @@ public class StartPanel extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Lägg till bakgrundsbild för gränssnittet.
+     */
     private void createLabels() {
         // Lägg till en bild i panelen
         ImageIcon imageIcon = new ImageIcon("images/bluestart.jpg");
@@ -82,6 +92,9 @@ public class StartPanel extends JFrame {
 
     }
 
+    /**
+     * Skapa och hantera spelarnamn
+     */
     private void createTextField() {
         playerNameJTextField = new JTextField("");
         playerNameJTextField.setFont(font);
@@ -91,6 +104,11 @@ public class StartPanel extends JFrame {
         playerNameJTextField.setBounds(330, height / 2 - 115, 230, 30);
         playerNameJTextField.addKeyListener(new KeyAdapter() {
 
+
+            /**
+             * Tlllåter inte andvändaren att skriva siffror med sitt namn.
+             * @param e the event to be processed
+             */
             @Override
         public void keyTyped(KeyEvent e) {
             char c = e.getKeyChar();
@@ -101,6 +119,10 @@ public class StartPanel extends JFrame {
     });
     }
 
+    /**
+     * Visar highscore-listan i start skärmen.
+     * @param highScoreList en array med highscore-resultaten.
+     */
     private void createTextArea(String[] highScoreList) {
         String scores = "";
         for (String s : highScoreList) {
@@ -118,6 +140,9 @@ public class StartPanel extends JFrame {
         scrollPane.setBounds(10, height / 2 - 70, 300, height / 2 - 55);
     }
 
+    /**
+     * Skapar två knappar "Starta spelet" och "Topplista"
+     */
     private void createButtons() {
         start = new JButton("  Starta spelet  ");
         start.setFont(font);
@@ -140,6 +165,10 @@ public class StartPanel extends JFrame {
         });
     }
 
+    /**
+     *  Lägger till en panel med frågor i fönstret.
+     * @param questionPanel QuestionPanel JPanel-objektet som innehåller frågorna.
+     */
     public void addQuestionsPanel(JPanel questionPanel) {
         this.remove(startPanel);
         questionPanel.setBounds(0, 0, width, height);
@@ -147,6 +176,9 @@ public class StartPanel extends JFrame {
         repaint();
     }
 
+    /**
+     * Skapar JComboBox för svårighetsgrad och fem olika GameType.
+     */
     private void createRadioButtons() {
         String[] diffOptions = {"Normal", "Svår"};
         difficultyOptions = new JComboBox<>(diffOptions);
@@ -156,7 +188,6 @@ public class StartPanel extends JFrame {
         gameTypeOptions = new JComboBox<>(gameOptions);
         gameTypeOptions.setBounds(333, 430, 200, 30);
         gameTypeOptions.setSelectedIndex(0);
-
     }
 
     public GameType getGameType() {

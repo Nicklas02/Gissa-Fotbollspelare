@@ -84,7 +84,7 @@ public class QuizView extends JPanel{
         titleLabel.setBounds(250, 15, 500, 40);
         this.add(titleLabel);
         questionNumber = new JLabel();
-        questionNumber.setBounds(width - 120, 110, 100, 40);
+        questionNumber.setBounds(width - 130, 110, 200, 40);
         questionNumber.setFont(font);
         //colour for fonts
         questionNumber.setForeground(Color.WHITE);

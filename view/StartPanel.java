@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 
 public class StartPanel extends JFrame {
 
-    private JButton start, showlist;
+    private JButton start, showlist, help;
     private JScrollPane scrollPane;
     private boolean show = false;
     private JLabel label, playerNameLabel, backgroundLabel;

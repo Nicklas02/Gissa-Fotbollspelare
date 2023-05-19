@@ -3,6 +3,9 @@ package model;
 import java.sql.*;
 import java.util.Properties;
 
+/**
+ * Denna klassen hämtar topplistan från databasen samt skriver in nya resultat till den.
+ */
 public class HighScoreFromDatabase {
     private Connection conn;
     private final int listSize = 10;
@@ -11,6 +14,10 @@ public class HighScoreFromDatabase {
         String[] s = readList();
     }
 
+    /**
+     * Metod för att få en förbindelse till databasen.
+     * @return en förbindelse till databasen.
+     */
     public Connection getDatabaseConnection() {
         String url = "jdbc:postgresql://pgserver.mau.se/gissa_fotbollsspelare";
         Properties props = new Properties();
@@ -27,6 +34,13 @@ public class HighScoreFromDatabase {
         }
     }
 
+    /**
+     * Skickar ett nytt resultat till databasen
+     * @param name användarnamnen på spelaren
+     * @param score resultatet på ronden
+     * @param gameType vilken kategori man spelat på
+     * @param difficulty vilken svårighetsgrad man spelat på
+     */
     public void newScoreToDatabase(String name, int score, GameType gameType, Difficulty difficulty) {
         conn = getDatabaseConnection();
         try {
@@ -62,6 +76,10 @@ public class HighScoreFromDatabase {
         }
     }
 
+    /**
+     * Hämtar en lista med toppresultaten från databasen
+     * @return En lista med resultat från databasen
+     */
     public String[] readList() {
         String[] highScoreList = new String[listSize];
         int i = 0;

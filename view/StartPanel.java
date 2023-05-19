@@ -177,6 +177,10 @@ public class StartPanel extends JFrame {
         }
     }
 
+    /**
+     * Läser in en beskrivning av programmet från en textfil och skapar en popup ruta som den
+     * visas på när man trycker på knappen "hjälp"
+     */
     public void createHelpButton(){
         String text = "";
         try (BufferedReader br = new BufferedReader(new FileReader("files/HjälpText.txt"))) {

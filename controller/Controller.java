@@ -52,6 +52,11 @@ public class Controller {
         quizView.FillQuestions(questions, alt, answers);
     }
 
+    /**
+     * Skickar ett nytt resultat till topplistan
+     * @param playerName användarnamnen på spelaren
+     * @param score resultatet på ronden
+     */
     public void sendScoreToDatabase(String playerName, int score) {
         highScoreList.newScoreToDatabase(playerName, score, gameType, difficulty);
     }

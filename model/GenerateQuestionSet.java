@@ -120,6 +120,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vem som har en specifik position
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic Position() {
         Player[] alternatives = randomAlternatives();
         int alternative = random.nextInt(4);
@@ -147,6 +151,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vem som spelar för en specifik klubb
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic Club() {
         Player[] alternatives = randomAlternatives();
         int alternative = random.nextInt(4);
@@ -163,6 +171,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vilken nationalitet spelaren kommer från
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic Nationality() {
         Player[] alternatives = randomAlternatives();
         int alternative = random.nextInt(4);
@@ -282,6 +294,10 @@ public class GenerateQuestionSet {
         return alternatives;
     }
 
+    /**
+     * Fråga om vem som är yngst eller äldst
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic ageQuestion() {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
@@ -313,6 +329,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vem som är längst eller kortast
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic heightQuestion() {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
@@ -343,6 +363,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vem som är mest enfotad
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic weakFootQuestion() {
         Player[] alternatives = null;
         boolean badWeakFoot = false;
@@ -374,7 +398,10 @@ public class GenerateQuestionSet {
 
     }
 
-
+    /**
+     * Fråga om vem som har ett specifikt tröjnummer
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic kitNum() {
         Player[] alternatives = randomAlternatives();
         int alternative = random.nextInt(NBR_OF_ALT);

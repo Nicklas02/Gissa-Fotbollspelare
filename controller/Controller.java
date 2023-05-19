@@ -19,6 +19,7 @@ public class Controller {
         this.highScoreList = new HighScoreFromDatabase();
         //String [] questionsandanswer=  hänmta questions
         startGame();
+        new MusicPlayer(this).start();
     }
 
     //skicka till GUI

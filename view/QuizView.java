@@ -242,12 +242,14 @@ public class QuizView extends JPanel{
     }
 
     public void playWrongAnswerSound() {
+        Clip clip;
         try {
-            //stopAllSound();
-            wrongAnswerSound = AudioSystem.getAudioInputStream(new File("aaa.wav"));
-            wrongAnswerSoundClip = AudioSystem.getClip();
-            wrongAnswerSoundClip.open(wrongAnswerSound);
-            wrongAnswerSoundClip.start();
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("aaa.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -231,7 +231,7 @@ public class QuizView extends JPanel{
     }
     public void playQuestionSound() {
         try {
-            stopAllSound();
+            //stopAllSound();
             questionSound = AudioSystem.getAudioInputStream(new File("question sound.wav"));
             questionSoundClip = AudioSystem.getClip();
             questionSoundClip.open(questionSound);
@@ -243,8 +243,8 @@ public class QuizView extends JPanel{
 
     public void playWrongAnswerSound() {
         try {
-            stopAllSound();
-            wrongAnswerSound = AudioSystem.getAudioInputStream(new File("wrong answer.wav"));
+            //stopAllSound();
+            wrongAnswerSound = AudioSystem.getAudioInputStream(new File("aaa.wav"));
             wrongAnswerSoundClip = AudioSystem.getClip();
             wrongAnswerSoundClip.open(wrongAnswerSound);
             wrongAnswerSoundClip.start();
@@ -255,7 +255,7 @@ public class QuizView extends JPanel{
 
     public void playCorrectAnswerSound() {
         try {
-            stopAllSound();
+            //stopAllSound();
             correctAnswerSound = AudioSystem.getAudioInputStream(new File("true answer.wav"));
             correctAnswerSoundClip = AudioSystem.getClip();
             correctAnswerSoundClip.open(correctAnswerSound);
@@ -283,7 +283,7 @@ public class QuizView extends JPanel{
        String userAnswer = getUserAnswer();
         if (answers[currentQuestionNum - 1].contains(userAnswer)) {
            String s = "You answered correct!";
-            playCorrectAnswerSound();
+            //playCorrectAnswerSound();
             rightOrWrong.setText(s);
             rightOrWrong.setForeground(Color.GREEN);
            score++;
@@ -341,7 +341,7 @@ public class QuizView extends JPanel{
         }
         // clear the selection
         clearSelection();
-        playQuestionSound();
+        //playQuestionSound();
 
 
         // start a new timer

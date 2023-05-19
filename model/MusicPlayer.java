@@ -47,13 +47,12 @@ public class MusicPlayer implements Runnable {
     @Override
     public void run() {
         try {
-            while (true) {
-                //AudioInputStream ais = AudioSystem.getAudioInputStream(new File(path));
-                AudioInputStream ais = AudioSystem.getAudioInputStream(new File("filesMusic/kids.wav"));
+                AudioInputStream ais = AudioSystem.getAudioInputStream(new File("kids.wav"));
+                //AudioInputStream ais = AudioSystem.getAudioInputStream(new File("filesMusic/kids.wav"));
                 clip = AudioSystem.getClip();
                 clip.open(ais);
                 clip.start();
-            }
+            
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

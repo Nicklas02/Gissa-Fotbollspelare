@@ -7,8 +7,12 @@ import java.awt.event.ActionEvent;
 
 import controller.Controller;
 
-        import javax.swing.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.*;
         import java.awt.event.ActionListener;
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -238,6 +242,7 @@ public class QuizView extends JPanel{
             rightOrWrong.setForeground(Color.GREEN);
             score++;
         } else {
+            //playWrongAnswerSound();
             rightOrWrong.setText("Fel!");
             rightOrWrong.setForeground(Color.RED);
         }
@@ -308,6 +313,7 @@ public class QuizView extends JPanel{
 
     public void gameOver(){
         if (currentQuestionNum == totalQuestionNum){
+            //playFinitoSound();
             showGameOverMessage();
             controller.sendScoreToDatabase(playerName, score);
             controller.startGame();
@@ -350,6 +356,33 @@ public class QuizView extends JPanel{
         setPlayerName(startPanel.getPlayerName());
         startPanel.addQuestionsPanel(this);
         updateQuestion();
+    }
+
+
+    public void playWrongAnswerSound() {
+        Clip clip;
+        try {
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("mus/aaa.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void playFinitoSound() {
+        Clip clip;
+        try {
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("mus/finito.wav"));
+            clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

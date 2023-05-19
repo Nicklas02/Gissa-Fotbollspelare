@@ -31,6 +31,7 @@ public class QuizView extends JPanel{
 
     //private ButtonGroup optionGroup;
     private JButton nextButton;
+    private JButton startAgain;
     private Font font = new Font("Ariel", Font.BOLD, 20);
     private Font font2 = new Font("Ariel", Font.PLAIN, 15);
     private int width = 800;
@@ -164,15 +165,15 @@ public class QuizView extends JPanel{
         });
 
 
-        nextButton = new JButton("Next");
-        nextButton.setBounds(325, 400, 100, 30);
+        nextButton = new JButton("Nästa");
+        nextButton.setBounds(400, 400, 100, 30);
         nextButton.setFont(font2);
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                 if(getUserAnswer().equals("")){
-                    showError("Must select one option first!");
+                    showError("Du måste välja ett alternativ!");
                     return;
                 }
                 timer.start();
@@ -183,10 +184,18 @@ public class QuizView extends JPanel{
                 clearSelection();
             }
         });
+        startAgain = new JButton("Starta Om");
+        startAgain.setBounds(220, 400, 150, 30);
+        startAgain.setFont(font2);
+        startAgain.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.startGame();
+            }
+        });
         this.add(nextButton);
+        this.add(startAgain);
         this.add(background);
-
-
 
     }
     private class OptionButtonListener implements ActionListener {
@@ -224,16 +233,16 @@ public class QuizView extends JPanel{
     public void showRightOrWrong() {
         String userAnswer = getUserAnswer();
         if (answers[currentQuestionNum - 1].contains(userAnswer)) {
-            String s = "You answered correct!";
+            String s = "Rätt!";
             rightOrWrong.setText(s);
             rightOrWrong.setForeground(Color.GREEN);
             score++;
         } else {
-            rightOrWrong.setText("Wrong");
+            rightOrWrong.setText("Fel!");
             rightOrWrong.setForeground(Color.RED);
         }
         if (userAnswer == null || userAnswer.isEmpty()) {
-            rightOrWrong.setText("You didn't select an answer");
+            rightOrWrong.setText("Du valde ej ett alternativ!");
             rightOrWrong.setForeground(Color.RED);
             score--;
         }
@@ -318,7 +327,7 @@ public class QuizView extends JPanel{
 
     public void showGameOverMessage() {
         disableNextButton();
-        JOptionPane.showMessageDialog(frame, "Game Over! Your score is: " + score + "/" + totalQuestionNum , "Football Quiz", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(frame, "Game Over! Ditt resultat: " + score + "/" + totalQuestionNum , "Fotbollsquiz", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void showError(String message) {

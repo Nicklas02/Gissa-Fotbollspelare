@@ -5,7 +5,7 @@ import java.util.Properties;
 
 
 /**
- * Ansvaret för denna klassen är endast att skapa sample/urval av spelareobjekt från databasen och lagra i en lista
+ * Syftet med denna klassen är endast att skapa sample/urval av spelarobjekt från databasen och lagra i en lista
  * Urvalet ska bero på förinställningar. T ex bara premier league eller bara "lätta" spelare
  * Slutligen skickas listan med urvalet av spelare vidare till en annan klass.
  */
@@ -36,23 +36,22 @@ public class GetSample {
         }
     }
 
+    /**
+     * Syftet med denna metoden är att hämta ett antal spelare ur databasen för att sedan lagra dessa spelarna
+     * i Player-objekt som sedermera kan användas för att generera frågor.
+     * Databasen är sorterad efter de högst rankade spelarna först. Det innebär att ett större urval ger fler
+     * lågt rankade spelare - dvs ett svårare spel. Därav skillnaden i urvalsstorlek beroende på svårighetsgrad.
+     * Storleken på urvalen för de olika svårighetsgraderna kontrolleras från GenerateQuestionSet-klassens
+     * konstanter i fältet.
+     * @return en lista med spelarobjekt
+     */
     public Player[] getSample() {
-
         Player[] playerSample = new Player[sampleSize];
         Player player;
         int count;
         ResultSet rs = null;
         Statement stmt = null;
-        if (this.gameType == GameType.None) {
-            try {
-                String QUERY = "select * from \"spelare2023\" " +
-                        "order by overall desc;";
-                stmt = conn.createStatement();
-                rs = stmt.executeQuery(QUERY);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        } else if (this.gameType == GameType.PremierLeague) {
+        if (this.gameType == GameType.PremierLeague) {
             try {
                 String QUERY = "select spelare2023.* from spelare2023\n" +
                         "join clubs \n" +
@@ -133,14 +132,12 @@ public class GetSample {
                 if (count >= sampleSize) {
                     break;
                 }
-                //System.out.println(player.toString());
             }
             stmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //testPrintSample(playerSample);
         return playerSample;
     }
 

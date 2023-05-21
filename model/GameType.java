@@ -1,7 +1,9 @@
 package model;
 
+/**
+ * Representerar olika typer av fotbollsligor
+ */
 public enum GameType {
-    None,
     PremierLeague,
     LaLiga,
     Bundesliga,

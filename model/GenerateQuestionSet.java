@@ -2,17 +2,21 @@ package model;
 
 import java.util.*;
 
+/**
+ * Syftet med GenerateQuestionSet-klassen är att utifrån ett urval (sample) av spelar-objekt generera frågor.
+ * Frågorna genereras utifrån ett dussin metoder och ordningen bestäms genom en slumpmässig Random-klass.
+ */
 public class GenerateQuestionSet {
-     //Förbindelse till sample objektet. 1:1 förbindelse
     private Player[] sample;
-    private final Random random = new Random(); //Används för slumpmässiga frågor liksom för slumpmässiga svarsalternativ
-    private static final int NUMBER_OF_QUESTIONS = 10; //antalet frågor settet innehåller, dvs antalet frågor användaren får per omgång
+    private final Random random = new Random();
+    private static final int NUMBER_OF_QUESTIONS = 10;
     private static final int NORMAL_SAMPLE = 80;
     private static final int HARD_SAMPLE = 180;
     private static final int NBR_OF_ALT = 4;
     private final GameType gameType;
     private final Difficulty difficulty;
-    ArrayList<Player> corrAnswers = new ArrayList<>();
+    private ArrayList<Player> corrAnswers = new ArrayList<>();
+    private int prevQuestion = 100;
 
 
     public GenerateQuestionSet(GameType gameType, Difficulty difficulty) {
@@ -20,6 +24,10 @@ public class GenerateQuestionSet {
         this.difficulty = difficulty;
     }
 
+    /**
+     * Hämtar ett urval av spelare beroende på användarens självvalda spelinställningar.
+     * @return
+     */
     public QuestionAutomatic[] buildNewQuestionSet() {
         GetSample getSample;
         if(difficulty==Difficulty.Normal){
@@ -36,13 +44,19 @@ public class GenerateQuestionSet {
         return questionSet;
     }
 
+    /**
+     * Slumpar fram en metod som returnerar ett frågeobjekt.
+     * @return Denna metoden returnerar i sin tur frågeobjektet till huvudmetoden.
+     */
     private QuestionAutomatic randomQuestion() {
         int nbrOfRdmQuestions= 10;
         int localRandom = random.nextInt(nbrOfRdmQuestions);
 
-        //Test specific value
-        //localRandom = 8;
+        while(localRandom == getPrevQuestion()) {
+            localRandom = random.nextInt(nbrOfRdmQuestions);
+        }
 
+        setPrevQuestion(localRandom);
         if (localRandom == 0) {
             return ageQuestion();
         }
@@ -68,12 +82,12 @@ public class GenerateQuestionSet {
             return Position();
         }
         if(localRandom==8){
-            return ValueOrWage(); //Bytte ut denna mot Weight för weight känns inte helt vettigt att ha med på en utställning
+            return ValueOrWage();
         }
         if(localRandom==9){
-            return SkillMoves(); 
+            return SkillMoves();
         }
-        System.out.println("Error, no question was generated, random was: " + localRandom);
+        System.out.println("Fel, ingen fråga genererades: " + localRandom);
         return null;
     }
 
@@ -106,6 +120,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vem som har en specifik position
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic Position() {
         Player[] alternatives = randomAlternatives();
         int alternative = random.nextInt(4);
@@ -129,10 +147,14 @@ public class GenerateQuestionSet {
             }
         }
 
-        String localQuestion = "Vilken spelare har positionen " + corrAnswers.get(0).getPosition() +"?";
+        String localQuestion = "Vilken spelare spelar på positionen " + corrAnswers.get(0).getPosition() +"?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vem som spelar för en specifik klubb
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic Club() {
         Player[] alternatives = randomAlternatives();
         int alternative = random.nextInt(4);
@@ -149,6 +171,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vilken nationalitet spelaren kommer från
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic Nationality() {
         Player[] alternatives = randomAlternatives();
         int alternative = random.nextInt(4);
@@ -164,13 +190,13 @@ public class GenerateQuestionSet {
         String localQuestion = "Vilken spelare kommer från " + corrAnswers.get(0).getNationality() +"?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
-    
+
     private QuestionAutomatic Overall() {
         Player[] alternatives = bottomQuartilePlayers();
         Player correctAnswer = upperQuartilePlayer();
         corrAnswers.add(correctAnswer);
         alternatives[random.nextInt(NBR_OF_ALT)] = correctAnswer;
-        return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren?");
+        return new QuestionAutomatic(alternatives, corrAnswers, "Vem är den bästa spelaren? (Enligt FIFA23)");
     }
 
     private Player[] bottomQuartilePlayers() {
@@ -210,8 +236,6 @@ public class GenerateQuestionSet {
         int[] wageOrValue = new int[sample.length];
         for (int i=0; i< wageOrValue.length; i++){
             wageOrValue[i] = formattingValueOrWage(sample[i], isValueQuestion);
-            //Test formatting the entire column of either wage or value
-            //System.out.println("Formatted wage/value: " + wageOrValue[i] + " Non-formatted wage: " + sample[i].getWage() + " Non-formatted value: " + sample[i].getValue());
         }
         Arrays.sort(wageOrValue);
         int lowestQuartile = sample.length/4;
@@ -221,8 +245,6 @@ public class GenerateQuestionSet {
             lowValuesOrWages[i] = wageOrValue[random.nextInt(lowestQuartile)];
         }
         int highValueOrWage = wageOrValue[random.nextInt(lowestQuartile) + highestQuartile];
-        //Test randomizing one highValueOrWage value (top quartile) and four low values (bottom quartile)
-        //System.out.println(highValueOrWage + "-"+ lowValuesOrWages[0]+"-"+ lowValuesOrWages[1]+"-"+ lowValuesOrWages[2]+ "-"+ lowValuesOrWages[3]);
         Player[] alternatives = new Player[NBR_OF_ALT];
         Player correctAnswer = null;
         int count=0;
@@ -245,25 +267,41 @@ public class GenerateQuestionSet {
             question = "Vilken spelare har högst marknadsvärde på "
                     + correctAnswer.getValue() + "?";
         } if(!isValueQuestion && correctAnswer!=null) {
-            question="Vilken spelare har tjänar mest med" +
-                    "en månadslön på " + correctAnswer.getWage() + "?";
+            question="Vilken spelare tjänar mest med" +
+                    " en månadslön på " + correctAnswer.getWage() + "?";
         }
         return new QuestionAutomatic(alternatives, corrAnswers, question);
     }
 
-    //Generell metod som tar ut fyra slumpmässigt valda (=alternatives) spelare utifrån urvalet (=sample)
+    /**
+     * Tar fram fyra alternativ och kolla så att de inte är samma spelare på två platser
+     * @return en array av spelare som alternativ
+     */
     private Player[] randomAlternatives() {
-        //svarsalternativ
+        boolean samePlayerTwice = true;
         Player[] alternatives = new Player[NBR_OF_ALT];
-        for (int i = 0; i < NBR_OF_ALT; i++) {
-            int pos = random.nextInt(sample.length);
-            alternatives[i] = sample[pos];
-
+        while(samePlayerTwice) {
+            samePlayerTwice = false;
+            for (int i = 0; i < NBR_OF_ALT; i++) {
+                int pos = random.nextInt(sample.length);
+                alternatives[i] = sample[pos];
+            }
+            for (int i = 0; i < alternatives.length; i++) {
+                for (int j = i + 1 ; j < alternatives.length; j++) {
+                    if (alternatives[i].equals(alternatives[j])) {
+                        samePlayerTwice = true;
+                        break;
+                    }
+                }
+            }
         }
         return alternatives;
     }
 
-    //lagrar metodens data i ett questionObject så att controllerklasserna sedermera kan hämta alla QuestionsObject
+    /**
+     * Fråga om vem som är yngst eller äldst
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic ageQuestion() {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
@@ -295,6 +333,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vem som är längst eller kortast
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic heightQuestion() {
         Player[] alternatives = randomAlternatives();
         int firstAlternative = 0;
@@ -325,6 +367,10 @@ public class GenerateQuestionSet {
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    /**
+     * Fråga om vem som är mest enfotad
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic weakFootQuestion() {
         Player[] alternatives = null;
         boolean badWeakFoot = false;
@@ -356,6 +402,10 @@ public class GenerateQuestionSet {
 
     }
 
+    /**
+     * Fråga om vem som har ett specifikt tröjnummer
+     * @return ett frågeobjekt med fråga, rätt svar och alternativ
+     */
     private QuestionAutomatic kitNum() {
         Player[] alternatives = randomAlternatives();
         int alternative = random.nextInt(NBR_OF_ALT);
@@ -366,8 +416,22 @@ public class GenerateQuestionSet {
                 corrAnswers.add(p);
             }
         }
-        String localQuestion = "Vilken spelare har tröjnummer " + corrAnswers.get(0).getKitNumber() + "?";
+        String localQuestion;
+        if(random.nextBoolean()){
+            localQuestion = "Vilken spelare har tröjnummer ";
+        } else {
+            localQuestion = "Vem bär tröja nummer ";
+        }
+
+        localQuestion += corrAnswers.get(0).getKitNumber() + "?";
         return new QuestionAutomatic(alternatives, corrAnswers, localQuestion);
     }
 
+    public int getPrevQuestion() {
+        return prevQuestion;
+    }
+
+    public void setPrevQuestion(int prevQuestion) {
+        this.prevQuestion = prevQuestion;
+    }
 }

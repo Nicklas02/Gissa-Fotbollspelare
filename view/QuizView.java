@@ -12,6 +12,10 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Detta är panelen där frågorna dyker upp och denna klass hanterar även logiken för en timer samt för knapparna.
+ * Den hanterar även visningen av frågorna, svarsalternativ samt uppdateringen av frågor.
+ */
 public class QuizView extends JPanel{
     private int currentQuestionNum = 1;
     private final int totalQuestionNum = 10;
@@ -25,7 +29,6 @@ public class QuizView extends JPanel{
     private int selectedOptionIndex = -1;
     private JButton nextButton;
 
-    private JButton prevButton;
     private Font font = new Font("Arial", Font.BOLD, 20);
     private Font font2 = new Font("Arial", Font.PLAIN, 15);
     private int width = 800;
@@ -39,12 +42,24 @@ public class QuizView extends JPanel{
     private Timer timer;
     private JProgressBar progressBar;
 
-    public void FillQuestions(String[] questions, String[][] alt, String[] answers) {
+    /**
+     * Denna metoden tar tre parameterar och syftet med den är att fylla instansvariblerna i QuizView objektet med de angivna
+     * arrayerna i parametern. Sedan instansieras array variablerna med this.
+     * @param questions detta är en String array för att lagra frågorna
+     * @param alt detta är en tvådimensionell array som lagrar alternativen till frågorna
+     * @param answers detta är en String array som håller svaren på frågorna
+     */
+    public void fillQuestions(String[] questions, String[][] alt, String[] answers) {
         this.questions = questions;
         this.alt = alt;
         this.answers = answers;
     }
 
+    /**
+     * Detta är konstruktorn för klassen QuizView och den skapar en QuizView instans som tar in en Controller instans som parameter
+     * Syftet denna konstruktorn har är att den skapar en JLabel för en ImageIcon så att bakgrunden syns,
+     * @param controller Controller-objektet som ska hantera händelser och logik för QuizView.
+     */
     public QuizView(Controller controller) {
         this.controller = controller;
         this.setLayout(null);
@@ -75,7 +90,6 @@ public class QuizView extends JPanel{
         questionNumber = new JLabel();
         questionNumber.setBounds(width - 130, 110, 200, 40);
         questionNumber.setFont(font);
-        //colour for fonts
         questionNumber.setForeground(Color.WHITE);
         this.add(questionNumber);
 
@@ -171,26 +185,49 @@ public class QuizView extends JPanel{
         this.add(background);
 
     }
+
+    /**
+     * Detta är en inre privat klass som implementerar ActionListener och används som lyssnare för händelser som genererar av
+     * svarsalternativ knapparna i QuizView
+     */
     private class OptionButtonListener implements ActionListener {
         private int optionIndex;
 
+        /**
+         * Detta är konstruktorn för och den tar emot ett en int av optionIndex och tilldelar den instansvariebeln
+         * optionIndex
+         * @param optionIndex lagrar indexet för svarsalternativen
+         */
         public OptionButtonListener(int optionIndex) {
             this.optionIndex = optionIndex;
         }
 
+        /**
+         * Denna metoden är en implementering av ActionListener gränsnittet, denna metoden kör när en händelse alltså någon klickar på någon av
+         * svarsalternativ knapperna.
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             selectedOptionIndex = optionIndex;
-            // Disable all option buttons
             disableOptionButtons();
         }
     }
+
+    /**
+     * Denna metoden går igenom alla optionButtons och inaktiverar varje knapp genom att sätta enabled till false
+     */
     public void disableOptionButtons() {
         for (int i = 0; i < optionButtons.length; i++) {
             optionButtons[i].setEnabled(false);
         }
     }
 
+    /**
+     * Syftet med denna metoden är att hämta användarens svar och kontrollera så att selectedOptionIndex är satt till ett
+     * giltigt värde, om det är giltigt så returneras texten på knappen
+     * @return
+     */
     public String getUserAnswer() {
         if (selectedOptionIndex != -1) {
             return optionButtons[selectedOptionIndex].getText();
@@ -198,6 +235,13 @@ public class QuizView extends JPanel{
         return "";
     }
 
+    /**
+     * Syftet med denna metod är att kontrollera om användarens svar är korrekt eller falskt, men den kollar även om du inte
+     * valt något svar under tidsperioden. Metoden uppdaterar även GUI:t med en text beroende på om svaret är korrekt eller inte
+     * Om svaret är korrekt så ökar score med 1
+     * Om svaret är fel så minskar score:
+     *
+     */
     public void showRightOrWrong() {
         String userAnswer = getUserAnswer();
         if (answers[currentQuestionNum - 1].contains(userAnswer)) {
@@ -220,13 +264,18 @@ public class QuizView extends JPanel{
         repaint();
     }
 
-
+    /**
+     * Denna metoden går igenom alla optionButtons och aktiverar dem igen efter varje fråga, denna metoden anropas i updateQuestion metoden
+     */
     public void enableOptionButtons() {
         for (int i = 0; i < optionButtons.length; i++) {
             optionButtons[i].setEnabled(true);
         }
     }
 
+    /**
+     *
+     */
     public void updateQuestion() {
         timer.stop();
 
@@ -267,6 +316,11 @@ public class QuizView extends JPanel{
         enableOptionButtons();
     }
 
+    /**
+     * Syftet med denna metod är att kontrollera så att spelet är över genom att kolla om sista frågan har besvarats
+     * och om det är gjort så visar den ett meddelande att matchen är över med ditt score. Samt skickar spelarnamnet och score
+     * till databasen och anropar startGame metoden i controller för att skicka tillbaka användaren till startskärmen
+     */
     public void gameOver(){
         if (currentQuestionNum == totalQuestionNum){
             //playFinitoSound();
@@ -276,25 +330,41 @@ public class QuizView extends JPanel{
         }
     }
 
+    /**
+     *
+     */
     public void clearSelection() {
         selectedOptionIndex = -1;
     }
 
+    /**
+     * Denna metoden inaktiverar next knappen genom att sätta enabled till false
+     */
     public void disableNextButton() {
         nextButton.setEnabled(false);
     }
 
-
+    /**
+     * Denna metoden visar game over meddelandet samt anropar metoden som inkativera next knappen.
+     */
     public void showGameOverMessage() {
         disableNextButton();
         JOptionPane.showMessageDialog(null, "Game Over! Ditt resultat: " + score + "/" + totalQuestionNum , "Fotbollsquiz", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Denna metoden är till för att visa error
+     * @param message en String som håller texten error
+     */
     public void showError(String message) {
         JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-
+    /**
+     * Denna metoden sätter spelarnamnet och uppdaterar textfältet för spelarnamnet i gränssnittet.
+     * Dessutom sätter den aktuellt datum bredvid spelarnamnet.
+     * @param playerName namnet på spelaren
+     */
     public void setPlayerName(String playerName) {
         LocalDate currentDate = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -303,7 +373,9 @@ public class QuizView extends JPanel{
     }
 
 
-
+    /**
+     * 
+     */
     public void playFinitoSound() {
         Clip clip;
         try {

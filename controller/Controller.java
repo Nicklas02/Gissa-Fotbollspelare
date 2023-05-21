@@ -49,7 +49,7 @@ public class Controller {
             }
         }
         quizView = new QuizView(this);
-        quizView.FillQuestions(questions, alt, answers);
+        quizView.fillQuestions(questions, alt, answers);
     }
 
     /**

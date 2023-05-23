@@ -290,7 +290,6 @@ public class GenerateQuestionSet {
                 for (int j = i + 1 ; j < alternatives.length; j++) {
                     if (alternatives[i].equals(alternatives[j])) {
                         samePlayerTwice = true;
-                        break;
                     }
                 }
             }

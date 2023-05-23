@@ -28,13 +28,6 @@ public class QuizView extends JPanel{
     private JButton[] optionButtons;
     private int selectedOptionIndex = -1;
     private JButton nextButton;
-
-    private Font font = new Font("Arial", Font.BOLD, 20);
-    private Font font2 = new Font("Arial", Font.PLAIN, 15);
-    private int width = 800;
-    private int height = 800;
-    private LocalDate currentDate;
-    private DateTimeFormatter formatter;
     private String[] questions;
     private String[][] alt;
     private String[] answers;

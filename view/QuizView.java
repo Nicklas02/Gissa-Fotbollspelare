@@ -50,7 +50,8 @@ public class QuizView extends JPanel{
 
     /**
      * Detta är konstruktorn för klassen QuizView och den skapar en QuizView instans som tar in en Controller instans som parameter
-     * Syftet denna konstruktorn har är att den skapar en JLabel för en ImageIcon så att bakgrunden syns,
+     * Syftet denna konstruktorn har är att den skapar en JLabel för en ImageIcon så att bakgrunden syns, men den skapar även allt som
+     * används till QuizView klassen och så att allt syns och är rätt placerat på QuizView skärmen
      * @param controller Controller-objektet som ska hantera händelser och logik för QuizView.
      */
     public QuizView(Controller controller) {
@@ -267,7 +268,7 @@ public class QuizView extends JPanel{
     }
 
     /**
-     *
+     * Denna metoden uppdaterar nya frågor, samt uppdaterar så att timern går ner från 15 sekunder för varje fråga
      */
     public void updateQuestion() {
         timer.stop();
@@ -323,15 +324,12 @@ public class QuizView extends JPanel{
         }
     }
 
-    /**
-     *
-     */
     public void clearSelection() {
         selectedOptionIndex = -1;
     }
 
     /**
-     * Denna metoden inaktiverar next knappen genom att sätta enabled till false
+     * Denna metoden inaktiverar next knappen genom att sätta enabled till false.
      */
     public void disableNextButton() {
         nextButton.setEnabled(false);
@@ -367,7 +365,7 @@ public class QuizView extends JPanel{
 
 
     /**
-     * 
+     * Syftet med denna metoden är att spela ett avlsutnings ljud när applikationen är slut.
      */
     public void playFinitoSound() {
         Clip clip;
